@@ -142,11 +142,11 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="RemovefromMsgQueue">
+  <xs:element name="MsgDisplayedResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="addressList" nillable="true" type="q6:ArrayOfstring" />
-        <xs:element minOccurs="0" name="CodingID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="console" nillable="true" type="xs:string" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/CallOut_CodingServiceLib.Class" minOccurs="0" name="codingIncidentMsg" nillable="true" type="q6:CodingIncidentMessage" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -192,10 +192,11 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="UpdateRemoveMsgList">
+  <xs:element name="StartTargetTimeoutTimer">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="CodingID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="console" nillable="true" type="xs:string" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/CallOut_CodingServiceLib.Class" minOccurs="0" name="codingIncidentMsg" nillable="true" type="q10:CodingIncidentMessage" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -742,11 +742,11 @@ namespace CallOut_Gateway.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="CallOut_CodingServiceLib/CallOut_CodingService/ReplyConnStatus")]
         System.Threading.Tasks.Task ReplyConnStatusAsync(string station);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="CallOut_CodingServiceLib/CallOut_CodingService/RemovefromMsgQueue")]
-        void RemovefromMsgQueue(string[] addressList, string CodingID);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="CallOut_CodingServiceLib/CallOut_CodingService/MsgDisplayedResponse")]
+        void MsgDisplayedResponse(string console, CallOut_Gateway.ServiceReference1.CodingIncidentMessage codingIncidentMsg);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="CallOut_CodingServiceLib/CallOut_CodingService/RemovefromMsgQueue")]
-        System.Threading.Tasks.Task RemovefromMsgQueueAsync(string[] addressList, string CodingID);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="CallOut_CodingServiceLib/CallOut_CodingService/MsgDisplayedResponse")]
+        System.Threading.Tasks.Task MsgDisplayedResponseAsync(string console, CallOut_Gateway.ServiceReference1.CodingIncidentMessage codingIncidentMsg);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -770,8 +770,8 @@ namespace CallOut_Gateway.ServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="CallOut_CodingServiceLib/CallOut_CodingService/ConsoleRcvConnStatus")]
         void ConsoleRcvConnStatus();
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="CallOut_CodingServiceLib/CallOut_CodingService/UpdateRemoveMsgList")]
-        void UpdateRemoveMsgList(string CodingID);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="CallOut_CodingServiceLib/CallOut_CodingService/StartTargetTimeoutTimer")]
+        void StartTargetTimeoutTimer(string console, CallOut_Gateway.ServiceReference1.CodingIncidentMessage codingIncidentMsg);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -914,12 +914,12 @@ namespace CallOut_Gateway.ServiceReference1 {
             return base.Channel.ReplyConnStatusAsync(station);
         }
         
-        public void RemovefromMsgQueue(string[] addressList, string CodingID) {
-            base.Channel.RemovefromMsgQueue(addressList, CodingID);
+        public void MsgDisplayedResponse(string console, CallOut_Gateway.ServiceReference1.CodingIncidentMessage codingIncidentMsg) {
+            base.Channel.MsgDisplayedResponse(console, codingIncidentMsg);
         }
         
-        public System.Threading.Tasks.Task RemovefromMsgQueueAsync(string[] addressList, string CodingID) {
-            return base.Channel.RemovefromMsgQueueAsync(addressList, CodingID);
+        public System.Threading.Tasks.Task MsgDisplayedResponseAsync(string console, CallOut_Gateway.ServiceReference1.CodingIncidentMessage codingIncidentMsg) {
+            return base.Channel.MsgDisplayedResponseAsync(console, codingIncidentMsg);
         }
     }
 }

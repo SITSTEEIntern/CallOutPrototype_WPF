@@ -15,3 +15,6 @@ C:\Users\intern\Documents\GitHub\CallOutPrototype\CallOut_CAD\CallOut_CAD\bin\De
 C:\Users\intern\Documents\GitHub\CallOutPrototype\CallOut_CAD\CallOut_CAD\bin\Debug\CallOut_CAD.pdb
 C:\Users\intern\Documents\GitHub\CallOutPrototype\CallOut_CAD\CallOut_CAD\obj\Debug\CallOut_CAD.exe
 C:\Users\intern\Documents\GitHub\CallOutPrototype\CallOut_CAD\CallOut_CAD\obj\Debug\CallOut_CAD.pdb
+C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_CAD\CallOut_CAD\bin\Debug\CallOut_CAD.exe.config
+C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_CAD\CallOut_CAD\obj\Debug\CallOut_CAD.exe
+C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_CAD\CallOut_CAD\obj\Debug\CallOut_CAD.pdb

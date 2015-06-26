@@ -71,8 +71,12 @@ namespace CallOut_CodingServiceLib
         void ReplyConnStatus(string station);
 
         //Once the msg in gateway had reached timeout, it will inform console and remove msg from queue
+        //[OperationContract(IsOneWay = true)]
+        //void RemovefromMsgQueue(string station, string CodingID);
+
+        //Once Message is displayed on console screen, it will send a response to gateway to start timeout timer [console]
         [OperationContract(IsOneWay = true)]
-        void RemovefromMsgQueue(List<string> addressList, string CodingID);
+        void MsgDisplayedResponse(string console, CodingIncidentMessage codingIncidentMsg);
     }
 
     public interface IMessageServiceCallback
@@ -100,8 +104,12 @@ namespace CallOut_CodingServiceLib
         void ConsoleRcvConnStatus();
 
         //[Console] received the station that had already failed/timeout at gateway
+        //[OperationContract(IsOneWay = true)]
+        //void UpdateRemoveMsgList(string CodingID);
+
+        //[Gateway] Start timer for timeout of the incident that displayed on console screen
         [OperationContract(IsOneWay = true)]
-        void UpdateRemoveMsgList(string CodingID);
+        void StartTargetTimeoutTimer(string console, CodingIncidentMessage codingIncidentMsg);
     }
 
     /// <summary>
@@ -354,16 +362,22 @@ namespace CallOut_CodingServiceLib
                 });
         }
 
-        public void RemovefromMsgQueue(List<string> addressList, string CodingID)
+        //public void RemovefromMsgQueue(string station, string CodingID)
+        //{
+        //    if (_ConnectedConsoleList.Contains(station))
+        //    {
+        //        IMessageServiceCallback tmpCallback = _ConnectedConsoleDict[station];
+        //        tmpCallback.UpdateRemoveMsgList(CodingID);
+        //    }
+        //}
+
+        public void MsgDisplayedResponse(string console, CodingIncidentMessage codingIncidentMsg)
         {
-            foreach (string station in addressList)
-            {
-                if (_ConnectedConsoleList.Contains(station))
+            _GatewayCallbackList.ForEach(
+                delegate(IMessageServiceCallback gatewaycallback)
                 {
-                    IMessageServiceCallback tmpCallback = _ConnectedConsoleDict[station];
-                    tmpCallback.UpdateRemoveMsgList(CodingID);
-                }
-            }
+                    gatewaycallback.StartTargetTimeoutTimer(console, codingIncidentMsg);
+                });
         }
     }
 }

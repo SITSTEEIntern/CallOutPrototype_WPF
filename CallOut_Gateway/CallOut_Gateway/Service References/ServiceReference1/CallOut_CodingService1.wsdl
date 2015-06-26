@@ -77,8 +77,8 @@
   <wsdl:message name="CallOut_CodingService_ReplyConnStatus_InputMessage">
     <wsdl:part name="parameters" element="tns:ReplyConnStatus" />
   </wsdl:message>
-  <wsdl:message name="CallOut_CodingService_RemovefromMsgQueue_InputMessage">
-    <wsdl:part name="parameters" element="tns:RemovefromMsgQueue" />
+  <wsdl:message name="CallOut_CodingService_MsgDisplayedResponse_InputMessage">
+    <wsdl:part name="parameters" element="tns:MsgDisplayedResponse" />
   </wsdl:message>
   <wsdl:message name="CallOut_CodingService_ConsoleDisplayMsg_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ConsoleDisplayMsg" />
@@ -98,8 +98,8 @@
   <wsdl:message name="CallOut_CodingService_ConsoleRcvConnStatus_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ConsoleRcvConnStatus" />
   </wsdl:message>
-  <wsdl:message name="CallOut_CodingService_UpdateRemoveMsgList_OutputCallbackMessage">
-    <wsdl:part name="parameters" element="tns:UpdateRemoveMsgList" />
+  <wsdl:message name="CallOut_CodingService_StartTargetTimeoutTimer_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:StartTargetTimeoutTimer" />
   </wsdl:message>
   <wsdl:portType msc:usingSession="true" name="CallOut_CodingService">
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetStationStatus">
@@ -153,8 +153,8 @@
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ReplyConnStatus">
       <wsdl:input wsaw:Action="CallOut_CodingServiceLib/CallOut_CodingService/ReplyConnStatus" message="tns:CallOut_CodingService_ReplyConnStatus_InputMessage" />
     </wsdl:operation>
-    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="RemovefromMsgQueue">
-      <wsdl:input wsaw:Action="CallOut_CodingServiceLib/CallOut_CodingService/RemovefromMsgQueue" message="tns:CallOut_CodingService_RemovefromMsgQueue_InputMessage" />
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="MsgDisplayedResponse">
+      <wsdl:input wsaw:Action="CallOut_CodingServiceLib/CallOut_CodingService/MsgDisplayedResponse" message="tns:CallOut_CodingService_MsgDisplayedResponse_InputMessage" />
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ConsoleDisplayMsg">
       <wsdl:output wsaw:Action="CallOut_CodingServiceLib/CallOut_CodingService/ConsoleDisplayMsg" message="tns:CallOut_CodingService_ConsoleDisplayMsg_OutputCallbackMessage" />
@@ -174,8 +174,8 @@
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ConsoleRcvConnStatus">
       <wsdl:output wsaw:Action="CallOut_CodingServiceLib/CallOut_CodingService/ConsoleRcvConnStatus" message="tns:CallOut_CodingService_ConsoleRcvConnStatus_OutputCallbackMessage" />
     </wsdl:operation>
-    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="UpdateRemoveMsgList">
-      <wsdl:output wsaw:Action="CallOut_CodingServiceLib/CallOut_CodingService/UpdateRemoveMsgList" message="tns:CallOut_CodingService_UpdateRemoveMsgList_OutputCallbackMessage" />
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="StartTargetTimeoutTimer">
+      <wsdl:output wsaw:Action="CallOut_CodingServiceLib/CallOut_CodingService/StartTargetTimeoutTimer" message="tns:CallOut_CodingService_StartTargetTimeoutTimer_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
 </wsdl:definitions>

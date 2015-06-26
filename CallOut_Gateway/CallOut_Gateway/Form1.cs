@@ -496,71 +496,11 @@ namespace CallOut_Gateway
             CreateMessageEntry(testIncidentMsg, tmpstationList.Count.ToString());
 
             //Start timer for 15 sec ti wait for response else take as failed
-            System.Timers.Timer AutoRejectTimer = new System.Timers.Timer();
-            AutoRejectTimer.Interval = 15000; //15 sec
-            AutoRejectTimer.Elapsed += delegate { TargetTimeout(tmpstationList, testIncidentMsg); };
-            AutoRejectTimer.AutoReset = false;
-            AutoRejectTimer.Start();
-        }
-
-        public void TargetTimeout(List<string> addressList, CodingIncidentMessage codingIncidentMsg)
-        {
-            //Cross thread 
-            SendOrPostCallback callback = delegate(object state)
-            {
-                string codingID = codingIncidentMsg.CodingID;
-
-                //Check against Pending number in coding tab, If there is any pending
-                //remove those which had respond base on message tab with codingID
-                foreach (CodingStatus codingstatus in _CodingStatusList)
-                {
-                    if (codingstatus.CodingID.Equals(codingID))
-                    {
-                        if (codingstatus.Pending != "0")
-                        {
-                            //Remove those station that already reply in the list
-                            foreach(MessageStatus msgstatus in _MessageStatusList){
-                                if (msgstatus.CodingID.Equals(codingID) && addressList.Contains(msgstatus.AckFrom))
-                                {
-                                    addressList.Remove(msgstatus.AckFrom); //remove those already acknowledge
-                                }
-                            }
-
-                            //Notify those failed msg to console
-                            _CallOut_CodingService.RemovefromMsgQueue(addressList.ToArray(), codingID);
-
-                            //Update failed status on the console
-                            foreach(string console in addressList){
-                                //update coding status
-                                UpdateCodingStatus(codingID, "Failed");
-                                //update message status
-                                MessageStatus messagestatus = UpdateMessageStatus(codingIncidentMsg.CodingID, console, "Failed");
-
-                                List<string> unitcallsign = new List<string>();
-                                //To give relevant station units callsign
-                                foreach (CodingUnits unit in codingIncidentMsg.DispatchUnits)
-                                {
-                                    if (unit.UnitCurrentStation.Equals(console))
-                                    {
-                                        unitcallsign.Add(unit.Callsign);
-                                    }
-
-                                    //For Test message
-                                    if (unit.UnitCurrentStation.Equals(""))
-                                    {
-                                        unitcallsign.Add(unit.Callsign);
-                                    }
-                                }
-
-                                //Broadcast Coding status back to CAD (failed)
-                                SendBroadcastIncidentCoding(console, "Failed", unitcallsign.ToArray(), messagestatus);
-                            }
-                        }
-                    }
-                }
-            };
-
-            _uiSyncContext.Post(callback, "target timeout");
+            //System.Timers.Timer AutoRejectTimer = new System.Timers.Timer();
+            //AutoRejectTimer.Interval = 15000; //15 sec
+            //AutoRejectTimer.Elapsed += delegate { TargetTimeout(tmpstationList, testIncidentMsg); };
+            //AutoRejectTimer.AutoReset = false;
+            //AutoRejectTimer.Start();
         }
 
         private void btnStationBroadcast_Click(object sender, EventArgs e)
@@ -622,11 +562,11 @@ namespace CallOut_Gateway
             CreateMessageEntry(testIncidentMsg, connectedConsole.Count.ToString());
 
             //Start timer for 15 sec to assume console disconnected
-            System.Timers.Timer AutoRejectTimer = new System.Timers.Timer();
-            AutoRejectTimer.Interval = 5000; //15 sec
-            AutoRejectTimer.Elapsed += delegate { TargetTimeout(connectedConsole, testIncidentMsg); };
-            AutoRejectTimer.AutoReset = false;
-            AutoRejectTimer.Start();
+            //System.Timers.Timer AutoRejectTimer = new System.Timers.Timer();
+            //AutoRejectTimer.Interval = 5000; //15 sec
+            //AutoRejectTimer.Elapsed += delegate { TargetTimeout(connectedConsole, testIncidentMsg); };
+            //AutoRejectTimer.AutoReset = false;
+            //AutoRejectTimer.Start();
         }
 
         private CodingIncidentMessage TestMessageTemplate()
@@ -981,6 +921,86 @@ namespace CallOut_Gateway
             _CallOut_CADService.BroadcastIncidentCodingStatus(incidentcodingstatus);
         }
 
+        public void StartTargetTimeoutTimer(string console, CodingIncidentMessage codingIncidentMsg)
+        {
+            SendOrPostCallback callback =
+                delegate(object state)
+                {
+                    Debug.WriteLine("StartTargetTimeoutTimer");
+                    //Start timer for 15 sec to assume console disconnected
+                    System.Timers.Timer AutoFailedTimer = new System.Timers.Timer();
+                    AutoFailedTimer.Interval = 15000; //15 sec
+                    AutoFailedTimer.Elapsed += delegate { TargetTimeout(console, codingIncidentMsg); };
+                    AutoFailedTimer.AutoReset = false;
+                    AutoFailedTimer.Start();
+                };
+
+            _uiSyncContext.Post(callback, "start target timeout timer");
+        }
+
+        public void TargetTimeout(string console, CodingIncidentMessage codingIncidentMsg)
+        {
+            Debug.WriteLine("TargetTimeout");
+            //Cross thread 
+            SendOrPostCallback callback = delegate(object state)
+            {
+                string codingID = codingIncidentMsg.CodingID;
+
+                //Check against Pending number in coding tab, If there is any pending
+                //remove those which had respond base on message tab with codingID
+                foreach (CodingStatus codingstatus in _CodingStatusList)
+                {
+                    if (codingstatus.CodingID.Equals(codingID))
+                    {
+                        if (codingstatus.Pending != "0")
+                        {
+                            //Remove those station that already reply in the list
+                            bool nomatchinmsgstatus = true;
+                            foreach (MessageStatus msgstatus in _MessageStatusList)
+                            {
+                                if (msgstatus.CodingID.Equals(codingID) && msgstatus.AckFrom.Equals(console))
+                                {
+                                    nomatchinmsgstatus = false; //console already acknowledge
+                                }
+                            }
+
+                            //Notify those failed msg to console
+                            //_CallOut_CodingService.RemovefromMsgQueue(console, codingID);
+
+                            if (nomatchinmsgstatus)
+                            {
+                                //update coding status
+                                UpdateCodingStatus(codingID, "Failed");
+                                //update message status
+                                MessageStatus messagestatus = UpdateMessageStatus(codingIncidentMsg.CodingID, console, "Failed");
+
+                                List<string> unitcallsign = new List<string>();
+                                //To give relevant station units callsign
+                                foreach (CodingUnits unit in codingIncidentMsg.DispatchUnits)
+                                {
+                                    if (unit.UnitCurrentStation.Equals(console))
+                                    {
+                                        unitcallsign.Add(unit.Callsign);
+                                    }
+
+                                    //For Test message
+                                    if (unit.UnitCurrentStation.Equals(""))
+                                    {
+                                        unitcallsign.Add(unit.Callsign);
+                                    }
+                                }
+
+                                //Broadcast Coding status back to CAD (failed)
+                                SendBroadcastIncidentCoding(console, "Failed", unitcallsign.ToArray(), messagestatus);
+                            }
+                        }
+                    }
+                }
+            };
+
+            _uiSyncContext.Post(callback, "target timeout");
+        }
+
         #region Methods not for Gateway
 
         public void ConsoleDisplayMsg(CodingIncidentMessage codingIncidentMsg)
@@ -1061,11 +1081,11 @@ namespace CallOut_Gateway
                     CreateMessageEntry(codingincidentmsg, tmpstationList.Count.ToString());
 
                     //Start timer for 15 sec to assume console disconnected
-                    System.Timers.Timer AutoRejectTimer = new System.Timers.Timer();
-                    AutoRejectTimer.Interval = 15000; //15 sec
-                    AutoRejectTimer.Elapsed += delegate { TargetTimeout(tmpstationList, codingincidentmsg); };
-                    AutoRejectTimer.AutoReset = false;
-                    AutoRejectTimer.Start();
+                    //System.Timers.Timer AutoRejectTimer = new System.Timers.Timer();
+                    //AutoRejectTimer.Interval = 15000; //15 sec
+                    //AutoRejectTimer.Elapsed += delegate { TargetTimeout(tmpstationList, codingincidentmsg); };
+                    //AutoRejectTimer.AutoReset = false;
+                    //AutoRejectTimer.Start();
 
                 };
 

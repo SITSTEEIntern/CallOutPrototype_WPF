@@ -197,6 +197,8 @@ namespace CallOut_ConsoleWPF
         { }
         public void UpdateRemoveMsgList(string CodingID)
         { }
+        public void StartTargetTimeoutTimer(string console, CodingIncidentMessage codingIncidentMsg) 
+        { }
 
         #endregion
 

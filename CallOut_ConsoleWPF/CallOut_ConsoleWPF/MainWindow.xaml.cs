@@ -241,33 +241,28 @@ namespace CallOut_ConsoleWPF
 
         private void UpdateDetails(CodingIncidentMessage codingIncidentMsg)
         {
-            Debug.WriteLine("Update detail " + codingIncidentMsg.CodingID);
             //check whether msg is in failed msg list else display
-            if (FailedCodingID.Contains(codingIncidentMsg.CodingID))
-            {
-                Debug.WriteLine("Update Failed");
+            //if (FailedCodingID.Contains(codingIncidentMsg.CodingID))
+            //{
+            //    //Create a console log entry, do not need as it wont appear at all
+            //    //CreateConsoleLogEntry("Failed");
 
-                //Create a console log entry, do not need as it wont appear at all
-                //CreateConsoleLogEntry("Failed");
+            //    //disable ack and reject button
+            //    this.btnAck.Visibility = Visibility.Collapsed;
+            //    this.btnReject.Visibility = Visibility.Collapsed;
 
-                //disable ack and reject button
-                this.btnAck.Visibility = Visibility.Collapsed;
-                this.btnReject.Visibility = Visibility.Collapsed;
+            //    //Empty Display
+            //    EmptyDisplay();
 
-                //Empty Display
-                EmptyDisplay();
+            //    this.lblStatus.Text = "Failed";
 
-                this.lblStatus.Text = "Failed";
+            //    FailedCodingID.Remove(codingIncidentMsg.CodingID);
 
-                FailedCodingID.Remove(codingIncidentMsg.CodingID);
-
-                //Take out from msg queue and show on display
-                NotifyNewMsg();
-            }
-            else
-            {
-                Debug.WriteLine("Display success");
-
+            //    //Take out from msg queue and show on display
+            //    NotifyNewMsg();
+            //}
+            //else
+            //{
                 //Update the Display panel details
                 this.txtIncidentSummary.Text = codingIncidentMsg.IncidentNo + ": " + codingIncidentMsg.IncidentType;
                 this.txtLocationSummary.Text = codingIncidentMsg.IncidentType + " at " + codingIncidentMsg.IncidentLocation.Street;
@@ -323,6 +318,11 @@ namespace CallOut_ConsoleWPF
                 //Update current codingID
                 _currCodingID = codingIncidentMsg.CodingID;
 
+                //--------------------------Display Completed!!!---------------------------
+
+                //Send to trigger gateway start timeout
+                _CallOut_CodingService.MsgDisplayedResponse(Properties.Settings.Default.CurrentID, codingIncidentMsg);
+
                 //Text to speech
                 string IncidentNoSpeech = "Incident Number, " + codingIncidentMsg.IncidentNo + ". ";
                 //string IncidentnoSpeech = "Incident Number : " + codingIncidentMsg.IncidentNo + ", Incident Type : "+ codingIncidentMsg.IncidentType;
@@ -340,7 +340,7 @@ namespace CallOut_ConsoleWPF
                 AutoRejectTimer.Elapsed += delegate { Timeout(codingIncidentMsg.CodingID); };
                 AutoRejectTimer.AutoReset = false;
                 AutoRejectTimer.Start();
-            }
+            //}
         }
 
         #region Methods for Text to Speech
@@ -476,14 +476,11 @@ namespace CallOut_ConsoleWPF
             SendOrPostCallback callback =
                 delegate(object state)
                 {
-                    Debug.WriteLine(CodingID + "update failed codingID");
                     FailedCodingID.Add(CodingID);
 
                     //If current display is msg of codingID, throw away with failed
                     if (this.lblCodingID.Text.Equals(CodingID))
                     {
-                        Debug.WriteLine("Already at Display Failed");
-
                         //Create a console log entry
                         CreateConsoleLogEntry("Failed");
 
@@ -496,31 +493,13 @@ namespace CallOut_ConsoleWPF
 
                         this.lblStatus.Text = "Failed";
 
-                        System.Timers.Timer AutoRejectTimer = new System.Timers.Timer();
-                        AutoRejectTimer.Interval = 1000; //10 sec
-                        AutoRejectTimer.Elapsed += delegate { OneSecTimeout(); };
-                        AutoRejectTimer.AutoReset = false;
-                        AutoRejectTimer.Start();
-
                         //Take out from msg queue and show on display
-                        //NotifyNewMsg();
+                        NotifyNewMsg();
                     }
                     
                 };
 
             _uiSyncContext.Post(callback, "update list of msg that will be remove");
-        }
-
-        private void OneSecTimeout()
-        {
-            SendOrPostCallback callback =
-            delegate(object state)
-            {
-                NotifyNewMsg();
-            };
-
-            _uiSyncContext.Post(callback, "Delay display");
-
         }
 
         #region Methods not for Console
@@ -532,6 +511,8 @@ namespace CallOut_ConsoleWPF
         public void NotifyConsoleNotConnected(string userName, CodingIncidentMessage codingIncidentMsg)
         { }
         public void GatewayRcvConnStatus(string station)
+        { }
+        public void StartTargetTimeoutTimer(string console, CodingIncidentMessage codingIncidentMsg) 
         { }
 
         #endregion

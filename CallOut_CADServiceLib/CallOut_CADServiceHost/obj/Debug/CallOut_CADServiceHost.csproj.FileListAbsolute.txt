@@ -22,3 +22,6 @@ C:\Users\intern\Documents\GitHub\CallOutPrototypeWPF\CallOut_CADServiceLib\CallO
 C:\Users\intern\Documents\GitHub\CallOutPrototypeWPF\CallOut_CADServiceLib\CallOut_CADServiceHost\obj\Debug\CallOut_CADServiceHost.csprojResolveAssemblyReference.cache
 C:\Users\intern\Documents\GitHub\CallOutPrototypeWPF\CallOut_CADServiceLib\CallOut_CADServiceHost\obj\Debug\CallOut_CADServiceHost.exe
 C:\Users\intern\Documents\GitHub\CallOutPrototypeWPF\CallOut_CADServiceLib\CallOut_CADServiceHost\obj\Debug\CallOut_CADServiceHost.pdb
+C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_CADServiceLib\CallOut_CADServiceHost\bin\Debug\CallOut_CADServiceHost.exe.config
+C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_CADServiceLib\CallOut_CADServiceHost\obj\Debug\CallOut_CADServiceHost.exe
+C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_CADServiceLib\CallOut_CADServiceHost\obj\Debug\CallOut_CADServiceHost.pdb
