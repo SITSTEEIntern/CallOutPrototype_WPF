@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="591f72d5-83f9-4d99-98f0-4e2a9ab8c082" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8082/CallOut_CADService" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="CallOut_CADService.xsd" MetadataType="Schema" ID="7fadbcd5-a720-4a39-9221-55754bdea086" SourceId="1" SourceUrl="http://localhost:8082/CallOut_CADService?xsd=xsd4" />
+    <MetadataFile FileName="CallOut_CADService2.wsdl" MetadataType="Wsdl" ID="1ff899b6-85d1-47b2-a469-80b70d2c8275" SourceId="1" SourceUrl="http://localhost:8082/CallOut_CADService?wsdl" />
+    <MetadataFile FileName="CallOut_CADService1.disco" MetadataType="Disco" ID="3c77392f-4eba-446e-a9a8-6eeb14b27fbb" SourceId="1" SourceUrl="http://localhost:8082/CallOut_CADService?disco" />
+    <MetadataFile FileName="CallOut_CADService21.wsdl" MetadataType="Wsdl" ID="bd8efa38-38dd-42b7-ab32-ffbf41affff3" SourceId="1" SourceUrl="http://localhost:8082/CallOut_CADService?wsdl=wsdl0" />
+    <MetadataFile FileName="CallOut_CADService4.xsd" MetadataType="Schema" ID="d9726f43-7c14-4b8c-ab3e-c3a8b80dd22b" SourceId="1" SourceUrl="http://localhost:8082/CallOut_CADService?xsd=xsd0" />
+    <MetadataFile FileName="CallOut_CADService41.xsd" MetadataType="Schema" ID="c43646be-7449-434a-a3f8-e9faefb9a3f3" SourceId="1" SourceUrl="http://localhost:8082/CallOut_CADService?xsd=xsd1" />
+    <MetadataFile FileName="CallOut_CADService42.xsd" MetadataType="Schema" ID="d64c313e-b45f-432a-8ff0-1405c321e2d6" SourceId="1" SourceUrl="http://localhost:8082/CallOut_CADService?xsd=xsd2" />
+    <MetadataFile FileName="CallOut_CADService43.xsd" MetadataType="Schema" ID="d9095861-c305-4061-86ca-ed4d908b6d4a" SourceId="1" SourceUrl="http://localhost:8082/CallOut_CADService?xsd=xsd3" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

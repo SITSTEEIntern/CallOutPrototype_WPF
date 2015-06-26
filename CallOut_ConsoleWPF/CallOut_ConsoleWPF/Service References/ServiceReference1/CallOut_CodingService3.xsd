@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/CallOut_CodingServiceLib.Class" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/CallOut_CodingServiceLib.Class" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:8080/CallOut_CodingService?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:complexType name="ArrayOfStationStatus">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="StationStatus" nillable="true" type="tns:StationStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfStationStatus" nillable="true" type="tns:ArrayOfStationStatus" />
+  <xs:complexType name="StationStatus">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Station" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Update" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="StationStatus" nillable="true" type="tns:StationStatus" />
+  <xs:complexType name="CodingIncidentMessage">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodingID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DispatchDateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DispatchUnits" nillable="true" type="tns:ArrayOfCodingUnits" />
+      <xs:element minOccurs="0" name="IncidentAlarm" type="xs:int" />
+      <xs:element minOccurs="0" name="IncidentLocation" nillable="true" type="tns:CodingLocation" />
+      <xs:element minOccurs="0" name="IncidentNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IncidentPriority" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IncidentTitle" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IncidentType" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CodingIncidentMessage" nillable="true" type="tns:CodingIncidentMessage" />
+  <xs:complexType name="ArrayOfCodingUnits">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CodingUnits" nillable="true" type="tns:CodingUnits" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCodingUnits" nillable="true" type="tns:ArrayOfCodingUnits" />
+  <xs:complexType name="CodingUnits">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Callsign" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FromStatus" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" type="xs:long" />
+      <xs:element minOccurs="0" name="UnitCurrentStation" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UnitHomeStation" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UnitLocation" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UnitType" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CodingUnits" nillable="true" type="tns:CodingUnits" />
+  <xs:complexType name="CodingLocation">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="City" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Country" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PostalCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="State" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Street" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Unit" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CodingLocation" nillable="true" type="tns:CodingLocation" />
+  <xs:complexType name="CodingAckMessage">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AckStatus" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AckTimeStamp" nillable="true" type="xs:string" />
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="AckUnits" nillable="true" type="q1:ArrayOfstring" />
+      <xs:element minOccurs="0" name="CodingID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ConsoleID" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CodingAckMessage" nillable="true" type="tns:CodingAckMessage" />
+</xs:schema>

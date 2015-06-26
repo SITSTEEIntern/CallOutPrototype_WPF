@@ -1,0 +1,20 @@
+Central FS
+Alexandra FS
+Clementi FS
+Jurong Island FS
+Bishan FS
+Banyan FS
+Marina Bay FS
+Paya Lebar FS
+Changi FS
+Tampines FS
+Yishun FS
+Ang Mo Kio FS
+Seng Kang FS
+Jurong FS
+Tuas FS
+Woodlands FS
+Bukit Batok FS
+Tuas View FS
+Brani Marine FS
+West Coast Marine FS

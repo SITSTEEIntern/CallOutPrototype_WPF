@@ -1,0 +1,116 @@
+﻿<Window x:Class="CallOut_ConsoleWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Call Out Console" Height="403.507" Width="525">
+    <!-- Display panel where display the incident details-->
+    <Grid x:Name="panelDisplay">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="380*"/>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="50*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="43*"/>
+            <RowDefinition Height="43*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="33*"/>
+            <RowDefinition Height="33*"/>
+            <RowDefinition Height="43*"/>
+            <RowDefinition Height="45*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+        <Grid x:Name="gIncidentSummary" Grid.Row="0" Grid.ColumnSpan="3" Background="#FFCA0000"  Visibility="Collapsed">
+            <Viewbox HorizontalAlignment="Center"  VerticalAlignment="Center">
+                <StackPanel>
+                    <TextBlock x:Name="txtIncidentSummary" Text="" FontWeight="Bold" Margin="5 2 5 2" />
+                </StackPanel>
+            </Viewbox>
+        </Grid>
+        <Viewbox Stretch="Uniform"  StretchDirection="Both"  Grid.Row="1" Grid.ColumnSpan="3">
+            <Grid>
+                <TextBlock x:Name="txtLocationSummary" Text="" FontWeight="Bold" Margin="5 2 5 2" />
+            </Grid>
+        </Viewbox>
+
+        <Button x:Name="btnAck" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3" Grid.Column="1" Click="btnAck_Click" Margin="5 2 5 2" Grid.ColumnSpan="2">
+            <Viewbox Stretch="Uniform">
+                <TextBlock x:Name="txtAck" Text="Acknowledge"/>
+            </Viewbox>
+        </Button>
+        <Button x:Name="btnReject" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="4" Grid.Column="1" Click="btnReject_Click" Margin="5 2 5 2" Grid.ColumnSpan="2">
+            <Viewbox Stretch="Uniform">
+                <TextBlock x:Name="txtReject" Text="Reject"/>
+            </Viewbox>
+        </Button>
+        <!--Incident Detail -->
+        <Viewbox HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.Row="2" Grid.Column="0">
+            <Grid>
+                <TextBlock x:Name="txtPriorAlarm" Text="" Margin="5 2 5 2" />
+            </Grid>
+        </Viewbox>
+        <!-- -->
+        <Viewbox HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.Row="3" Grid.Column="0" Grid.RowSpan="3">
+            <Grid>
+                <StackPanel Margin="5 5 5 5">
+                    <TextBlock x:Name="txtLocationName" Text=""/>
+                    <TextBlock x:Name="txtLocationStreet" Text=""/>
+                    <TextBlock x:Name="txtLocationUnit" Text=""/>
+                    <TextBlock x:Name="txtLocationStateCity" Text=""/>
+                    <TextBlock x:Name="txtLocationPostal" Text=""/>
+                </StackPanel>
+            </Grid>
+        </Viewbox>
+        <!--Dispatch Units -->
+        <Viewbox Grid.Row="6" Grid.Column="0" Grid.RowSpan="2" MinHeight="100" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,0,0,0">
+            <ListView x:Name="lvUnits" Height="90" Visibility="Collapsed">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="200" DisplayMemberBinding="{Binding CallSign}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Tag="CallSign" Click="lvUnitsColumnHeader_Click">Call Sign</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn Width="200" DisplayMemberBinding="{Binding UnitType}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Tag="UnitType" Click="lvUnitsColumnHeader_Click">Unit Type</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Viewbox>
+        <!--Test Status Label [Hidden]-->
+        <TextBlock x:Name="lblCodingID" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="5" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Visibility="Collapsed"/>
+        <TextBlock x:Name="lblStatus" Grid.Column="2" HorizontalAlignment="Left" Grid.Row="5" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Visibility="Collapsed"/>
+
+        <Viewbox Grid.Column="2" Grid.Row="7" Stretch="Uniform">
+            <ToggleButton x:Name="btnConnect" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnConnect_Click" Background="Transparent" BorderBrush="{x:Null}">
+                <ToggleButton.Template>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border HorizontalAlignment="Center" VerticalAlignment="Center" >
+                            <Image x:Name="imgConnect" Source="Icon/Logout.png"/>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="imgConnect" Property="Source" Value="Icon/Login.png"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </ToggleButton.Template>
+            </ToggleButton>
+        </Viewbox>
+        <Viewbox Grid.Column="1" Grid.Row="7" Stretch="Uniform">
+            <Button x:Name="btnSettings" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnSettings_Click" Background="Transparent" BorderBrush="{x:Null}">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Border HorizontalAlignment="Center" VerticalAlignment="Center" >
+                            <Image Source="Icon/Settings.png" />
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </Viewbox>
+    </Grid>
+</Window>

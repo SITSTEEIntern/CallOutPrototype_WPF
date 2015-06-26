@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="CallOut_CodingServiceLib" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="CallOut_CodingServiceLib" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="CallOut_CodingServiceLib/Imports">
+      <xsd:import schemaLocation="http://localhost:8080/CallOut_CodingService?xsd=xsd0" namespace="CallOut_CodingServiceLib" />
+      <xsd:import schemaLocation="http://localhost:8080/CallOut_CodingService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:8080/CallOut_CodingService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/CallOut_CodingServiceLib.Class" />
+      <xsd:import schemaLocation="http://localhost:8080/CallOut_CodingService?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="CallOut_CodingService_GetStationStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetStationStatus" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CodingService_GetStationStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetStationStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CodingService_UpdateStationStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateStationStatus" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CodingService_GetConnectedConsole_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetConnectedConsole" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CodingService_GetConnectedConsole_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetConnectedConsoleResponse" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CodingService_GetCodingID_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCodingID" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CodingService_GetCodingID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCodingIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CodingService_GetTestID_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTestID" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CodingService_GetTestID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTestIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CodingService_GetConnectedConsoleNo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetConnectedConsoleNo" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CodingService_GetConnectedConsoleNo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetConnectedConsoleNoResponse" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CodingService_GatewayJoin_InputMessage">
+    <wsdl:part name="parameters" element="tns:GatewayJoin" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CodingService_GatewayJoin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GatewayJoinResponse" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CodingService_GatewayLeave_InputMessage">
+    <wsdl:part name="parameters" element="tns:GatewayLeave" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CodingService_GatewayLeave_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GatewayLeaveResponse" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CodingService_ConsoleJoin_InputMessage">
+    <wsdl:part name="parameters" element="tns:ConsoleJoin" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CodingService_ConsoleJoin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ConsoleJoinResponse" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CodingService_ConsoleLeave_InputMessage">
+    <wsdl:part name="parameters" element="tns:ConsoleLeave" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CodingService_ConsoleLeave_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ConsoleLeaveResponse" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CodingService_TargetMsg_InputMessage">
+    <wsdl:part name="parameters" element="tns:TargetMsg" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CodingService_AckCodingIncidentMsg_InputMessage">
+    <wsdl:part name="parameters" element="tns:AckCodingIncidentMsg" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CodingService_RequestConnStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:RequestConnStatus" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CodingService_ReplyConnStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReplyConnStatus" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CodingService_RemovefromMsgQueue_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemovefromMsgQueue" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CodingService_ConsoleDisplayMsg_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ConsoleDisplayMsg" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CodingService_EditConnStatus_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:EditConnStatus" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CodingService_NotifyConsoleNotConnected_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:NotifyConsoleNotConnected" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CodingService_RcvCodingAckMsg_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:RcvCodingAckMsg" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CodingService_GatewayRcvConnStatus_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:GatewayRcvConnStatus" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CodingService_ConsoleRcvConnStatus_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:ConsoleRcvConnStatus" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CodingService_UpdateRemoveMsgList_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:UpdateRemoveMsgList" />
+  </wsdl:message>
+  <wsdl:portType msc:usingSession="true" name="CallOut_CodingService">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetStationStatus">
+      <wsdl:input wsaw:Action="CallOut_CodingServiceLib/CallOut_CodingService/GetStationStatus" message="tns:CallOut_CodingService_GetStationStatus_InputMessage" />
+      <wsdl:output wsaw:Action="CallOut_CodingServiceLib/CallOut_CodingService/GetStationStatusResponse" message="tns:CallOut_CodingService_GetStationStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="UpdateStationStatus">
+      <wsdl:input wsaw:Action="CallOut_CodingServiceLib/CallOut_CodingService/UpdateStationStatus" message="tns:CallOut_CodingService_UpdateStationStatus_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetConnectedConsole">
+      <wsdl:input wsaw:Action="CallOut_CodingServiceLib/CallOut_CodingService/GetConnectedConsole" message="tns:CallOut_CodingService_GetConnectedConsole_InputMessage" />
+      <wsdl:output wsaw:Action="CallOut_CodingServiceLib/CallOut_CodingService/GetConnectedConsoleResponse" message="tns:CallOut_CodingService_GetConnectedConsole_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetCodingID">
+      <wsdl:input wsaw:Action="CallOut_CodingServiceLib/CallOut_CodingService/GetCodingID" message="tns:CallOut_CodingService_GetCodingID_InputMessage" />
+      <wsdl:output wsaw:Action="CallOut_CodingServiceLib/CallOut_CodingService/GetCodingIDResponse" message="tns:CallOut_CodingService_GetCodingID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetTestID">
+      <wsdl:input wsaw:Action="CallOut_CodingServiceLib/CallOut_CodingService/GetTestID" message="tns:CallOut_CodingService_GetTestID_InputMessage" />
+      <wsdl:output wsaw:Action="CallOut_CodingServiceLib/CallOut_CodingService/GetTestIDResponse" message="tns:CallOut_CodingService_GetTestID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetConnectedConsoleNo">
+      <wsdl:input wsaw:Action="CallOut_CodingServiceLib/CallOut_CodingService/GetConnectedConsoleNo" message="tns:CallOut_CodingService_GetConnectedConsoleNo_InputMessage" />
+      <wsdl:output wsaw:Action="CallOut_CodingServiceLib/CallOut_CodingService/GetConnectedConsoleNoResponse" message="tns:CallOut_CodingService_GetConnectedConsoleNo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GatewayJoin">
+      <wsdl:input wsaw:Action="CallOut_CodingServiceLib/CallOut_CodingService/GatewayJoin" message="tns:CallOut_CodingService_GatewayJoin_InputMessage" />
+      <wsdl:output wsaw:Action="CallOut_CodingServiceLib/CallOut_CodingService/GatewayJoinResponse" message="tns:CallOut_CodingService_GatewayJoin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GatewayLeave">
+      <wsdl:input wsaw:Action="CallOut_CodingServiceLib/CallOut_CodingService/GatewayLeave" message="tns:CallOut_CodingService_GatewayLeave_InputMessage" />
+      <wsdl:output wsaw:Action="CallOut_CodingServiceLib/CallOut_CodingService/GatewayLeaveResponse" message="tns:CallOut_CodingService_GatewayLeave_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ConsoleJoin">
+      <wsdl:input wsaw:Action="CallOut_CodingServiceLib/CallOut_CodingService/ConsoleJoin" message="tns:CallOut_CodingService_ConsoleJoin_InputMessage" />
+      <wsdl:output wsaw:Action="CallOut_CodingServiceLib/CallOut_CodingService/ConsoleJoinResponse" message="tns:CallOut_CodingService_ConsoleJoin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ConsoleLeave">
+      <wsdl:input wsaw:Action="CallOut_CodingServiceLib/CallOut_CodingService/ConsoleLeave" message="tns:CallOut_CodingService_ConsoleLeave_InputMessage" />
+      <wsdl:output wsaw:Action="CallOut_CodingServiceLib/CallOut_CodingService/ConsoleLeaveResponse" message="tns:CallOut_CodingService_ConsoleLeave_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="TargetMsg">
+      <wsdl:input wsaw:Action="CallOut_CodingServiceLib/CallOut_CodingService/TargetMsg" message="tns:CallOut_CodingService_TargetMsg_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="AckCodingIncidentMsg">
+      <wsdl:input wsaw:Action="CallOut_CodingServiceLib/CallOut_CodingService/AckCodingIncidentMsg" message="tns:CallOut_CodingService_AckCodingIncidentMsg_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="RequestConnStatus">
+      <wsdl:input wsaw:Action="CallOut_CodingServiceLib/CallOut_CodingService/RequestConnStatus" message="tns:CallOut_CodingService_RequestConnStatus_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ReplyConnStatus">
+      <wsdl:input wsaw:Action="CallOut_CodingServiceLib/CallOut_CodingService/ReplyConnStatus" message="tns:CallOut_CodingService_ReplyConnStatus_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="RemovefromMsgQueue">
+      <wsdl:input wsaw:Action="CallOut_CodingServiceLib/CallOut_CodingService/RemovefromMsgQueue" message="tns:CallOut_CodingService_RemovefromMsgQueue_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ConsoleDisplayMsg">
+      <wsdl:output wsaw:Action="CallOut_CodingServiceLib/CallOut_CodingService/ConsoleDisplayMsg" message="tns:CallOut_CodingService_ConsoleDisplayMsg_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="EditConnStatus">
+      <wsdl:output wsaw:Action="CallOut_CodingServiceLib/CallOut_CodingService/EditConnStatus" message="tns:CallOut_CodingService_EditConnStatus_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="NotifyConsoleNotConnected">
+      <wsdl:output wsaw:Action="CallOut_CodingServiceLib/CallOut_CodingService/NotifyConsoleNotConnected" message="tns:CallOut_CodingService_NotifyConsoleNotConnected_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="RcvCodingAckMsg">
+      <wsdl:output wsaw:Action="CallOut_CodingServiceLib/CallOut_CodingService/RcvCodingAckMsg" message="tns:CallOut_CodingService_RcvCodingAckMsg_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GatewayRcvConnStatus">
+      <wsdl:output wsaw:Action="CallOut_CodingServiceLib/CallOut_CodingService/GatewayRcvConnStatus" message="tns:CallOut_CodingService_GatewayRcvConnStatus_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ConsoleRcvConnStatus">
+      <wsdl:output wsaw:Action="CallOut_CodingServiceLib/CallOut_CodingService/ConsoleRcvConnStatus" message="tns:CallOut_CodingService_ConsoleRcvConnStatus_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="UpdateRemoveMsgList">
+      <wsdl:output wsaw:Action="CallOut_CodingServiceLib/CallOut_CodingService/UpdateRemoveMsgList" message="tns:CallOut_CodingService_UpdateRemoveMsgList_OutputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

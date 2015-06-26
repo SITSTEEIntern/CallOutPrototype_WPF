@@ -1,0 +1,44 @@
+c:\users\intern\documents\visual studio 2013\Projects\CallOut_ConsoleWPF\CallOut_ConsoleWPF\bin\Debug\CallOut_ConsoleWPF.exe.config
+c:\users\intern\documents\visual studio 2013\Projects\CallOut_ConsoleWPF\CallOut_ConsoleWPF\bin\Debug\CallOut_ConsoleWPF.exe
+c:\users\intern\documents\visual studio 2013\Projects\CallOut_ConsoleWPF\CallOut_ConsoleWPF\bin\Debug\CallOut_ConsoleWPF.pdb
+c:\users\intern\documents\visual studio 2013\Projects\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Debug\CallOut_ConsoleWPF.csprojResolveAssemblyReference.cache
+c:\users\intern\documents\visual studio 2013\Projects\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Debug\MainWindow.baml
+c:\users\intern\documents\visual studio 2013\Projects\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Debug\MainWindow.g.cs
+c:\users\intern\documents\visual studio 2013\Projects\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Debug\App.g.cs
+c:\users\intern\documents\visual studio 2013\Projects\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Debug\CallOut_ConsoleWPF_MarkupCompile.cache
+c:\users\intern\documents\visual studio 2013\Projects\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Debug\CallOut_ConsoleWPF.g.resources
+c:\users\intern\documents\visual studio 2013\Projects\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Debug\CallOut_ConsoleWPF.Properties.Resources.resources
+c:\users\intern\documents\visual studio 2013\Projects\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Debug\CallOut_ConsoleWPF.csproj.GenerateResource.Cache
+c:\users\intern\documents\visual studio 2013\Projects\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Debug\CallOut_ConsoleWPF.exe
+c:\users\intern\documents\visual studio 2013\Projects\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Debug\CallOut_ConsoleWPF.pdb
+c:\users\intern\documents\visual studio 2013\Projects\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Debug\wndSettings.baml
+c:\users\intern\documents\visual studio 2013\Projects\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Debug\wndSettings.g.cs
+C:\Users\intern\Desktop\CallOut_ConsoleWPF\CallOut_ConsoleWPF\bin\Debug\CallOut_ConsoleWPF.exe.config
+C:\Users\intern\Desktop\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Debug\CallOut_ConsoleWPF.exe
+C:\Users\intern\Desktop\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Debug\CallOut_ConsoleWPF.pdb
+C:\Users\intern\Desktop\CallOut_ConsoleWPF\CallOut_ConsoleWPF\bin\Debug\CallOut_ConsoleWPF.exe
+C:\Users\intern\Desktop\CallOut_ConsoleWPF\CallOut_ConsoleWPF\bin\Debug\CallOut_ConsoleWPF.pdb
+C:\Users\intern\Desktop\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Debug\CallOut_ConsoleWPF.csprojResolveAssemblyReference.cache
+C:\Users\intern\Desktop\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Debug\MainWindow.baml
+C:\Users\intern\Desktop\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Debug\MainWindow.g.cs
+C:\Users\intern\Desktop\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Debug\App.g.cs
+C:\Users\intern\Desktop\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Debug\CallOut_ConsoleWPF_MarkupCompile.cache
+C:\Users\intern\Desktop\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Debug\CallOut_ConsoleWPF.g.resources
+C:\Users\intern\Desktop\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Debug\CallOut_ConsoleWPF.Properties.Resources.resources
+C:\Users\intern\Desktop\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Debug\CallOut_ConsoleWPF.csproj.GenerateResource.Cache
+C:\Users\intern\Documents\GitHub\CallOutPrototypeWPF\CallOut_ConsoleWPF\CallOut_ConsoleWPF\bin\Debug\CallOut_ConsoleWPF.exe.config
+C:\Users\intern\Documents\GitHub\CallOutPrototypeWPF\CallOut_ConsoleWPF\CallOut_ConsoleWPF\bin\Debug\CallOut_ConsoleWPF.exe
+C:\Users\intern\Documents\GitHub\CallOutPrototypeWPF\CallOut_ConsoleWPF\CallOut_ConsoleWPF\bin\Debug\CallOut_ConsoleWPF.pdb
+C:\Users\intern\Documents\GitHub\CallOutPrototypeWPF\CallOut_ConsoleWPF\CallOut_ConsoleWPF\bin\Debug\NAudio.dll
+C:\Users\intern\Documents\GitHub\CallOutPrototypeWPF\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Debug\CallOut_ConsoleWPF.csprojResolveAssemblyReference.cache
+C:\Users\intern\Documents\GitHub\CallOutPrototypeWPF\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Debug\MainWindow.baml
+C:\Users\intern\Documents\GitHub\CallOutPrototypeWPF\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Debug\SettingsWindow.baml
+C:\Users\intern\Documents\GitHub\CallOutPrototypeWPF\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Debug\MainWindow.g.cs
+C:\Users\intern\Documents\GitHub\CallOutPrototypeWPF\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Debug\SettingsWindow.g.cs
+C:\Users\intern\Documents\GitHub\CallOutPrototypeWPF\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Debug\App.g.cs
+C:\Users\intern\Documents\GitHub\CallOutPrototypeWPF\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Debug\CallOut_ConsoleWPF_MarkupCompile.cache
+C:\Users\intern\Documents\GitHub\CallOutPrototypeWPF\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Debug\CallOut_ConsoleWPF.g.resources
+C:\Users\intern\Documents\GitHub\CallOutPrototypeWPF\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Debug\CallOut_ConsoleWPF.Properties.Resources.resources
+C:\Users\intern\Documents\GitHub\CallOutPrototypeWPF\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Debug\CallOut_ConsoleWPF.csproj.GenerateResource.Cache
+C:\Users\intern\Documents\GitHub\CallOutPrototypeWPF\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Debug\CallOut_ConsoleWPF.exe
+C:\Users\intern\Documents\GitHub\CallOutPrototypeWPF\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Debug\CallOut_ConsoleWPF.pdb

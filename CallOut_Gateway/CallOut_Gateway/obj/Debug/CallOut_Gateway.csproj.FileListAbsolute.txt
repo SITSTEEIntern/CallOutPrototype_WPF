@@ -1,0 +1,10 @@
+c:\users\intern\documents\visual studio 2013\Projects\CallOut_Gateway\CallOut_Gateway\bin\Debug\CallOut_Gateway.exe.config
+C:\Users\intern\Documents\GitHub\CallOutPrototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\CallOut_Gateway.exe.config
+C:\Users\intern\Documents\GitHub\CallOutPrototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\CallOut_Gateway.exe
+C:\Users\intern\Documents\GitHub\CallOutPrototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\CallOut_Gateway.pdb
+C:\Users\intern\Documents\GitHub\CallOutPrototype\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.csprojResolveAssemblyReference.cache
+C:\Users\intern\Documents\GitHub\CallOutPrototype\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.Form1.resources
+C:\Users\intern\Documents\GitHub\CallOutPrototype\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.Properties.Resources.resources
+C:\Users\intern\Documents\GitHub\CallOutPrototype\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.csproj.GenerateResource.Cache
+C:\Users\intern\Documents\GitHub\CallOutPrototype\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.exe
+C:\Users\intern\Documents\GitHub\CallOutPrototype\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.pdb
