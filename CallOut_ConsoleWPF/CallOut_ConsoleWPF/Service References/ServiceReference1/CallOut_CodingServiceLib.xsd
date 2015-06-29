@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="CallOut_CodingServiceLib" elementFormDefault="qualified" targetNamespace="CallOut_CodingServiceLib" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:8080/CallOut_CodingService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/CallOut_CodingServiceLib.Class" />
-  <xs:import schemaLocation="http://localhost:8080/CallOut_CodingService?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/CallOut_CodingServiceLib.Class" />
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:element name="GetStationStatus">
     <xs:complexType>
       <xs:sequence />

@@ -112,22 +112,22 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <None Include="Service References\ServiceReference1\CallOut_CodingService.wsdl" />
-    <None Include="Service References\ServiceReference1\CallOut_CodingService.xsd">
+    <None Include="Service References\ServiceReference1\Arrays.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceReference1\CallOut_CodingService1.wsdl" />
-    <None Include="Service References\ServiceReference1\CallOut_CodingService1.xsd">
+    <None Include="Service References\ServiceReference1\CallOut_CodingServiceLib.Class.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceReference1\CallOut_CodingService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceReference1\CallOut_CodingService3.xsd">
+    <None Include="Service References\ServiceReference1\CallOut_CodingServiceLib.wsdl" />
+    <None Include="Service References\ServiceReference1\CallOut_CodingServiceLib.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceReference1\CallOut_ConsoleWPF.ServiceReference1.StationStatus.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServiceReference1\service.wsdl" />
+    <None Include="Service References\ServiceReference1\service.xsd">
+      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -137,10 +137,15 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Service References\ServiceReference1\" />
+    <Resource Include="Icon\Login.png" />
+    <Resource Include="Icon\Logout.png" />
+    <Resource Include="Icon\Settings.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\ServiceReference1\CallOut_CodingService.disco" />
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\ServiceReference1\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\ServiceReference1\configuration91.svcinfo" />
@@ -153,14 +158,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Icon\Login.png" />
-    <Resource Include="Icon\Logout.png" />
-    <Resource Include="Icon\Settings.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

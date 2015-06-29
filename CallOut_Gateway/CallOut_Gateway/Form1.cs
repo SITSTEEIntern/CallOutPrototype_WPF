@@ -38,8 +38,9 @@ namespace CallOut_Gateway
         BindingList<MessageStatus> _MessageStatusList = new BindingList<MessageStatus>();
         List<StationStatus> _StationStatusList = new List<StationStatus>();
 
-        //holding of all the coding message in order to hold the information of dispatch for adhoc request
-        List<CodingIncidentMessage> _CodingIncidentList = new List<CodingIncidentMessage>();
+        //List of informaton at is hold and track at gateway, e.g station status and dispatchunit info for adhoc request
+        //pending and completed list?
+        List<GatewayTracker> _GatewayTrackerList = new List<GatewayTracker>();
 
         //List of station that will be remove from service
         List<string> _ToBeRemove;
@@ -56,7 +57,7 @@ namespace CallOut_Gateway
 
             // The client callback interface must be hosted for the server to invoke the callback
             // Open a connection to the message service via the proxy (qualifier ServiceReference1 needed due to name clash)
-            _CallOut_CodingService = new ServiceReference1.CallOut_CodingServiceClient(new InstanceContext(this), "WSDualHttpBinding_CallOut_CodingService");
+            _CallOut_CodingService = new ServiceReference1.CallOut_CodingServiceClient(new InstanceContext(this), "NetTcpBinding_CallOut_CodingService");
             _CallOut_CodingService.Open();
 
             _CallOut_CADService = new ServiceReference2.CallOut_CADServiceClient(new InstanceContext(this), "WSDualHttpBinding_CallOut_CADService");
@@ -104,7 +105,7 @@ namespace CallOut_Gateway
 
             //Have a timer that will broadcast message to connected console and expect reply within 5 second else disconnect
             System.Timers.Timer HealthBroadcastTimer = new System.Timers.Timer();
-            HealthBroadcastTimer.Interval = 10000; //1min
+            HealthBroadcastTimer.Interval = 10000; //10sec
             HealthBroadcastTimer.Elapsed += delegate { HealthBroadcastTimeOut(); };
             HealthBroadcastTimer.AutoReset = false;
             HealthBroadcastTimer.Start();
@@ -127,10 +128,31 @@ namespace CallOut_Gateway
             //Disconnected if there is no response
             foreach(string station in _ToBeRemove){
                 _CallOut_CodingService.ConsoleLeave(station);
+
+                //start a new thread to check against tracker for reference on station status
+                var t = new Thread(() => FailedPendingMsg(station));
+                t.Start();
             }
 
+            //recall healthcheck
             HealthCheck();
         }
+
+        private void FailedPendingMsg(string station)
+        {
+            foreach (GatewayTracker gatewaytrack in _GatewayTrackerList)
+            {
+                string value = "";
+                if (gatewaytrack.StationStatus.TryGetValue(station, out value))
+                {
+                    if (value.Equals("Pending"))
+                    {
+                        TargetTimeout(station, gatewaytrack.CodingID, gatewaytrack.DispatchUnits.ToArray());
+                    }
+                }
+            }
+        }
+
 
         private void btnJoinCAD_Click(object sender, EventArgs e)
         {
@@ -367,6 +389,16 @@ namespace CallOut_Gateway
 
             _MessageStatusList.Add(newMsgStatus);
 
+            //Update on gateway tracker
+            foreach (GatewayTracker gatewaytrack in _GatewayTrackerList)
+            {
+                //if match codingID and station name, update the station status
+                if (gatewaytrack.CodingID.Equals(codingID) && gatewaytrack.StationStatus.ContainsKey(station))
+                {
+                    gatewaytrack.StationStatus[station] = status;
+                }
+            }
+
             return newMsgStatus;
 
         }
@@ -454,7 +486,7 @@ namespace CallOut_Gateway
             string[] addressList = tmpstationList.ToArray();
 
             CodingIncidentMessage testIncidentMsg = TestMessageTemplate();
-            _CodingIncidentList.Add(testIncidentMsg);
+            ConvertCodingtoTracker(testIncidentMsg); //Add to gateway tracker
             _CallOut_CodingService.TargetMsg(addressList, testIncidentMsg);
 
             List<Tracking> trackingList = new List<Tracking>();
@@ -494,13 +526,6 @@ namespace CallOut_Gateway
             CreateTestCodingEntry(testIncidentMsg, tmpstationList.Count.ToString());
             //Set Message Entry
             CreateMessageEntry(testIncidentMsg, tmpstationList.Count.ToString());
-
-            //Start timer for 15 sec ti wait for response else take as failed
-            //System.Timers.Timer AutoRejectTimer = new System.Timers.Timer();
-            //AutoRejectTimer.Interval = 15000; //15 sec
-            //AutoRejectTimer.Elapsed += delegate { TargetTimeout(tmpstationList, testIncidentMsg); };
-            //AutoRejectTimer.AutoReset = false;
-            //AutoRejectTimer.Start();
         }
 
         private void btnStationBroadcast_Click(object sender, EventArgs e)
@@ -514,7 +539,7 @@ namespace CallOut_Gateway
             string[] addressList = connectedConsole.ToArray();
 
             CodingIncidentMessage testIncidentMsg = TestMessageTemplate2();
-            _CodingIncidentList.Add(testIncidentMsg);
+            ConvertCodingtoTracker(testIncidentMsg); //Add to gateway tracker
             _CallOut_CodingService.TargetMsg(addressList, testIncidentMsg);
 
             List<Tracking> trackingList = new List<Tracking>();
@@ -560,13 +585,6 @@ namespace CallOut_Gateway
             CreateTestCodingEntry(testIncidentMsg, connectedConsole.Count.ToString());
             //Set Message Entry
             CreateMessageEntry(testIncidentMsg, connectedConsole.Count.ToString());
-
-            //Start timer for 15 sec to assume console disconnected
-            //System.Timers.Timer AutoRejectTimer = new System.Timers.Timer();
-            //AutoRejectTimer.Interval = 5000; //15 sec
-            //AutoRejectTimer.Elapsed += delegate { TargetTimeout(connectedConsole, testIncidentMsg); };
-            //AutoRejectTimer.AutoReset = false;
-            //AutoRejectTimer.Start();
         }
 
         private CodingIncidentMessage TestMessageTemplate()
@@ -930,7 +948,7 @@ namespace CallOut_Gateway
                     //Start timer for 15 sec to assume console disconnected
                     System.Timers.Timer AutoFailedTimer = new System.Timers.Timer();
                     AutoFailedTimer.Interval = 15000; //15 sec
-                    AutoFailedTimer.Elapsed += delegate { TargetTimeout(console, codingIncidentMsg); };
+                    AutoFailedTimer.Elapsed += delegate { TargetTimeout(console, codingIncidentMsg.CodingID, codingIncidentMsg.DispatchUnits); };
                     AutoFailedTimer.AutoReset = false;
                     AutoFailedTimer.Start();
                 };
@@ -938,13 +956,13 @@ namespace CallOut_Gateway
             _uiSyncContext.Post(callback, "start target timeout timer");
         }
 
-        public void TargetTimeout(string console, CodingIncidentMessage codingIncidentMsg)
+        public void TargetTimeout(string console, string codingID, CodingUnits[] dispatchUnits)
         {
             Debug.WriteLine("TargetTimeout");
             //Cross thread 
             SendOrPostCallback callback = delegate(object state)
             {
-                string codingID = codingIncidentMsg.CodingID;
+                //string codingID = codingIncidentMsg.CodingID;
 
                 //Check against Pending number in coding tab, If there is any pending
                 //remove those which had respond base on message tab with codingID
@@ -972,11 +990,11 @@ namespace CallOut_Gateway
                                 //update coding status
                                 UpdateCodingStatus(codingID, "Failed");
                                 //update message status
-                                MessageStatus messagestatus = UpdateMessageStatus(codingIncidentMsg.CodingID, console, "Failed");
+                                MessageStatus messagestatus = UpdateMessageStatus(codingID, console, "Failed");
 
                                 List<string> unitcallsign = new List<string>();
                                 //To give relevant station units callsign
-                                foreach (CodingUnits unit in codingIncidentMsg.DispatchUnits)
+                                foreach (CodingUnits unit in dispatchUnits)
                                 {
                                     if (unit.UnitCurrentStation.Equals(console))
                                     {
@@ -1059,8 +1077,8 @@ namespace CallOut_Gateway
                     string[] addressList = tmpstationList.ToArray();
 
                     //Convert Incident to Coding Message and send to respective console
-                    CodingIncidentMessage codingincidentmsg = CovertIncidentToCoding(CADincidentMsg);
-                    _CodingIncidentList.Add(codingincidentmsg); //add to list to keep track
+                    CodingIncidentMessage codingincidentmsg = ConvertIncidentToCoding(CADincidentMsg);
+                    ConvertCodingtoTracker(codingincidentmsg); //Add to gateway tracker
                     _CallOut_CodingService.TargetMsg(addressList, codingincidentmsg);
 
                     //Send ack back to CAD
@@ -1080,19 +1098,12 @@ namespace CallOut_Gateway
                     //Set Message Entry
                     CreateMessageEntry(codingincidentmsg, tmpstationList.Count.ToString());
 
-                    //Start timer for 15 sec to assume console disconnected
-                    //System.Timers.Timer AutoRejectTimer = new System.Timers.Timer();
-                    //AutoRejectTimer.Interval = 15000; //15 sec
-                    //AutoRejectTimer.Elapsed += delegate { TargetTimeout(tmpstationList, codingincidentmsg); };
-                    //AutoRejectTimer.AutoReset = false;
-                    //AutoRejectTimer.Start();
-
                 };
 
             _uiSyncContext.Post(callback, "Rcv Incident Message");
         }
 
-        public CodingIncidentMessage CovertIncidentToCoding(DispatchedIncident CADincidentMsg)
+        public CodingIncidentMessage ConvertIncidentToCoding(DispatchedIncident CADincidentMsg)
         {
             string codingID = _CallOut_CodingService.GetCodingID();
 
@@ -1134,6 +1145,30 @@ namespace CallOut_Gateway
             codingIncidentMsg.DispatchUnits = dispatchUnits;
 
             return codingIncidentMsg;
+        }
+
+        //Convert the coding incident message to gateway tracker and add to the tracker list for reference of information
+        public void ConvertCodingtoTracker(CodingIncidentMessage CodingincidentMsg)
+        {
+            GatewayTracker gatewaytrack = new GatewayTracker();
+            gatewaytrack.CodingID = CodingincidentMsg.CodingID;
+            gatewaytrack.IncidentID = CodingincidentMsg.IncidentNo;
+
+            List<CodingUnits> dispatchunits = new List<CodingUnits>();
+            Dictionary<string, string> stationstatus = new Dictionary<string, string>();
+            foreach (CodingUnits unit in CodingincidentMsg.DispatchUnits)
+            {
+                dispatchunits.Add(unit);
+
+                if (!stationstatus.ContainsKey(unit.UnitCurrentStation))
+                {
+                    stationstatus.Add(unit.UnitCurrentStation, "Pending");
+                }
+            }
+            gatewaytrack.DispatchUnits = dispatchunits;
+            gatewaytrack.StationStatus = stationstatus;
+
+            _GatewayTrackerList.Add(gatewaytrack);
         }
         
         //Retrieve Incident Coding Status base on Query
@@ -1190,12 +1225,12 @@ namespace CallOut_Gateway
                         List<string> tmpstationList = new List<string>();
                         List<Tracking> trackingList = new List<Tracking>();
 
-                        foreach (CodingIncidentMessage codingincidentmsg in _CodingIncidentList)
+                        foreach (GatewayTracker gatewaytrack in _GatewayTrackerList)
                         {
-                            if (codingincidentmsg.CodingID.Equals(querycodingID))
+                            if (gatewaytrack.CodingID.Equals(querycodingID))
                             {
                                 //Only take out the stations on the Current Station
-                                foreach (CodingUnits uniqueunit in codingincidentmsg.DispatchUnits)
+                                foreach (CodingUnits uniqueunit in gatewaytrack.DispatchUnits)
                                 {
                                     //Avoid duplicate station name in the list
                                     if (!tmpstationList.Contains(uniqueunit.UnitCurrentStation))
@@ -1221,7 +1256,7 @@ namespace CallOut_Gateway
                                         List<string> unitcallsign = new List<string>();
 
                                         //To give relevant station units callsign
-                                        foreach (CodingUnits unit in codingincidentmsg.DispatchUnits)
+                                        foreach (CodingUnits unit in gatewaytrack.DispatchUnits)
                                         {
                                             if (unit.UnitCurrentStation.Equals(uniqueunit.UnitCurrentStation))
                                             {

@@ -23,10 +23,10 @@ C:\Users\intern\Documents\GitHub\CallOutPrototypeWPF\CallOut_CodingServiceLib\Ca
 C:\Users\intern\Documents\GitHub\CallOutPrototypeWPF\CallOut_CodingServiceLib\CallOut_CodingServiceHost\obj\Debug\CallOut_CodingServiceHost.exe
 C:\Users\intern\Documents\GitHub\CallOutPrototypeWPF\CallOut_CodingServiceLib\CallOut_CodingServiceHost\obj\Debug\CallOut_CodingServiceHost.pdb
 C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_CodingServiceLib\CallOut_CodingServiceHost\bin\Debug\CallOut_CodingServiceHost.exe.config
-C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_CodingServiceLib\CallOut_CodingServiceHost\obj\Debug\CallOut_CodingServiceHost.exe
-C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_CodingServiceLib\CallOut_CodingServiceHost\obj\Debug\CallOut_CodingServiceHost.pdb
 C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_CodingServiceLib\CallOut_CodingServiceHost\bin\Debug\CallOut_CodingServiceHost.exe
 C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_CodingServiceLib\CallOut_CodingServiceHost\bin\Debug\CallOut_CodingServiceHost.pdb
 C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_CodingServiceLib\CallOut_CodingServiceHost\bin\Debug\CallOut_CodingServiceLib.dll
 C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_CodingServiceLib\CallOut_CodingServiceHost\bin\Debug\CallOut_CodingServiceLib.pdb
 C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_CodingServiceLib\CallOut_CodingServiceHost\obj\Debug\CallOut_CodingServiceHost.csprojResolveAssemblyReference.cache
+C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_CodingServiceLib\CallOut_CodingServiceHost\obj\Debug\CallOut_CodingServiceHost.exe
+C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_CodingServiceLib\CallOut_CodingServiceHost\obj\Debug\CallOut_CodingServiceHost.pdb

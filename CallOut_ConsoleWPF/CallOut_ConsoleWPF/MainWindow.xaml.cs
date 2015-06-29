@@ -60,6 +60,11 @@ namespace CallOut_ConsoleWPF
 
         //Default string to find the translate
         private const string URL = "http://translate.google.com/translate_tts?tl={0}&q={1}";
+
+        //number count for title display
+        bool isfirstdisplay = true;
+        int countdisplay = 1;
+        int counttotal = 0;
         
         public MainWindow()
         {
@@ -76,7 +81,7 @@ namespace CallOut_ConsoleWPF
 
             // The client callback interface must be hosted for the server to invoke the callback
             // Open a connection to the message service via the proxy (qualifier ServiceReference1 needed due to name clash)
-            _CallOut_CodingService = new ServiceReference1.CallOut_CodingServiceClient(new InstanceContext(this), "WSDualHttpBinding_CallOut_CodingService");
+            _CallOut_CodingService = new ServiceReference1.CallOut_CodingServiceClient(new InstanceContext(this), "NetTcpBinding_CallOut_CodingService");
             _CallOut_CodingService.Open();
 
             //DataGrid Bind
@@ -436,7 +441,19 @@ namespace CallOut_ConsoleWPF
             //Only attempt to take out from queue if there is msg inside the queue
             if (IncidentMsgQueue.Count != 0)
             {
+                if(!isfirstdisplay){
+                    countdisplay++;
+                }
+                this.Title = "Call Out Console [" + Properties.Settings.Default.CurrentID + "] ("+countdisplay.ToString()+" of " + counttotal.ToString() + ")";
                 this.UpdateDetails(IncidentMsgQueue.Dequeue());
+                isfirstdisplay = false;
+            }
+            else
+            {
+                countdisplay = 1;
+                counttotal = 0;
+                this.Title = "Call Out Console [" + Properties.Settings.Default.CurrentID + "]";
+                isfirstdisplay = true;
             }
         }
 
@@ -450,6 +467,8 @@ namespace CallOut_ConsoleWPF
             {
                 //Update to the queue
                 IncidentMsgQueue.Enqueue(codingIncidentMsg);
+                counttotal++; //increase number of msg on queue
+                this.Title = "Call Out Console [" + Properties.Settings.Default.CurrentID + "] (" + countdisplay.ToString() + " of " + counttotal.ToString() + ")";
                 //If currently does not servicing any message
                 if (this.lblCodingID.Text.Equals(""))
                 {

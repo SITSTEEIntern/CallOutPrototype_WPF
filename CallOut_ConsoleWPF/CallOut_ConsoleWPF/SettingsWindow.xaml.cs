@@ -58,7 +58,7 @@ namespace CallOut_ConsoleWPF
 
             // The client callback interface must be hosted for the server to invoke the callback
             // Open a connection to the message service via the proxy (qualifier ServiceReference1 needed due to name clash)
-            _CallOut_CodingService = new ServiceReference1.CallOut_CodingServiceClient(new InstanceContext(this), "WSDualHttpBinding_CallOut_CodingService");
+            _CallOut_CodingService = new ServiceReference1.CallOut_CodingServiceClient(new InstanceContext(this), "NetTcpBinding_CallOut_CodingService");
             _CallOut_CodingService.Open();
 
             //Fill up the combobox items

@@ -289,7 +289,6 @@ namespace CallOut_CodingServiceLib
                     _ConnectedConsoleDict.Remove(console);
                     _ConnectedConsoleList.Remove(console);
                     _ConnectedConsoleNo--;
-                    Debug.WriteLine(_ConnectedConsoleDict.Count.ToString());
 
                     //Update the station status
                     foreach (StationStatus station in StationIDList)
@@ -350,6 +349,7 @@ namespace CallOut_CodingServiceLib
                 {
                     tmpCallback.ConsoleRcvConnStatus();
                 }
+
             }
         }
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="5f7ee411-d0ee-4e88-8c29-b42891883d2e" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="48c09fde-ff22-4c65-8df2-c8850bf01949" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -19,16 +19,15 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:8080/CallOut_CodingService" Protocol="http" SourceId="1" />
+    <MetadataSource Address="net.tcp://192.168.2.48:8080/CallOut_CodingService/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="CallOut_CodingService.wsdl" MetadataType="Wsdl" ID="9db2edd1-9275-4495-a5ea-631f7b4973c5" SourceId="1" SourceUrl="http://localhost:8080/CallOut_CodingService?wsdl" />
-    <MetadataFile FileName="CallOut_CodingService.xsd" MetadataType="Schema" ID="44253a66-c5cf-48e9-baed-aaecf1562a1f" SourceId="1" SourceUrl="http://localhost:8080/CallOut_CodingService?xsd=xsd3" />
-    <MetadataFile FileName="CallOut_CodingService1.xsd" MetadataType="Schema" ID="2481f669-1938-4171-a25e-8d7293550f28" SourceId="1" SourceUrl="http://localhost:8080/CallOut_CodingService?xsd=xsd0" />
-    <MetadataFile FileName="CallOut_CodingService2.xsd" MetadataType="Schema" ID="ff074f7b-58e9-45ac-8b06-e401038080fe" SourceId="1" SourceUrl="http://localhost:8080/CallOut_CodingService?xsd=xsd1" />
-    <MetadataFile FileName="CallOut_CodingService1.wsdl" MetadataType="Wsdl" ID="ca034d05-6c00-47de-9abd-f5faa346b102" SourceId="1" SourceUrl="http://localhost:8080/CallOut_CodingService?wsdl=wsdl0" />
-    <MetadataFile FileName="CallOut_CodingService3.xsd" MetadataType="Schema" ID="758a3ec0-4033-4c69-8c96-d0d55a2fcd85" SourceId="1" SourceUrl="http://localhost:8080/CallOut_CodingService?xsd=xsd2" />
-    <MetadataFile FileName="CallOut_CodingService.disco" MetadataType="Disco" ID="d90da44b-4cbb-464d-a75a-f8b41a36541b" SourceId="1" SourceUrl="http://localhost:8080/CallOut_CodingService?disco" />
+    <MetadataFile FileName="CallOut_CodingServiceLib.wsdl" MetadataType="Wsdl" ID="04334ded-81ce-4728-bf18-a5d913f9f3c5" SourceId="1" SourceUrl="net.tcp://192.168.2.48:8080/CallOut_CodingService/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="79981aa5-6b49-491e-805d-e558f879e8e8" SourceId="1" SourceUrl="net.tcp://192.168.2.48:8080/CallOut_CodingService/mex" />
+    <MetadataFile FileName="CallOut_CodingServiceLib.xsd" MetadataType="Schema" ID="1e04e34a-dd23-45a2-941b-9552d73a762d" SourceId="1" SourceUrl="net.tcp://192.168.2.48:8080/CallOut_CodingService/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="9eb8b3e4-c47a-41cc-b8b5-1760de958f44" SourceId="1" SourceUrl="net.tcp://192.168.2.48:8080/CallOut_CodingService/mex" />
+    <MetadataFile FileName="CallOut_CodingServiceLib.Class.xsd" MetadataType="Schema" ID="15b3feef-5b00-455c-acec-a8211ebe6518" SourceId="1" SourceUrl="net.tcp://192.168.2.48:8080/CallOut_CodingService/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="0063a449-9737-48ba-a89f-acce8147240a" SourceId="1" SourceUrl="net.tcp://192.168.2.48:8080/CallOut_CodingService/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
