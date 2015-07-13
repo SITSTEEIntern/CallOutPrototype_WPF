@@ -1,16 +1,14 @@
-﻿//using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.ServiceModel;// for WCF to happen
+using System.Diagnostics; //for debug
+
+using System.IO; //for read from file
+using System.Runtime.Serialization;//datacontract
+//using System;
 //using System.Linq;
 //using System.Text;
-using System.IO; //for read from file
-using System.Diagnostics; //for debug
-using System.ServiceModel;// for WCF to happen
-using System.Runtime.Serialization;//datacontract
 
 using CallOut_CADServiceLib.Class;
-
-//From CAD people
-using gCAD.Shared.IntegrationContract;
 
 namespace CallOut_CADServiceLib
 {
@@ -229,68 +227,4 @@ namespace CallOut_CADServiceLib
         }
 
     }
-
-    //Custon Class Object
-
-    //[DataContract]
-    //public class IncidentLocation
-    //{
-    //    [DataMember]
-    //    public string Unit { get; set; }
-    //    [DataMember]
-    //    public string Address { get; set; }
-    //    [DataMember]
-    //    public string City { get; set; }
-    //    [DataMember]
-    //    public string State { get; set; }
-    //    [DataMember]
-    //    public string PostalCode { get; set; } //?? required
-
-    //    [DataMember]
-    //    public string Name { get; set; }
-    //    [DataMember]
-    //    public string Country { get; set; }
-    //}
-
-    //[DataContract]
-    //public class IncidentUnits
-    //{
-    //    [DataMember]
-    //    public long ID { get; set; }
-    //    [DataMember]
-    //    public string Callsign { get; set; }
-    //    [DataMember]
-    //    public string FromStatus { get; set; }
-    //    [DataMember]
-    //    public string UnitLocation { get; set; }
-    //    [DataMember]
-    //    public string UnitHomeStation { get; set; }
-    //    [DataMember]
-    //    public string UnitCurrentStation { get; set; }
-
-    //    [DataMember]
-    //    public string UnitType { get; set; }
-    //}
-
-    //[DataContract]
-    //public class CADIncidentMessage
-    //{
-    //    [DataMember]
-    //    public string IncidentNo { get; set; }
-    //    [DataMember]
-    //    public string IncidentTitle { get; set; }
-    //    [DataMember]
-    //    public IncidentLocation IncidentLocation { get; set; }
-    //    [DataMember]
-    //    public string IncidentType { get; set; }
-    //    [DataMember]
-    //    public int IncidentAlarm { get; set; }
-    //    [DataMember]
-    //    public string IncidentPriority { get; set; }
-    //    [DataMember]
-    //    public DateTime DispatchDateTime { get; set; }
-    //    [DataMember]
-    //    public List<IncidentUnits> DispatchUnits { get; set; }
-    //}
-
 }

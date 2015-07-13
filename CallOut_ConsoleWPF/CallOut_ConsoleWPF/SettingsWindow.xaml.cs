@@ -1,26 +1,28 @@
-﻿//using System;
+﻿using System;
 using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
-//using System.Windows.Input;
-//using System.Windows.Media;
-//using System.Windows.Media.Imaging;
-//using System.Windows.Shapes;
 using System.Threading;
 using System.ComponentModel;
 using System.ServiceModel;
 using System.Diagnostics; //for debug
+
+//using System.Windows.Input;
+//using System.Windows.Media;
+//using System.Windows.Media.Imaging;
+//using System.Windows.Shapes;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
 
 // Location of the proxy.
 using CallOut_ConsoleWPF.ServiceReference1;
 
 //Class
 using CallOut_ConsoleWPF.Class;
+using CallOut_ConsoleWPF.Network;
 
 namespace CallOut_ConsoleWPF
 {
@@ -43,12 +45,31 @@ namespace CallOut_ConsoleWPF
         private GridViewColumnHeader listViewSortCol = null;
         private SortAdorner listViewSortAdorner = null;
 
+        private bool _isCodingSvcIPSet = false;
+        private bool _isStationIDSet = false;
+
+        //Internet connection
+        private bool isInternetup = true; 
+
         public SettingsWindow()
         {
             InitializeComponent();
             //Sub window load and closing eventhandler
             Loaded += MyWindow_Loaded;
             Closing += MyWindow_Closing;
+            NetworkStatus.AvailabilityChanged +=
+                new NetworkStatusChangedHandler(DoAvailabilityChanged);
+
+            //Check for internet connection first
+            if (NetworkStatus.IsAvailable)
+            {
+                isInternetup = true;
+            }
+            else
+            {
+                isInternetup = false;
+                ShowMessageBox("Please check the internet connection to continue");
+            }
         }
 
         private void MyWindow_Loaded(object sender, RoutedEventArgs e)
@@ -56,100 +77,307 @@ namespace CallOut_ConsoleWPF
             // Capture the UI synchronization context
             _uiSyncContext = SynchronizationContext.Current;
 
-            // The client callback interface must be hosted for the server to invoke the callback
-            // Open a connection to the message service via the proxy (qualifier ServiceReference1 needed due to name clash)
-            _CallOut_CodingService = new ServiceReference1.CallOut_CodingServiceClient(new InstanceContext(this), "NetTcpBinding_CallOut_CodingService");
-            _CallOut_CodingService.Open();
-
-            //Fill up the combobox items
-            foreach (StationStatus station in _CallOut_CodingService.GetStationStatus())
+            //Check whether CodingIP exist
+            if (Properties.Settings.Default.CodingIP != null && Properties.Settings.Default.CodingIP != "")
             {
-                this.comboID.Items.Add(station.Station);
-            }
+                this.txtCodingSvcIP.Text = Properties.Settings.Default.CodingIP;
+                this.txtCodingSvcIP.IsEnabled = false;
 
-            //Fill the combobox selected text
-            this.comboID.Text = Properties.Settings.Default.CurrentID;
+                _isCodingSvcIPSet = true;
+                this.btnSetIP.Content = "Unset IP";
 
-            //DataGrid Bind
-            _ConsoleLogList.Clear();
+                string endpointaddress = "net.tcp://" + this.txtCodingSvcIP.Text.Trim() + ":8000/CallOut_CodingService/service";
+                EndpointAddress endpointaddr = new EndpointAddress(new Uri(endpointaddress));
+                _CallOut_CodingService = new ServiceReference1.CallOut_CodingServiceClient(new InstanceContext(this), "NetTcpBinding_CallOut_CodingService", endpointaddr);
+                _CallOut_CodingService.Open();
 
-            //Load out the console log status from configfile
-            if (this.comboID.Text != "")
-            {
-                this.comboID.IsEnabled = false;
+                //Connection is UP!!!
 
-                if (Properties.Settings.Default.ConsoleLogList != null)
+                //Fill up the combobox items
+                foreach (StationStatus station in _CallOut_CodingService.GetStationStatus())
                 {
-                    foreach (string log in Properties.Settings.Default.ConsoleLogList)
+                    this.comboID.Items.Add(station.Station);
+                }
+
+                //Fill the combobox selected text
+                this.comboID.Text = Properties.Settings.Default.CurrentID;
+
+                //DataGrid Bind
+                _ConsoleLogList.Clear();
+
+                //Load out the console log status from configfile
+                if (this.comboID.Text != "")
+                {
+                    this.comboID.IsEnabled = false;
+                    _isStationIDSet = true;
+                    this.btnSetID.Content = "Unset";
+
+                    if (Properties.Settings.Default.ConsoleLogList != null)
                     {
-                        string[] parts = log.Split(',');
-                        //Check is it corresponding stationID
-                        if (parts[0] == this.comboID.Text)
+                        foreach (string log in Properties.Settings.Default.ConsoleLogList)
                         {
-                            ConsoleLog consolelog = new ConsoleLog();
-                            consolelog.CodingID = parts[1];
-                            consolelog.AckTimeStamp = parts[2];
-                            consolelog.AckFrom = parts[3];
-                            consolelog.AckStatus = parts[4];
-                            _ConsoleLogList.Add(consolelog);
+                            string[] parts = log.Split(',');
+                            //Check is it corresponding stationID
+                            if (parts[0] == this.comboID.Text)
+                            {
+                                ConsoleLog consolelog = new ConsoleLog();
+                                consolelog.CodingID = parts[1];
+                                consolelog.AckTimeStamp = parts[2];
+                                consolelog.AckFrom = parts[3];
+                                consolelog.AckStatus = parts[4];
+                                _ConsoleLogList.Add(consolelog);
+                            }
                         }
                     }
                 }
-            }
+                this.lvConsoleLog.ItemsSource = _ConsoleLogList;
 
-            this.lvConsoleLog.ItemsSource = _ConsoleLogList;
+            }
         }
 
         private void MyWindow_Closing(object sender, CancelEventArgs e)
         {
             //possible of remove the stationID in the setting file?
+            if (isInternetup)
+            {
+                //Cut off the proxy / channel
+                if (_CallOut_CodingService != null)
+                {
+                    _CallOut_CodingService.Close();
+                }
+            }
+            else 
+            {
+                //Cut off the proxy / channel
+                if (_CallOut_CodingService != null)
+                {
+                    //Use abort as internet is been cut
+                    _CallOut_CodingService.Abort();
+                }
+            }
 
-            //Terminate the connection to the service.
-            _CallOut_CodingService.Close();
-
+            //remove the networkstatus handler
+            NetworkStatus.AvailabilityChanged -=
+                new NetworkStatusChangedHandler(DoAvailabilityChanged);
         }
 
-        private void btnSet_Click(object sender, RoutedEventArgs e)
-        {
-            //Disable the combobox
-            this.comboID.IsEnabled = false;
-            //Set the stationID chosen to "currentstation" in the setting 
-            Properties.Settings.Default.CurrentID = this.comboID.Text;
-            Properties.Settings.Default.Save();
+        #region NETWORK
 
-            if (Properties.Settings.Default.ConsoleLogList != null)
+        /// <summary>
+        /// Event handler used to capture availability changes.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
+        void DoAvailabilityChanged(object sender, NetworkStatusChangedArgs e)
+        {
+            ReportAvailability();
+        }
+
+        /// <summary>
+        /// Report the current network availability.
+        /// </summary>
+
+        private void ReportAvailability()
+        {
+            if (NetworkStatus.IsAvailable)
             {
-                foreach (string log in Properties.Settings.Default.ConsoleLogList)
+                isInternetup = true;
+                //Do not have to open another messagebox or proxy as mainwindow had been triggered
+                if (Properties.Settings.Default.CodingIP != null && Properties.Settings.Default.CodingIP != "")
                 {
-                    string[] parts = log.Split(',');
-                    //Check is it corresponding stationID
-                    if (parts[0] == this.comboID.Text)
+                    string endpointaddress = "net.tcp://" + Properties.Settings.Default.CodingIP + ":8000/CallOut_CodingService/service";
+                    EndpointAddress endpointaddr = new EndpointAddress(new Uri(endpointaddress));
+                    _CallOut_CodingService = new ServiceReference1.CallOut_CodingServiceClient(new InstanceContext(this), "NetTcpBinding_CallOut_CodingService", endpointaddr);
+                    _CallOut_CodingService.Open();
+                }
+            }
+            else
+            {
+                isInternetup = false;
+
+                if (Properties.Settings.Default.CodingIP != null && Properties.Settings.Default.CodingIP != "")
+                {
+                    _CallOut_CodingService.Abort();
+                    _CallOut_CodingService = null;
+                }
+            }
+        }
+
+        public void ShowMessageBox(string msg)
+        {
+            var thread = new Thread(() =>
+            {
+                MessageBox.Show(msg);
+            });
+            thread.Start();
+        }
+
+        #endregion
+
+        private void btnSetIP_Click(object sender, RoutedEventArgs e)
+        {
+            if (isInternetup)
+            {
+                if (_isCodingSvcIPSet)
+                {
+                    //UnSetIP
+
+                    //Clear ComboBox and Console Log
+                    this.comboID.Items.Clear();
+
+                    _ConsoleLogList.Clear();
+                    this.lvConsoleLog.ItemsSource = _ConsoleLogList;
+
+                    //Cut off the proxy / channel
+                    _CallOut_CodingService.Close();
+                    _CallOut_CodingService = null;
+
+                    //Remove the IP Address in config file
+                    Properties.Settings.Default.CodingIP = "";
+                    Properties.Settings.Default.Save();
+
+                    this.txtCodingSvcIP.IsEnabled = true;
+                    _isCodingSvcIPSet = false;
+                    this.btnSetIP.Content = "Set IP";
+                }
+                else
+                {
+                    //Set IP
+
+                    //Trigger to create Coding Service Client with the input IP
+                    try
                     {
-                        ConsoleLog consolelog = new ConsoleLog();
-                        consolelog.CodingID = parts[1];
-                        consolelog.AckTimeStamp = parts[2];
-                        consolelog.AckFrom = parts[3];
-                        consolelog.AckStatus = parts[4];
-                        _ConsoleLogList.Add(consolelog);
+                        string endpointaddress = "net.tcp://" + this.txtCodingSvcIP.Text.Trim() + ":8000/CallOut_CodingService/service";
+                        _CallOut_CodingService = new ServiceReference1.CallOut_CodingServiceClient(new InstanceContext(this), "NetTcpBinding_CallOut_CodingService", endpointaddress);
+                        _CallOut_CodingService.Open();
+
+                        //Save the IP address that is confirm
+                        Properties.Settings.Default.CodingIP = this.txtCodingSvcIP.Text.Trim();
+                        Properties.Settings.Default.Save();
+
+                        //Fill up the combobox items
+                        foreach (StationStatus station in _CallOut_CodingService.GetStationStatus())
+                        {
+                            this.comboID.Items.Add(station.Station);
+                        }
+
+                        //Fill the combobox selected text
+                        this.comboID.Text = Properties.Settings.Default.CurrentID;
+
+                        //DataGrid Bind
+                        _ConsoleLogList.Clear();
+
+                        //Load out the console log status from configfile
+                        if (this.comboID.Text != "")
+                        {
+                            this.comboID.IsEnabled = false;
+
+                            if (Properties.Settings.Default.ConsoleLogList != null)
+                            {
+                                foreach (string log in Properties.Settings.Default.ConsoleLogList)
+                                {
+                                    string[] parts = log.Split(',');
+                                    //Check is it corresponding stationID
+                                    if (parts[0] == this.comboID.Text)
+                                    {
+                                        ConsoleLog consolelog = new ConsoleLog();
+                                        consolelog.CodingID = parts[1];
+                                        consolelog.AckTimeStamp = parts[2];
+                                        consolelog.AckFrom = parts[3];
+                                        consolelog.AckStatus = parts[4];
+                                        _ConsoleLogList.Add(consolelog);
+                                    }
+                                }
+                            }
+                        }
+
+                        this.lvConsoleLog.ItemsSource = _ConsoleLogList;
+
+                        this.txtCodingSvcIP.IsEnabled = false;
+                        _isCodingSvcIPSet = true;
+                        this.btnSetIP.Content = "Unset IP";
+                    }
+                    catch (Exception exception)
+                    {
+                        MessageBox.Show("Invalid IP address...");
                     }
                 }
             }
-            this.lvConsoleLog.ItemsSource = null;
-            this.lvConsoleLog.ItemsSource = _ConsoleLogList;
+            else 
+            {
+                ShowMessageBox("Please check the internet connection to continue");
+            }
+        }
+
+        private void btnSetID_Click(object sender, RoutedEventArgs e)
+        {
+            if (isInternetup)
+            {
+                if (_isStationIDSet)
+                {
+                    //unset
+                    //Enable the combobox to allow user to change station
+                    this.comboID.IsEnabled = true;
+                    _isStationIDSet = false;
+                    this.btnSetID.Content = "Set";
+                    Properties.Settings.Default.CurrentID = "";
+                    Properties.Settings.Default.Save();
+                    //Clear the datagrid
+                    _ConsoleLogList.Clear();
+                    //this.lvConsoleLog.Items.Refresh();
+                    //Had to use this instead of refresh as the columnh header sort overlay on the itemsource
+                    this.lvConsoleLog.ItemsSource = null;
+                    this.lvConsoleLog.ItemsSource = _ConsoleLogList;
+                }
+                else
+                {
+                    //set
+                    //Disable the combobox
+                    this.comboID.IsEnabled = false;
+                    _isStationIDSet = true;
+                    this.btnSetID.Content = "Unset";
+                    //Set the stationID chosen to "currentstation" in the setting 
+                    Properties.Settings.Default.CurrentID = this.comboID.Text;
+                    Properties.Settings.Default.Save();
+
+                    if (Properties.Settings.Default.ConsoleLogList != null)
+                    {
+                        foreach (string log in Properties.Settings.Default.ConsoleLogList)
+                        {
+                            string[] parts = log.Split(',');
+                            //Check is it corresponding stationID
+                            if (parts[0] == this.comboID.Text)
+                            {
+                                ConsoleLog consolelog = new ConsoleLog();
+                                consolelog.CodingID = parts[1];
+                                consolelog.AckTimeStamp = parts[2];
+                                consolelog.AckFrom = parts[3];
+                                consolelog.AckStatus = parts[4];
+                                _ConsoleLogList.Add(consolelog);
+                            }
+                        }
+                    }
+                    this.lvConsoleLog.ItemsSource = null;
+                    this.lvConsoleLog.ItemsSource = _ConsoleLogList;
+                }
+            }
+            else
+            {
+                ShowMessageBox("Please check the internet connection to continue");
+            }
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            //Enable the combobox to allow user to change station
-            this.comboID.IsEnabled = true;
-            Properties.Settings.Default.CurrentID = "";
-            Properties.Settings.Default.Save();
-            //Clear the datagrid
-            _ConsoleLogList.Clear();
-            //this.lvConsoleLog.Items.Refresh();
-            //Had to use this instead of refresh as the columnh header sort overlay on the itemsource
-            this.lvConsoleLog.ItemsSource = null;
-            this.lvConsoleLog.ItemsSource = _ConsoleLogList;
+            if (isInternetup)
+            {
+                this.Close();
+            }
+            else
+            {
+                ShowMessageBox("Please check the internet connection to continue");
+            }
         }
 
         private void lvConsoleLogColumnHeader_Click(object sender, RoutedEventArgs e)

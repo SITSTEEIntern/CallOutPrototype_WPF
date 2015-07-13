@@ -12,3 +12,13 @@ C:\Users\intern\Documents\GitHub\CallOutPrototypeWPF\CallOut_CADServiceLib\CallO
 C:\Users\intern\Documents\GitHub\CallOutPrototypeWPF\CallOut_CADServiceLib\CallOut_CADServiceLib\bin\Debug\CallOut_CADServiceLib.pdb
 C:\Users\intern\Documents\GitHub\CallOutPrototypeWPF\CallOut_CADServiceLib\CallOut_CADServiceLib\obj\Debug\CallOut_CADServiceLib.dll
 C:\Users\intern\Documents\GitHub\CallOutPrototypeWPF\CallOut_CADServiceLib\CallOut_CADServiceLib\obj\Debug\CallOut_CADServiceLib.pdb
+C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_CADServiceLib\CallOut_CADServiceLib\bin\Debug\CallOut_CADServiceLib.dll
+C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_CADServiceLib\CallOut_CADServiceLib\bin\Debug\CallOut_CADServiceLib.pdb
+C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_CADServiceLib\CallOut_CADServiceLib\obj\Debug\CallOut_CADServiceLib.dll
+C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_CADServiceLib\CallOut_CADServiceLib\obj\Debug\CallOut_CADServiceLib.pdb
+C:\Users\Elson\Desktop\CallOutPrototype_WPF\CallOut_CADServiceLib\CallOut_CADServiceLib\bin\Debug\CallOut_CADServiceLib.dll
+C:\Users\Elson\Desktop\CallOutPrototype_WPF\CallOut_CADServiceLib\CallOut_CADServiceLib\bin\Debug\CallOut_CADServiceLib.pdb
+C:\Users\Elson\Desktop\CallOutPrototype_WPF\CallOut_CADServiceLib\CallOut_CADServiceLib\obj\Debug\CallOut_CADServiceLib.csprojResolveAssemblyReference.cache
+C:\Users\Elson\Desktop\CallOutPrototype_WPF\CallOut_CADServiceLib\CallOut_CADServiceLib\obj\Debug\CallOut_CADServiceLib.dll
+C:\Users\Elson\Desktop\CallOutPrototype_WPF\CallOut_CADServiceLib\CallOut_CADServiceLib\obj\Debug\CallOut_CADServiceLib.pdb
+C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_CADServiceLib\CallOut_CADServiceLib\obj\Debug\CallOut_CADServiceLib.csprojResolveAssemblyReference.cache

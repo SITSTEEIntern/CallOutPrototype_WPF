@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>gCAD.Integration.AppLib</name>
+    </assembly>
+    <members>
+        <member name="M:gCAD.Integration.AppLib.ClientSession.#ctor(System.String)">
+            <summary>
+            Create a session object to connect to the CAD Server.
+            </summary>
+            <param name="endpoint">Name of the endpoint to the CAD IIntegrationService</param>
+        </member>
+        <member name="M:gCAD.Integration.AppLib.ClientSession.Initiate(System.String,System.String,gCAD.Shared.IntegrationContract.AccountType)">
+            <summary>
+            Initiate a session with the CAD Server using a CAD account.
+            </summary>
+            <param name="username">Username</param>
+            <param name="password">Password</param>
+        </member>
+        <member name="M:gCAD.Integration.AppLib.ClientSession.Exit">
+            <summary>
+            Exit the session with the CAD Server.
+            </summary>
+            <returns>TRUE if successful</returns>
+        </member>
+        <member name="M:gCAD.Integration.AppLib.ClientSession.setupHeartBeat">
+            <summary>
+            Set up the heart beat with the CAD server
+            </summary>
+        </member>
+        <member name="M:gCAD.Integration.AppLib.ClientSession.SessionHealthCheck(System.Object,System.Timers.ElapsedEventArgs)">
+            <summary>
+            Delegate for the heartbeat timer
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:gCAD.Integration.AppLib.ClientSession.startHeartBeat">
+            <summary>
+            Start the heartbeat timer
+            </summary>
+        </member>
+        <member name="M:gCAD.Integration.AppLib.ClientSession.stopHeartBeat">
+            <summary>
+            Stop the heartbeat timer
+            </summary>
+        </member>
+        <member name="P:gCAD.Integration.AppLib.ClientSession.IsInitiated">
+            <summary>
+            Flag to indicate if the session has been initiated and is valid
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,357 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>gCAD.Shared.IntegrationContract</name>
+    </assembly>
+    <members>
+        <member name="F:gCAD.Shared.IntegrationContract.AccountType.Proprietary">
+            <summary>
+            CAD Proprietary Account
+            </summary>
+        </member>
+        <member name="F:gCAD.Shared.IntegrationContract.AccountType.Domain">
+            <summary>
+            Windows Active Directory Account
+            </summary>
+        </member>
+        <member name="F:gCAD.Shared.IntegrationContract.AccountType.Certificate">
+            <summary>
+            Certificate based
+            </summary>
+        </member>
+        <member name="P:gCAD.Shared.IntegrationContract.AVLLocation.AVLID">
+            <summary>
+            Used to identify the AVL device
+            </summary>
+        </member>
+        <member name="P:gCAD.Shared.IntegrationContract.AVLLocation.Fix">
+            <summary>
+            GPS fix quality
+            </summary>
+        </member>
+        <member name="P:gCAD.Shared.IntegrationContract.AVLLocation.Coord">
+            <summary>
+            Latitude Longitude of the location
+            </summary>
+        </member>
+        <member name="P:gCAD.Shared.IntegrationContract.AVLLocation.Heading">
+            <summary>
+            Heading in decimal degrees, relative to True North
+            </summary>
+        </member>
+        <member name="P:gCAD.Shared.IntegrationContract.AVLLocation.Speed">
+            <summary>
+            Speed in Km/Hr
+            </summary>
+        </member>
+        <member name="P:gCAD.Shared.IntegrationContract.CallInfo.CallUid">
+            <summary>
+            Used to identify the call 
+            </summary>
+        </member>
+        <member name="P:gCAD.Shared.IntegrationContract.CallInfo.Timestamp">
+            <summary>
+            Time of the call in UTC
+            </summary>
+        </member>
+        <member name="P:gCAD.Shared.IntegrationContract.CallInfo.CallRecordId">
+            <summary>
+            Call Record identifier.  Null if not available.
+            </summary>
+        </member>
+        <member name="P:gCAD.Shared.IntegrationContract.CallInfo.CallingNumber">
+            <summary>
+            Number of the call.  Null if not available.
+            </summary>
+        </member>
+        <member name="P:gCAD.Shared.IntegrationContract.CallInfo.CallbackNumber">
+            <summary>
+            Callback number if different from calling number.  Null if not available.
+            </summary>
+        </member>
+        <member name="P:gCAD.Shared.IntegrationContract.CallInfo.ClassOfService">
+            <summary>
+            Class of service.  Null if not available.
+            </summary>
+        </member>
+        <member name="P:gCAD.Shared.IntegrationContract.CallInfo.TypeOfService">
+            <summary>
+            Type of service.  Null if not available.
+            </summary>
+        </member>
+        <member name="P:gCAD.Shared.IntegrationContract.CallInfo.AttentionIndicator">
+            <summary>
+            Attention Indicator. "T" / "F"
+            </summary>
+        </member>
+        <member name="P:gCAD.Shared.IntegrationContract.CallInfo.DataProviderId">
+            <summary>
+            Data Provider identifier.  Null if not available.
+            </summary>
+        </member>
+        <member name="P:gCAD.Shared.IntegrationContract.CallInfo.AccessProviderId">
+            <summary>
+            Access Provider identifier.  Null if not available.
+            </summary>
+        </member>
+        <member name="P:gCAD.Shared.IntegrationContract.CallInfo.CustomerName">
+            <summary>
+            Name of the customer which the number belongs to.  Null if not available.
+            </summary>
+        </member>
+        <member name="P:gCAD.Shared.IntegrationContract.CallInfo.CustomerCode">
+            <summary>
+            Customer code.  Null if not available.
+            </summary>
+        </member>
+        <member name="T:gCAD.Shared.IntegrationContract.DispatchedIncident">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:gCAD.Shared.IntegrationContract.DispatchedIncident.IncidentNumber">
+            <summary>
+            Unique Incident Identifier from CAD
+            </summary>
+        </member>
+        <member name="P:gCAD.Shared.IntegrationContract.DispatchedIncident.IncidentLocation">
+            <summary>
+            Incident Object's Incident Location Address
+            </summary>
+        </member>
+        <member name="P:gCAD.Shared.IntegrationContract.DispatchedIncident.IncidentType">
+            <summary>
+            Selected Incident type
+            </summary>
+        </member>
+        <member name="P:gCAD.Shared.IntegrationContract.DispatchedIncident.Priority">
+            <summary>
+            Priority of Incident (Information Only)
+            </summary>
+        </member>
+        <member name="P:gCAD.Shared.IntegrationContract.DispatchedIncident.AlarmLevel">
+            <summary>
+            Level of Dispatch expected (Information Only)
+            </summary>
+        </member>
+        <member name="P:gCAD.Shared.IntegrationContract.DispatchedIncident.DateTime">
+            <summary>
+            Date and Time when Resources are dispatched
+            </summary>
+        </member>
+        <member name="P:gCAD.Shared.IntegrationContract.DispatchedIncident.ListOfUnits">
+            <summary>
+            An Incident message could have one or more units dispatched from one or more stations
+            </summary>
+        </member>
+        <member name="T:gCAD.Shared.IntegrationContract.DispatchedUnit">
+            <summary>
+            Dispatched Unit Entity Infomrations
+            </summary>
+        </member>
+        <member name="P:gCAD.Shared.IntegrationContract.DispatchedUnit.ID">
+            <summary>
+            Unique Identifier
+            </summary>
+        </member>
+        <member name="P:gCAD.Shared.IntegrationContract.DispatchedUnit.CallSign">
+            <summary>
+            Unit Call Sign
+            </summary>
+        </member>
+        <member name="P:gCAD.Shared.IntegrationContract.DispatchedUnit.Status">
+            <summary>
+            From Status
+            </summary>
+        </member>
+        <member name="P:gCAD.Shared.IntegrationContract.DispatchedUnit.Location">
+            <summary>
+            Unit Location
+            </summary>
+        </member>
+        <member name="P:gCAD.Shared.IntegrationContract.DispatchedUnit.HomeStation">
+            <summary>
+            Unit Home Station
+            </summary>
+        </member>
+        <member name="P:gCAD.Shared.IntegrationContract.DispatchedUnit.CurrentStation">
+            <summary>
+            Unit Current Station
+            </summary>
+        </member>
+        <member name="P:gCAD.Shared.IntegrationContract.CellSite.CellId">
+            <summary>
+            Cell Id of the Cell Site
+            </summary>
+        </member>
+        <member name="P:gCAD.Shared.IntegrationContract.CellSite.CellSector">
+            <summary>
+            Cell Sector of the Cell Site
+            </summary>
+        </member>
+        <member name="F:gCAD.Shared.IntegrationContract.FixQuality.Invalid">
+            <summary>
+            Not a valid fix
+            </summary>
+        </member>
+        <member name="F:gCAD.Shared.IntegrationContract.FixQuality.GPS">
+            <summary>
+            Valid GPS Fix
+            </summary>
+        </member>
+        <member name="F:gCAD.Shared.IntegrationContract.FixQuality.DGPS">
+            <summary>
+            Valid DGPS Fix
+            </summary>
+        </member>
+        <member name="F:gCAD.Shared.IntegrationContract.FixQuality.OTHERS">
+            <summary>
+            A Fix by other methods
+            </summary>
+        </member>
+        <member name="P:gCAD.Shared.IntegrationContract.GeoCoordinate.Latitude">
+            <summary>
+            Latitude in decimal degrees
+            </summary>
+        </member>
+        <member name="P:gCAD.Shared.IntegrationContract.GeoCoordinate.Longitude">
+            <summary>
+            Longitude in decimal degrees
+            </summary>
+        </member>
+        <member name="P:gCAD.Shared.IntegrationContract.GeoCoordinate.Elevation">
+            <summary>
+            Elevation in metres
+            </summary>
+        </member>
+        <member name="P:gCAD.Shared.IntegrationContract.GeoCoordinate.Timestamp">
+            <summary>
+            Date time of the coordinate report (UTC)
+            </summary>
+        </member>
+        <member name="T:gCAD.Shared.IntegrationContract.IDispatchIntegrationNotification">
+            <summary>
+            Notification external system 
+            </summary>
+        </member>
+        <member name="M:gCAD.Shared.IntegrationContract.IDispatchIntegrationNotification.IncidentDispatched(gCAD.Shared.IntegrationContract.DispatchedIncident)">
+            <summary>
+            
+            </summary>
+            <param name="incident"></param>
+        </member>
+        <member name="M:gCAD.Shared.IntegrationContract.IIncidentIntegrationService.CreateCallWithAddress(gCAD.Shared.IntegrationContract.CallInfo,gCAD.Shared.IntegrationContract.Address)">
+            <summary>
+            Create call details
+            </summary>
+            <param name="callInfo">Info for the call</param>
+            <param name="address">Address of the calling number.  Null if not available</param>
+        </member>
+        <member name="M:gCAD.Shared.IntegrationContract.IIncidentIntegrationService.CreateCallWithCoordinate(gCAD.Shared.IntegrationContract.CallInfo,gCAD.Shared.IntegrationContract.GeoCoordinate)">
+            <summary>
+            Create call details
+            </summary>
+            <param name="callInfo">Info for this call</param>
+            <param name="coord">Latitude and Longitude coordinate of the calling number.  Null if not available.</param>
+        </member>
+        <member name="M:gCAD.Shared.IntegrationContract.IIncidentIntegrationService.CreateCallWithCellsite(gCAD.Shared.IntegrationContract.CallInfo,gCAD.Shared.IntegrationContract.CellSite)">
+            <summary>
+            CellSite of the the calling number.  Null if not available.
+            </summary>
+            <param name="callInfo">Info for this call</param>
+            <param name="cellsite">CellSite of the the calling number.  Null if not available.</param>
+        </member>
+        <member name="M:gCAD.Shared.IntegrationContract.IIncidentIntegrationService.UpdateCallAddress(System.String,gCAD.Shared.IntegrationContract.Address)">
+            <summary>
+            Update the address of the call
+            </summary>
+            <param name="callUid">Used to identify the call</param>
+            <param name="address">Address to be updated</param>
+        </member>
+        <member name="M:gCAD.Shared.IntegrationContract.IIncidentIntegrationService.UpdateCallCoordinate(System.String,gCAD.Shared.IntegrationContract.GeoCoordinate)">
+            <summary>
+            Update the Latitude and Longitude coordinates of the call
+            </summary>
+            <param name="callUid">Used to identify the call</param>
+            <param name="coord">Latitude and Longitude coordinates to be updated</param>
+        </member>
+        <member name="M:gCAD.Shared.IntegrationContract.IIncidentIntegrationService.UpdateCallCellsite(System.String,gCAD.Shared.IntegrationContract.CellSite)">
+            <summary>
+            Update the cell site of the call
+            </summary>
+            <param name="callUid">Used to identify the call</param>
+            <param name="cellsite">Cell site to be updated</param>
+        </member>
+        <member name="M:gCAD.Shared.IntegrationContract.IIncidentIntegrationService.CreateIncidentWithAddress(System.String,System.String,System.String,gCAD.Shared.IntegrationContract.Address)">
+            <summary>
+            Create an Incident
+            </summary>
+            <param name="source">Code of the incident source type</param>
+            <param name="callUid">Used to identify the call. Only used to associate with the call details created earlier, otherwise null</param>
+            <param name="type">Code of the incident type.  Null if not available.</param>
+            <param name="address">Address of the incident.  Null if not available.</param>
+            <returns>Incident number</returns>
+        </member>
+        <member name="M:gCAD.Shared.IntegrationContract.IIncidentIntegrationService.CreateIncidentWithCoordinate(System.String,System.String,System.String,gCAD.Shared.IntegrationContract.GeoCoordinate)">
+            <summary>
+            Create an Incident
+            </summary>
+            <param name="source">Code of the incident source type</param>
+            <param name="callUid">Used to identify the call. Only used to associate with the call details created earlier, otherwise null</param>
+            <param name="type">Code of the incident type.  Null if not available.</param>
+            <param name="coord">Latitude and Longitude coordinates of the incident</param>
+            <returns>Incident Number</returns>
+        </member>
+        <member name="M:gCAD.Shared.IntegrationContract.IIncidentIntegrationService.AddIncidentComment(System.String,System.String,System.String)">
+            <summary>
+            Add a comment to the incident
+            </summary>
+            <param name="incidentNumber">Number of the incident</param>
+            <param name="type">Type of the comment</param>
+            <param name="text">Text of the comment</param>
+        </member>
+        <member name="M:gCAD.Shared.IntegrationContract.IIncidentIntegrationService.PopupIncident(System.String,System.String)">
+            <summary>
+            Pop up the incident form on a workstation
+            </summary>
+            <param name="incidentNumber">Number of the incident</param>
+            <param name="host">Workstation hostname or IP address</param>
+        </member>
+        <member name="M:gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(System.String,System.String,gCAD.Shared.IntegrationContract.AccountType)">
+            <summary>
+            Initiate a session with CAD server using a username and password.  
+            This user account must be created in the CAD database.
+            </summary>
+            <param name="username">Username</param>
+            <param name="password">Password</param>
+            <param name="account">Account Type</param>
+            <returns>session token</returns>
+        </member>
+        <member name="M:gCAD.Shared.IntegrationContract.IIntegrationSessionService.Exit">
+            <summary>
+            Terminate the session with the CAD server
+            </summary>
+            <returns>TRUE if successful</returns>
+        </member>
+        <member name="M:gCAD.Shared.IntegrationContract.IIntegrationSessionService.Ping">
+            <summary>
+            Notify the CAD server of the liveliness of the session
+            </summary>
+            <returns>TRUE if ok</returns>
+        </member>
+        <member name="M:gCAD.Shared.IntegrationContract.IUnitLocationIntegrationService.UpdateAVLLocation(gCAD.Shared.IntegrationContract.AVLLocation[])">
+            <summary>
+            Update the location of units (vehicle) from the AVL devices
+            </summary>
+            <param name="locations">Array of AVL locations</param>
+        </member>
+        <member name="M:gCAD.Shared.IntegrationContract.IUnitLocationIntegrationService.UpdatePanicStatus(System.String,System.Boolean,System.String)">
+            <summary>
+            Update the panic state from the AVL
+            </summary>
+            <param name="AVLID">Id of the AVL device.</param>
+            <param name="panic">State of Panic Status.  TRUE means in panic state.  FALSE means not in panic state.</param>
+            <param name="message">Message associated with the state.  Set to null if no message.</param>
+        </member>
+    </members>
+</doc>

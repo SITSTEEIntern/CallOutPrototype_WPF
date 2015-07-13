@@ -81,21 +81,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Service References\ServiceReference1\CallOut_CADService.xsd">
+    <None Include="Service References\ServiceReference1\Arrays.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceReference1\CallOut_CADService2.wsdl" />
-    <None Include="Service References\ServiceReference1\CallOut_CADService21.wsdl" />
-    <None Include="Service References\ServiceReference1\CallOut_CADService4.xsd">
+    <None Include="Service References\ServiceReference1\CallOut_CADServiceLib.Class.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceReference1\CallOut_CADService41.xsd">
+    <None Include="Service References\ServiceReference1\CallOut_CADServiceLib.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceReference1\CallOut_CADService42.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceReference1\CallOut_CADService43.xsd">
+    <None Include="Service References\ServiceReference1\service.wsdl" />
+    <None Include="Service References\ServiceReference1\service.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
@@ -109,6 +105,7 @@
     <WCFMetadataStorage Include="Service References\ServiceReference1\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Service References\ServiceReference1\CallOut_CADServiceLib.wsdl" />
     <None Include="Service References\ServiceReference1\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
@@ -119,9 +116,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ServiceReference1\CallOut_CADService1.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

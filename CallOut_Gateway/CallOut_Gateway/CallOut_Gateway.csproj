@@ -32,7 +32,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="gCAD.CADS.Service">
+      <HintPath>Lib\gCAD.CADS.Service.dll</HintPath>
+    </Reference>
+    <Reference Include="gCAD.Integration.AppLib">
+      <HintPath>Lib\gCAD.Integration.AppLib.dll</HintPath>
+    </Reference>
+    <Reference Include="gCAD.Shared.IntegrationContract">
+      <HintPath>Lib\gCAD.Shared.IntegrationContract.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog">
+      <HintPath>.\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -47,8 +60,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class\CodingStatus.cs" />
+    <Compile Include="Class\ConfigSettings.cs" />
     <Compile Include="Class\GatewayTracker.cs" />
     <Compile Include="Class\MessageStatus.cs" />
+    <Compile Include="DispatchService.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -105,21 +120,17 @@
     <None Include="Service References\ServiceReference1\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceReference2\CallOut_CADService.xsd">
+    <None Include="Service References\ServiceReference2\Arrays.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceReference2\CallOut_CADService2.wsdl" />
-    <None Include="Service References\ServiceReference2\CallOut_CADService21.wsdl" />
-    <None Include="Service References\ServiceReference2\CallOut_CADService4.xsd">
+    <None Include="Service References\ServiceReference2\CallOut_CADServiceLib.Class.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceReference2\CallOut_CADService41.xsd">
+    <None Include="Service References\ServiceReference2\CallOut_CADServiceLib.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceReference2\CallOut_CADService42.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceReference2\CallOut_CADService43.xsd">
+    <None Include="Service References\ServiceReference2\service.wsdl" />
+    <None Include="Service References\ServiceReference2\service.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
@@ -136,6 +147,7 @@
     <WCFMetadataStorage Include="Service References\ServiceReference2\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Service References\ServiceReference2\CallOut_CADServiceLib.wsdl" />
     <None Include="Service References\ServiceReference2\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
@@ -146,9 +158,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ServiceReference2\CallOut_CADService1.disco" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\ServiceReference1\configuration91.svcinfo" />

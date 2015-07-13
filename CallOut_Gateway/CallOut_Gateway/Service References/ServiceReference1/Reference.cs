@@ -569,6 +569,9 @@ namespace CallOut_Gateway.ServiceReference1 {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ConsoleIDField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string IncidentNoField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -640,6 +643,19 @@ namespace CallOut_Gateway.ServiceReference1 {
                 if ((object.ReferenceEquals(this.ConsoleIDField, value) != true)) {
                     this.ConsoleIDField = value;
                     this.RaisePropertyChanged("ConsoleID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string IncidentNo {
+            get {
+                return this.IncidentNoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IncidentNoField, value) != true)) {
+                    this.IncidentNoField = value;
+                    this.RaisePropertyChanged("IncidentNo");
                 }
             }
         }
@@ -741,6 +757,12 @@ namespace CallOut_Gateway.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="CallOut_CodingServiceLib/CallOut_CodingService/ReplyConnStatus")]
         System.Threading.Tasks.Task ReplyConnStatusAsync(string station);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="CallOut_CodingServiceLib/CallOut_CodingService/RemovefromMsgQueue")]
+        void RemovefromMsgQueue(string station, string CodingID);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="CallOut_CodingServiceLib/CallOut_CodingService/RemovefromMsgQueue")]
+        System.Threading.Tasks.Task RemovefromMsgQueueAsync(string station, string CodingID);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="CallOut_CodingServiceLib/CallOut_CodingService/MsgDisplayedResponse")]
         void MsgDisplayedResponse(string console, CallOut_Gateway.ServiceReference1.CodingIncidentMessage codingIncidentMsg);
@@ -912,6 +934,14 @@ namespace CallOut_Gateway.ServiceReference1 {
         
         public System.Threading.Tasks.Task ReplyConnStatusAsync(string station) {
             return base.Channel.ReplyConnStatusAsync(station);
+        }
+        
+        public void RemovefromMsgQueue(string station, string CodingID) {
+            base.Channel.RemovefromMsgQueue(station, CodingID);
+        }
+        
+        public System.Threading.Tasks.Task RemovefromMsgQueueAsync(string station, string CodingID) {
+            return base.Channel.RemovefromMsgQueueAsync(station, CodingID);
         }
         
         public void MsgDisplayedResponse(string console, CallOut_Gateway.ServiceReference1.CodingIncidentMessage codingIncidentMsg) {

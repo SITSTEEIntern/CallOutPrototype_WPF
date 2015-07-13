@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="CallOut_CADServiceLib" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="CallOut_CADServiceLib" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="CallOut_CADServiceLib/Imports">
+      <xsd:import namespace="CallOut_CADServiceLib" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/CallOut_CADServiceLib.Class" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="CallOut_CADService_CADJoin_InputMessage">
+    <wsdl:part name="parameters" element="tns:CADJoin" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CADService_CADJoin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CADJoinResponse" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CADService_CADLeave_InputMessage">
+    <wsdl:part name="parameters" element="tns:CADLeave" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CADService_CADLeave_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CADLeaveResponse" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CADService_GatewayJoin_InputMessage">
+    <wsdl:part name="parameters" element="tns:GatewayJoin" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CADService_GatewayJoin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GatewayJoinResponse" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CADService_GatewayLeave_InputMessage">
+    <wsdl:part name="parameters" element="tns:GatewayLeave" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CADService_GatewayLeave_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GatewayLeaveResponse" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CADService_SendCADIncidentMsg_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendCADIncidentMsg" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CADService_AckCADIncidentMsg_InputMessage">
+    <wsdl:part name="parameters" element="tns:AckCADIncidentMsg" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CADService_BroadcastIncidentCodingStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:BroadcastIncidentCodingStatus" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CADService_IncidentCodingStatusQuery_InputMessage">
+    <wsdl:part name="parameters" element="tns:IncidentCodingStatusQuery" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CADService_IncidentCodingStatusResponse_InputMessage">
+    <wsdl:part name="parameters" element="tns:IncidentCodingStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CADService_IncidentDispatched_InputMessage">
+    <wsdl:part name="parameters" element="tns:IncidentDispatched" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CADService_IncidentDispatched_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IncidentDispatchedResponse" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CADService_RcvCADIncidentMsg_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:RcvCADIncidentMsg" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CADService_UpdateCADIncidentAck_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCADIncidentAck" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CADService_UpdateIncidentCodingStatus_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:UpdateIncidentCodingStatus" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CADService_IncidentCodingStatus_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:IncidentCodingStatus" />
+  </wsdl:message>
+  <wsdl:message name="CallOut_CADService_RcvIncidentCodingStatusResponse_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:RcvIncidentCodingStatusResponse" />
+  </wsdl:message>
+  <wsdl:portType msc:usingSession="true" name="CallOut_CADService">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CADJoin">
+      <wsdl:input wsaw:Action="CallOut_CADServiceLib/CallOut_CADService/CADJoin" message="tns:CallOut_CADService_CADJoin_InputMessage" />
+      <wsdl:output wsaw:Action="CallOut_CADServiceLib/CallOut_CADService/CADJoinResponse" message="tns:CallOut_CADService_CADJoin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="CADLeave">
+      <wsdl:input wsaw:Action="CallOut_CADServiceLib/CallOut_CADService/CADLeave" message="tns:CallOut_CADService_CADLeave_InputMessage" />
+      <wsdl:output wsaw:Action="CallOut_CADServiceLib/CallOut_CADService/CADLeaveResponse" message="tns:CallOut_CADService_CADLeave_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GatewayJoin">
+      <wsdl:input wsaw:Action="CallOut_CADServiceLib/CallOut_CADService/GatewayJoin" message="tns:CallOut_CADService_GatewayJoin_InputMessage" />
+      <wsdl:output wsaw:Action="CallOut_CADServiceLib/CallOut_CADService/GatewayJoinResponse" message="tns:CallOut_CADService_GatewayJoin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GatewayLeave">
+      <wsdl:input wsaw:Action="CallOut_CADServiceLib/CallOut_CADService/GatewayLeave" message="tns:CallOut_CADService_GatewayLeave_InputMessage" />
+      <wsdl:output wsaw:Action="CallOut_CADServiceLib/CallOut_CADService/GatewayLeaveResponse" message="tns:CallOut_CADService_GatewayLeave_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="SendCADIncidentMsg">
+      <wsdl:input wsaw:Action="CallOut_CADServiceLib/CallOut_CADService/SendCADIncidentMsg" message="tns:CallOut_CADService_SendCADIncidentMsg_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="AckCADIncidentMsg">
+      <wsdl:input wsaw:Action="CallOut_CADServiceLib/CallOut_CADService/AckCADIncidentMsg" message="tns:CallOut_CADService_AckCADIncidentMsg_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="BroadcastIncidentCodingStatus">
+      <wsdl:input wsaw:Action="CallOut_CADServiceLib/CallOut_CADService/BroadcastIncidentCodingStatus" message="tns:CallOut_CADService_BroadcastIncidentCodingStatus_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="IncidentCodingStatusQuery">
+      <wsdl:input wsaw:Action="CallOut_CADServiceLib/CallOut_CADService/IncidentCodingStatusQuery" message="tns:CallOut_CADService_IncidentCodingStatusQuery_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="IncidentCodingStatusResponse">
+      <wsdl:input wsaw:Action="CallOut_CADServiceLib/CallOut_CADService/IncidentCodingStatusResponse" message="tns:CallOut_CADService_IncidentCodingStatusResponse_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="IncidentDispatched">
+      <wsdl:input wsaw:Action="CallOut_CADServiceLib/CallOut_CADService/IncidentDispatched" message="tns:CallOut_CADService_IncidentDispatched_InputMessage" />
+      <wsdl:output wsaw:Action="CallOut_CADServiceLib/CallOut_CADService/IncidentDispatchedResponse" message="tns:CallOut_CADService_IncidentDispatched_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="RcvCADIncidentMsg">
+      <wsdl:output wsaw:Action="CallOut_CADServiceLib/CallOut_CADService/RcvCADIncidentMsg" message="tns:CallOut_CADService_RcvCADIncidentMsg_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="UpdateCADIncidentAck">
+      <wsdl:output wsaw:Action="CallOut_CADServiceLib/CallOut_CADService/UpdateCADIncidentAck" message="tns:CallOut_CADService_UpdateCADIncidentAck_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="UpdateIncidentCodingStatus">
+      <wsdl:output wsaw:Action="CallOut_CADServiceLib/CallOut_CADService/UpdateIncidentCodingStatus" message="tns:CallOut_CADService_UpdateIncidentCodingStatus_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="IncidentCodingStatus">
+      <wsdl:output wsaw:Action="CallOut_CADServiceLib/CallOut_CADService/IncidentCodingStatus" message="tns:CallOut_CADService_IncidentCodingStatus_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="RcvIncidentCodingStatusResponse">
+      <wsdl:output wsaw:Action="CallOut_CADServiceLib/CallOut_CADService/RcvIncidentCodingStatusResponse" message="tns:CallOut_CADService_RcvIncidentCodingStatusResponse_OutputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

@@ -13,6 +13,8 @@ namespace CallOut_CodingServiceLib.Class
         [DataMember]
         public string ConsoleID { get; set; }
         [DataMember]
+        public string IncidentNo { get; set; }
+        [DataMember]
         public string CodingID { get; set; }
         [DataMember]
         public string AckStatus { get; set; }

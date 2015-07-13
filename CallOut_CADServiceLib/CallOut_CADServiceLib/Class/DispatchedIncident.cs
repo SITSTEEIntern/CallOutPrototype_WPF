@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.Text;
 
 
-namespace gCAD.Shared.IntegrationContract
+namespace CallOut_CADServiceLib.Class
 {
     /// <summary>
     /// 

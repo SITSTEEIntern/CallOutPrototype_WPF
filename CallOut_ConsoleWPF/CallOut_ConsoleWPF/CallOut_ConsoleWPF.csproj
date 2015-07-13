@@ -61,8 +61,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Class\ConsoleLog.cs" />
+    <Compile Include="Class\InternetAvailability.cs" />
     <Compile Include="Class\SortAdorner.cs" />
     <Compile Include="Class\UnitsStatus.cs" />
+    <Compile Include="Network\NetworkStatus.cs" />
+    <Compile Include="Network\NetworkStatusChangedArgs.cs" />
     <Compile Include="Service References\ServiceReference1\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -112,26 +115,28 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <None Include="Service References\ServiceReference1\Arrays.xsd">
+    <None Include="Service References\ServiceReference1\Arrays1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceReference1\CallOut_CodingServiceLib.Class.xsd">
+    <None Include="Service References\ServiceReference1\CallOut_CodingServiceLib.Class1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceReference1\CallOut_CodingServiceLib.wsdl" />
-    <None Include="Service References\ServiceReference1\CallOut_CodingServiceLib.xsd">
+    <None Include="Service References\ServiceReference1\CallOut_CodingServiceLib1.wsdl" />
+    <None Include="Service References\ServiceReference1\CallOut_CodingServiceLib1.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceReference1\CallOut_ConsoleWPF.ServiceReference1.StationStatus.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\ServiceReference1\service.wsdl" />
-    <None Include="Service References\ServiceReference1\service.xsd">
+    <None Include="Service References\ServiceReference1\service1.wsdl" />
+    <None Include="Service References\ServiceReference1\service1.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

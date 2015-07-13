@@ -1,15 +1,16 @@
 ﻿using System;
+using System.Threading;
+using System.ServiceModel;
+using System.Windows.Forms;
+using System.ComponentModel; //for bindinglist, inotify
+using System.Diagnostics; //for debug
+
+using System.Timers; //Timer
 //using System.Collections.Generic;
 //using System.Data;
 //using System.Drawing;
-using System.Threading;
-using System.ServiceModel;
 //using System.Linq;
 //using System.Text;
-using System.Windows.Forms;
-using System.Diagnostics; //for debug
-using System.ComponentModel; //for bindinglist, inotify
-using System.Timers; //Timer
 
 // Location of the proxy.
 using CallOut_CAD.ServiceReference1;
@@ -46,7 +47,7 @@ namespace CallOut_CAD
 
             // The client callback interface must be hosted for the server to invoke the callback
             // Open a connection to the message service via the proxy (qualifier ServiceReference1 needed due to name clash)
-            _CallOut_CADService = new ServiceReference1.CallOut_CADServiceClient(new InstanceContext(this), "WSDualHttpBinding_CallOut_CADService");
+            _CallOut_CADService = new ServiceReference1.CallOut_CADServiceClient(new InstanceContext(this), "NetTcpBinding_CallOut_CADService");
             _CallOut_CADService.Open();
 
             // Initial eventhandlers

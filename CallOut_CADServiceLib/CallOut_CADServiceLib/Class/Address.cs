@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace gCAD.Shared.IntegrationContract
+namespace CallOut_CADServiceLib.Class
 {
     [DataContract]
     public class Address

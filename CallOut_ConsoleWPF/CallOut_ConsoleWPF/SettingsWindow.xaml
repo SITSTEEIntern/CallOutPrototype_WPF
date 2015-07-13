@@ -9,24 +9,28 @@
             <RowDefinition Height="36"/>
         </Grid.RowDefinitions>
         <!--Call Out Gateway-->
-        <Grid Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="7,0,60,6">
-            <TextBlock HorizontalAlignment="Left" Margin="74,16,0,0" TextWrapping="Wrap" Text="Call Out Gateway" VerticalAlignment="Top"/>
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="181,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
+        <Grid Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="37,3,44,3" Width="430">
+            <TextBlock HorizontalAlignment="Left" Margin="18,16,0,0" TextWrapping="Wrap" Text="IP of Coding Service" VerticalAlignment="Top"/>
+            <TextBox x:Name="txtCodingSvcIP" HorizontalAlignment="Left" Height="23" Margin="142,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
             
             <!--Station ID-->
-            <TextBlock HorizontalAlignment="Left" Margin="111,45,0,0" TextWrapping="Wrap" Text="Station ID" VerticalAlignment="Top"/>
-            <ComboBox x:Name="comboID" HorizontalAlignment="Left" Margin="181,42,0,0" VerticalAlignment="Top" Width="200"/>
+            <TextBlock HorizontalAlignment="Left" Margin="72,45,0,0" TextWrapping="Wrap" Text="Station ID" VerticalAlignment="Top"/>
+            <ComboBox x:Name="comboID" HorizontalAlignment="Left" Margin="142,42,0,0" VerticalAlignment="Top" Width="200"/>
             
             <!--Auto Ack or reject CheckBox-->
-            <CheckBox Content="Auto" HorizontalAlignment="Left" Margin="181,75,0,0" VerticalAlignment="Top"/>
-            <ComboBox HorizontalAlignment="Left" Margin="229,71,0,0" VerticalAlignment="Top" Width="80"/>
-            <TextBlock HorizontalAlignment="Left" Margin="314,75,0,0" TextWrapping="Wrap" Text="In" VerticalAlignment="Top"/>
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="329,72,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="52"/>
-            <TextBlock HorizontalAlignment="Left" Margin="386,75,0,0" TextWrapping="Wrap" Text="seconds" VerticalAlignment="Top"/>
+            <CheckBox Content="Auto" HorizontalAlignment="Left" Margin="142,75,0,0" VerticalAlignment="Top"/>
+            <ComboBox HorizontalAlignment="Left" Margin="190,71,0,0" VerticalAlignment="Top" Width="80"/>
+            <TextBlock HorizontalAlignment="Left" Margin="275,75,0,0" TextWrapping="Wrap" Text="In" VerticalAlignment="Top"/>
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="290,72,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="52"/>
+            <TextBlock HorizontalAlignment="Left" Margin="347,75,0,0" TextWrapping="Wrap" Text="seconds" VerticalAlignment="Top"/>
+            
+            <!--Button to Set Coding service IP-->
+            <Button x:Name="btnSetIP" Content="Set IP" HorizontalAlignment="Left" Margin="347,14,0,0" VerticalAlignment="Top" Width="75" Click="btnSetIP_Click"/>
             
             <!--Button Set or cancel-->
-            <Button Content="Set" HorizontalAlignment="Left" Margin="181,98,0,0" VerticalAlignment="Top" Width="95" Click="btnSet_Click"/>
-            <Button Content="Cancel" HorizontalAlignment="Left" Margin="286,98,0,0" VerticalAlignment="Top" Width="95" Click="btnCancel_Click"/>
+            <Button x:Name="btnSetID" Content="Set" HorizontalAlignment="Left" Margin="142,98,0,0" VerticalAlignment="Top" Width="95" Click="btnSetID_Click"/>
+            <Button Content="Cancel" HorizontalAlignment="Left" Margin="247,98,0,0" VerticalAlignment="Top" Width="95" Click="btnCancel_Click"/>
+            
         </Grid>
 
         <!--Console Log file-->

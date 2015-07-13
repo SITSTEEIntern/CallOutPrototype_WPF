@@ -1,15 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel; //for bindinglist
-//using System.Data;
 using System.Drawing;
 using System.Threading;
 using System.ServiceModel;
-//using System.Linq;
-//using System.Text;
 using System.Windows.Forms;
 using System.Diagnostics; //for debug
 using System.Timers;
+
+//From CAD ppl
+using gCAD.Shared.IntegrationContract;
+using gCAD.Integration.AppLib;
+using System.Configuration;
+using CalloutServices;
+
+//using System.Linq;
+//using System.Text;
+//using System.Data;
 
 // Location of the proxy.
 using CallOut_Gateway.ServiceReference1; //Coding
@@ -26,26 +33,59 @@ namespace CallOut_Gateway
     public partial class Form1 : Form, ServiceReference1.CallOut_CodingServiceCallback, ServiceReference2.CallOut_CADServiceCallback
     {
         private SynchronizationContext _uiSyncContext = null;
+
+        private ConfigSettings configsetting = new ConfigSettings(); //to overwrite the endpoint address in appconfig on runtime
         private ServiceReference1.CallOut_CodingServiceClient _CallOut_CodingService = null;
         private ServiceReference2.CallOut_CADServiceClient _CallOut_CADService = null;
 
+        //Flags
         private bool _isCADConnected = false;
         private bool _isConsoleConnected = false;
 
+        private bool _isSimulateCADSvcIPSet = false;
+        private bool _isCodingSvcIPSet = false;
+        private bool _ActivateHealthCheck = false;
+
         //For binding of list to datagirdview
         //Bindinglist allow user to add row, however will left a empty last row.
-        BindingList<CodingStatus> _CodingStatusList = new BindingList<CodingStatus>();
-        BindingList<MessageStatus> _MessageStatusList = new BindingList<MessageStatus>();
-        List<StationStatus> _StationStatusList = new List<StationStatus>();
+        private BindingList<CodingStatus> _CodingStatusList = new BindingList<CodingStatus>();
+        private BindingList<MessageStatus> _MessageStatusList = new BindingList<MessageStatus>();
+        private List<StationStatus> _StationStatusList = new List<StationStatus>();
 
         //List of informaton at is hold and track at gateway, e.g station status and dispatchunit info for adhoc request
         //pending and completed list?
-        List<GatewayTracker> _GatewayTrackerList = new List<GatewayTracker>();
+        private List<GatewayTracker> _GatewayTrackerList = new List<GatewayTracker>();
 
         //List of station that will be remove from service
-        List<string> _ToBeRemove;
+        private List<string> _ToBeRemove;
 
-        public Form1()
+        //-----------------From Call Out Simulator----------------------
+        private ClientSession session = null; //remove readonly as I cannot just set at constructor
+        private IncidentIntegrationClient incidentSession = null;
+        private bool _isRealCADSvcIPSet = false;
+        private bool _isServiceStart = false;
+        public static ServiceHost host = null;
+
+        private static volatile Form1 _instance;
+        private readonly static object _synRoot = new object();
+
+        public static Form1 Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    lock (_synRoot)
+                    {
+                        if (_instance == null)
+                            _instance = new Form1();
+                    }
+                }
+                return _instance;
+            }
+        }
+
+        private Form1()
         {
             InitializeComponent();
         }
@@ -55,40 +95,401 @@ namespace CallOut_Gateway
             // Capture the UI synchronization context
             _uiSyncContext = SynchronizationContext.Current;
 
-            // The client callback interface must be hosted for the server to invoke the callback
-            // Open a connection to the message service via the proxy (qualifier ServiceReference1 needed due to name clash)
-            _CallOut_CodingService = new ServiceReference1.CallOut_CodingServiceClient(new InstanceContext(this), "NetTcpBinding_CallOut_CodingService");
-            _CallOut_CodingService.Open();
-
-            _CallOut_CADService = new ServiceReference2.CallOut_CADServiceClient(new InstanceContext(this), "WSDualHttpBinding_CallOut_CADService");
-            _CallOut_CADService.Open();
-            
             // Initial eventhandlers
             this.FormClosing += new FormClosingEventHandler(Form1_FormClosing);
-
-            //Set Up DataGridView
-            InitCodingDataGrid();
-            InitMessageDataGrid();
-            InitStationDataGrid();
-
-            //Init Health Checker aka check for ocnsole connectivity
-            HealthCheck();
-
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             //Terminate the connection to the service.
-            if (_isConsoleConnected)
+            if (_isCodingSvcIPSet)
             {
                 _CallOut_CodingService.Close();
             }
-            if (_isCADConnected)
+            if (_isSimulateCADSvcIPSet)
             {
                 _CallOut_CADService.Close();
             }
 
+            //StopService();
+
         }
+
+        #region From Call Out Simulator
+
+        private void btnSetRealCADSvcIP_Click(object sender, EventArgs e)
+        {
+            if (_isRealCADSvcIPSet)
+            {
+                //Unset
+
+                //Need to cut off the client proxy with CAD
+                //Need confirmation!!!
+                session = null;
+                incidentSession = null;
+
+                this.txtRealCADSvcIP.Enabled = true;
+                this.btnSetRealCADSvcIP.Text = "Set";
+                _isRealCADSvcIPSet = false;
+            }
+            else
+            {
+                //Set
+                try
+                {
+                    //This part need to edit (How does they link up the Endpoint, in order for me to dynamic change IP)
+                    //sessionEP and incidentSessionEP just return a string that corresponding to key in appconfig
+                    //How does it access to the appconfig endpoint setting
+                    string sessionEPaddress = "net.tcp://" + this.txtRealCADSvcIP.Text.Trim() + ":2034/IncidentIntegrationService/";
+                    var sessionEP = ConfigurationManager.AppSettings.Get("SessionEndPoint");
+                    configsetting.SaveEndpointAddress(sessionEPaddress, sessionEP); //overwrite endpoint address in appconfig
+                    session = new ClientSession(sessionEP);
+
+                    string incidentSessionEPaddress = "net.tcp://" + this.txtRealCADSvcIP.Text.Trim() + ":2041/IntegrationSessionService/";
+                    var incidentSessionEP = ConfigurationManager.AppSettings.Get("IncidentIntegrationServiceEndPoint");
+                    configsetting.SaveEndpointAddress(incidentSessionEPaddress, incidentSessionEP); //overwrite endpoint address in appconfig
+                    incidentSession = new IncidentIntegrationClient(incidentSessionEP);
+
+                    this.txtRealCADSvcIP.Enabled = false;
+                    //Change button Text
+                    this.btnSetRealCADSvcIP.Text = "Unset";
+                    _isRealCADSvcIPSet = true;
+                }
+                catch(Exception exception)
+                {
+                    MessageBox.Show("Invalid IP address...");
+                }
+
+            }
+        }
+
+        private void btnStartService_Click(object sender, EventArgs e)
+        {
+            if (_isServiceStart)
+            {
+                //Service Stopped
+
+                host.Close();
+
+                this.btnStartService.Text = "Start Service";
+                _isServiceStart = false;
+            }
+            else
+            {
+                //Service started (so gateway act as a server to receive incident from CAD which act as client)
+
+                host = new ServiceHost(typeof(DispatchService));
+                host.Open();
+
+                //Change button Text
+                this.btnStartService.Text = "Stop Service";
+                _isServiceStart = true;
+
+            }
+        }
+
+        private void EmptyAllDataGridView()
+        {
+            this.dgvCoding.DataSource = null;
+            this.dgvCoding.Columns.Clear();
+
+            this.dgvMessage.DataSource = null;
+            this.dgvMessage.Columns.Clear();
+
+            this.dgvStation.CellPainting -= dgvStation_CellPainting;
+            this.dgvStation.CellValueChanged -= dgvStation_CellValueChanged;
+            this.dgvStation.DataSource = null;
+            this.dgvStation.Columns.Clear();
+        }
+
+        private bool CreateClientSession()
+        {
+            if (session.IsInitiated == false)
+            {
+                var username = ConfigurationManager.AppSettings.Get("CadUsername");
+                var password = ConfigurationManager.AppSettings.Get("CadPassword");
+
+                return session.Initiate(username, password, AccountType.Proprietary);
+            }
+            else return true;
+        }
+
+        //Passing back to CAD
+        private void CallAPI(string IncidentNumber, string Comment)
+        {
+            try
+            {
+                if (CreateClientSession())
+                {
+                    incidentSession.AddIncidentComment(IncidentNumber, "", Comment);
+                    MessageBox.Show("Incident Number: " + IncidentNumber + " Successfully updated the Comment to: " + Comment);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Update Comment Failed.");
+            }
+        }
+
+        //------------------------------- for trying connection purpose---------------------------------------------
+        public void RcvDispatchedIncidentMsg(gCAD.Shared.IntegrationContract.DispatchedIncident CADincidentMsg)
+        {
+            SendOrPostCallback callback =
+                delegate (object state)
+                {
+                    List<string> tmpstationList = new List<string>();
+                    List<Tracking> trackingList = new List<Tracking>();
+                    //Only take out the stations on the Current Station
+                    foreach (gCAD.Shared.IntegrationContract.DispatchedUnit uniqueunit in CADincidentMsg.ListOfUnits)
+                    {
+                        //Avoid duplicate station name in the list
+                        if (!tmpstationList.Contains(uniqueunit.CurrentStation))
+                        {
+                            tmpstationList.Add(uniqueunit.CurrentStation);
+                            Tracking newstation = new Tracking();
+                            newstation.Station = uniqueunit.CurrentStation;
+                            newstation.Status = "Pending";
+
+                            List<string> unitcallsign = new List<string>();
+
+                            //To give relevant station units callsign
+                            foreach (gCAD.Shared.IntegrationContract.DispatchedUnit unit in CADincidentMsg.ListOfUnits)
+                            {
+                                if (unit.CurrentStation.Equals(uniqueunit.CurrentStation))
+                                {
+                                    unitcallsign.Add(unit.CallSign);
+                                }
+                            }
+
+                            newstation.Unit = unitcallsign.ToArray();
+                            trackingList.Add(newstation); //Add into tracking list
+                        }
+                    }
+
+                    string[] addressList = tmpstationList.ToArray();
+
+                    //Convert Incident to Coding Message and send to respective console
+                    CodingIncidentMessage codingincidentmsg = ConvertDispatchedIncidentToCoding(CADincidentMsg);
+                    ConvertCodingtoTracker(addressList, codingincidentmsg); //Add to gateway tracker
+                    _CallOut_CodingService.TargetMsg(addressList, codingincidentmsg);
+
+                    //Send ack back to CAD
+                    foreach (Tracking station in trackingList)
+                    {
+                        string Comment = station.Station + " " + station.Status;
+                        CallAPI(CADincidentMsg.IncidentNumber, Comment);
+                    }
+
+                    //Set Coding Entry
+                    CreateCodingEntry(codingincidentmsg, tmpstationList.Count.ToString());
+                    //Set Message Entry
+                    CreateMessageEntry(codingincidentmsg, tmpstationList.Count.ToString());
+
+                };
+
+            _uiSyncContext.Post(callback, "Rcv Incident Message");
+        }
+
+        public CodingIncidentMessage ConvertDispatchedIncidentToCoding(gCAD.Shared.IntegrationContract.DispatchedIncident CADincidentMsg)
+        {
+            string codingID = _CallOut_CodingService.GetCodingID();
+
+            CodingLocation incidentLocation = new CodingLocation();
+            incidentLocation.Name = "N.A. Name";
+            //incidentLocation.Name = CADincidentMsg.IncidentLocation.Name;
+            incidentLocation.Street = CADincidentMsg.IncidentLocation.Street;
+            incidentLocation.Unit = CADincidentMsg.IncidentLocation.Unit;
+            incidentLocation.State = CADincidentMsg.IncidentLocation.State;
+            incidentLocation.City = CADincidentMsg.IncidentLocation.City;
+            incidentLocation.Country = "N.A. Country";
+            //incidentLocation.Country = CADincidentMsg.IncidentLocation.Country;
+            incidentLocation.PostalCode = CADincidentMsg.IncidentLocation.PostalCode;
+
+            List<CodingUnits> tmpcodingunitList = new List<CodingUnits>();
+            foreach (gCAD.Shared.IntegrationContract.DispatchedUnit unit in CADincidentMsg.ListOfUnits)
+            {
+                CodingUnits newUnit = new CodingUnits();
+                newUnit.ID = unit.ID;
+                newUnit.Callsign = unit.CallSign;
+                newUnit.UnitType = "N.A. Unit Type";
+                //newUnit.UnitType = unit.UnitType;
+                newUnit.FromStatus = unit.Status;
+                newUnit.UnitLocation = unit.Location;
+                newUnit.UnitHomeStation = unit.HomeStation;
+                newUnit.UnitCurrentStation = unit.CurrentStation;
+
+                tmpcodingunitList.Add(newUnit);
+            }
+
+            CodingUnits[] dispatchUnits = tmpcodingunitList.ToArray();
+
+            CodingIncidentMessage codingIncidentMsg = new CodingIncidentMessage();
+            codingIncidentMsg.CodingID = codingID;
+            codingIncidentMsg.IncidentNo = CADincidentMsg.IncidentNumber;
+            codingIncidentMsg.IncidentTitle = "N.A. Incident Title";
+            //codingIncidentMsg.IncidentTitle = CADincidentMsg.IncidentTitle;
+            codingIncidentMsg.IncidentLocation = incidentLocation;
+            codingIncidentMsg.IncidentType = CADincidentMsg.IncidentType;
+            codingIncidentMsg.IncidentAlarm = CADincidentMsg.AlarmLevel;
+            codingIncidentMsg.IncidentPriority = CADincidentMsg.Priority;
+            codingIncidentMsg.DispatchDateTime = CADincidentMsg.DateTime;
+            codingIncidentMsg.DispatchUnits = dispatchUnits;
+
+            return codingIncidentMsg;
+        }
+
+        //------------------------------- for trying connection purpose---------------------------------------------
+
+        #endregion
+
+        #region Simulate CAD and Console
+
+        private void btnSetSimulateCADSvcIP_Click(object sender, EventArgs e)
+        {
+            if (_isSimulateCADSvcIPSet)
+            {
+                //Un set
+
+                //Cut off the proxy / channel
+                _CallOut_CADService.Close();
+
+                this.txtSimulateCADSvcIP.Enabled = true;
+                this.btnSetSimulateCADSvcIP.Text = "Set";
+                _isSimulateCADSvcIPSet = false;
+            }
+            else
+            {
+                //Set
+                try
+                {
+                    string endpointaddress = "net.tcp://" + this.txtSimulateCADSvcIP.Text.Trim() + ":8002/CallOut_CADService/service";
+                    _CallOut_CADService = new ServiceReference2.CallOut_CADServiceClient(new InstanceContext(this), "NetTcpBinding_CallOut_CADService", endpointaddress);
+                    _CallOut_CADService.Open();
+
+                    this.txtSimulateCADSvcIP.Enabled = false;
+                    //Change button Text
+                    this.btnSetSimulateCADSvcIP.Text = "Unset";
+                    _isSimulateCADSvcIPSet = true;
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show("Invalid IP address...");
+                }
+            }
+        }
+
+        private void btnJoinCAD_Click(object sender, EventArgs e)
+        {
+            if (_isCADConnected)
+            {
+                // Let the service know that this user is leaving
+                _CallOut_CADService.GatewayLeave();
+
+                //Toggle button display
+                _isCADConnected = false;
+                this.btnJoinCAD.Text = "Join CAD";
+            }
+            else
+            {
+                try
+                {
+                    //contact the service.
+                    _CallOut_CADService.GatewayJoin();
+
+                    //Toggle button display
+                    _isCADConnected = true;
+                    this.btnJoinCAD.Text = "Leave CAD";
+                }
+                catch(Exception exception)
+                {
+                    MessageBox.Show("IP address had not been set...");
+                }
+
+            }
+
+        }
+
+        private void btnSetCodingSvcIP_Click(object sender, EventArgs e)
+        {
+            if (_isCodingSvcIPSet)
+            {
+                //Un set
+
+                //Clear Datagrid
+                EmptyAllDataGridView();
+                _ActivateHealthCheck = false;
+
+                //Cut off the proxy / channel
+                _CallOut_CodingService.Close();
+
+                this.txtCodingSvcIP.Enabled = true;
+                this.btnSetCodingSvcIP.Text = "Set";
+                _isCodingSvcIPSet = false;
+            }
+            else
+            {
+                //Set
+                try
+                {
+                    string endpointaddress = "net.tcp://" + this.txtCodingSvcIP.Text.Trim() + ":8000/CallOut_CodingService/service";
+                    _CallOut_CodingService = new ServiceReference1.CallOut_CodingServiceClient(new InstanceContext(this), "NetTcpBinding_CallOut_CodingService", endpointaddress); //using new endpointaddress
+                    _CallOut_CodingService.Open();
+
+                    //Set Up DataGridView
+                    InitCodingDataGrid();
+                    InitMessageDataGrid();
+                    InitStationDataGrid();
+
+                    //Init Health Checker aka check for ocnsole connectivity
+                    _ActivateHealthCheck = true;
+                    HealthCheck();
+
+                    this.txtCodingSvcIP.Enabled = false;
+                    //Change button Text
+                    this.btnSetCodingSvcIP.Text = "Unset";
+                    _isCodingSvcIPSet = true;
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show("Invalid IP address...");
+                }
+
+            }
+        }
+
+        private void btnJoinConsole_Click(object sender, EventArgs e)
+        {
+            if (_isConsoleConnected)
+            {
+                // Let the service know that this user is leaving
+                _CallOut_CodingService.GatewayLeave();
+
+                //Toggle button display
+                _isConsoleConnected = false;
+                this.btnJoinConsole.Text = "Join Console";
+            }
+            else
+            {
+                try
+                {
+                    //contact the service.
+                    _CallOut_CodingService.GatewayJoin();
+
+                    //Toggle button display
+                    _isConsoleConnected = true;
+                    this.btnJoinConsole.Text = "Leave Console";
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show("IP address had not been set...");
+                }
+            }
+        }
+
+        #endregion
+
+        #region Health Check Operations
 
         private void InitToBeRemove()
         {
@@ -101,41 +502,51 @@ namespace CallOut_Gateway
 
         private void HealthCheck()
         {
-            InitToBeRemove();
+            if (_ActivateHealthCheck)
+            {
+                InitToBeRemove();
 
-            //Have a timer that will broadcast message to connected console and expect reply within 5 second else disconnect
-            System.Timers.Timer HealthBroadcastTimer = new System.Timers.Timer();
-            HealthBroadcastTimer.Interval = 10000; //10sec
-            HealthBroadcastTimer.Elapsed += delegate { HealthBroadcastTimeOut(); };
-            HealthBroadcastTimer.AutoReset = false;
-            HealthBroadcastTimer.Start();
+                //Have a timer that will broadcast message to connected console and expect reply within 5 second else disconnect
+                System.Timers.Timer HealthBroadcastTimer = new System.Timers.Timer();
+                HealthBroadcastTimer.Interval = 10000; //10sec
+                HealthBroadcastTimer.Elapsed += delegate { HealthBroadcastTimeOut(); };
+                HealthBroadcastTimer.AutoReset = false;
+                HealthBroadcastTimer.Start();
+            }
         }
 
         private void HealthBroadcastTimeOut()
         {
-            //Broadcast message to all connected console
-            _CallOut_CodingService.RequestConnStatus();
+            if (_ActivateHealthCheck)
+            {
+                //Broadcast message to all connected console
+                _CallOut_CodingService.RequestConnStatus();
 
-            System.Timers.Timer HealthResponseTimer = new System.Timers.Timer();
-            HealthResponseTimer.Interval = 5000; //5sec
-            HealthResponseTimer.Elapsed += delegate { HealthResponseTimeOut(); };
-            HealthResponseTimer.AutoReset = false;
-            HealthResponseTimer.Start();
+                System.Timers.Timer HealthResponseTimer = new System.Timers.Timer();
+                HealthResponseTimer.Interval = 5000; //5sec
+                HealthResponseTimer.Elapsed += delegate { HealthResponseTimeOut(); };
+                HealthResponseTimer.AutoReset = false;
+                HealthResponseTimer.Start();
+            }
         }
 
         private void HealthResponseTimeOut()
         {
-            //Disconnected if there is no response
-            foreach(string station in _ToBeRemove){
-                _CallOut_CodingService.ConsoleLeave(station);
+            if (_ActivateHealthCheck)
+            {
+                //Disconnected if there is no response
+                foreach (string station in _ToBeRemove)
+                {
+                    _CallOut_CodingService.ConsoleLeave(station);
 
-                //start a new thread to check against tracker for reference on station status
-                var t = new Thread(() => FailedPendingMsg(station));
-                t.Start();
+                    //start a new thread to check against tracker for reference on station status
+                    var t = new Thread(() => FailedPendingMsg(station));
+                    t.Start();
+                }
+
+                //recall healthcheck
+                HealthCheck();
             }
-
-            //recall healthcheck
-            HealthCheck();
         }
 
         private void FailedPendingMsg(string station)
@@ -153,51 +564,7 @@ namespace CallOut_Gateway
             }
         }
 
-
-        private void btnJoinCAD_Click(object sender, EventArgs e)
-        {
-            if (_isCADConnected)
-            {
-                // Let the service know that this user is leaving
-                _CallOut_CADService.GatewayLeave();
-
-                //Toggle button display
-                _isCADConnected = false;
-                this.btnJoinCAD.Text = "Join CAD";
-            }
-            else
-            {
-                //contact the service.
-                _CallOut_CADService.GatewayJoin();
-
-                //Toggle button display
-                _isCADConnected = true;
-                this.btnJoinCAD.Text = "Leave CAD";
-            }
-            
-        }
-
-        private void btnJoinConsole_Click(object sender, EventArgs e)
-        {
-            if (_isConsoleConnected)
-            {
-                // Let the service know that this user is leaving
-                _CallOut_CodingService.GatewayLeave();
-
-                //Toggle button display
-                _isConsoleConnected = false;
-                this.btnJoinConsole.Text = "Join Console";
-            }
-            else
-            {
-                //contact the service.
-                _CallOut_CodingService.GatewayJoin();
-
-                //Toggle button display
-                _isConsoleConnected = true;
-                this.btnJoinConsole.Text = "Leave Console";
-            }
-        }
+        #endregion
 
         #region Coding Tab 
 
@@ -272,10 +639,10 @@ namespace CallOut_Gateway
 
         #region Initialise Coding Data Grid View
 
-        public void InitCodingDataGrid()
+        private void InitCodingDataGrid()
         {
             //Initialize the datagridview
-            this.dgvCoding.AutoGenerateColumns = true;
+            this.dgvCoding.AutoGenerateColumns = false;
             this.dgvCoding.CellBorderStyle = DataGridViewCellBorderStyle.None;
 
             DataGridViewTextBoxColumn incidentIDColumn = new DataGridViewTextBoxColumn();
@@ -403,9 +770,21 @@ namespace CallOut_Gateway
 
         }
 
+        private bool CheckNoDelayMsg(string codingID, string console)
+        {
+            foreach (MessageStatus messagestatus in _MessageStatusList)
+            {
+                if (messagestatus.CodingID.Equals(codingID) && messagestatus.AckFrom.Equals(console))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         #region Initialise Message Data Grid View
 
-        public void InitMessageDataGrid()
+        private void InitMessageDataGrid()
         {
             //Initialize the datagridview
             this.dgvMessage.AutoGenerateColumns = false;
@@ -455,10 +834,6 @@ namespace CallOut_Gateway
             this.dgvMessage.Columns.Add(acktotalColumn);
 
             _MessageStatusList.Clear();
-            //foreach (StationStatus station in _CallOut_CodingService.GetStationStatus())
-            //{
-            //    _MessageStatusList.Add(station);
-            //}
 
             this.dgvMessage.DataSource = _MessageStatusList;
         }
@@ -486,7 +861,7 @@ namespace CallOut_Gateway
             string[] addressList = tmpstationList.ToArray();
 
             CodingIncidentMessage testIncidentMsg = TestMessageTemplate();
-            ConvertCodingtoTracker(testIncidentMsg); //Add to gateway tracker
+            ConvertCodingtoTracker(addressList, testIncidentMsg); //Add to gateway tracker
             _CallOut_CodingService.TargetMsg(addressList, testIncidentMsg);
 
             List<Tracking> trackingList = new List<Tracking>();
@@ -503,6 +878,12 @@ namespace CallOut_Gateway
                 foreach (CodingUnits unit in testIncidentMsg.DispatchUnits)
                 {
                     if (unit.UnitCurrentStation.Equals(station))
+                    {
+                        unitcallsign.Add(unit.Callsign);
+                    }
+
+                    //For test message
+                    if (unit.UnitCurrentStation.Equals("Test"))
                     {
                         unitcallsign.Add(unit.Callsign);
                     }
@@ -539,7 +920,7 @@ namespace CallOut_Gateway
             string[] addressList = connectedConsole.ToArray();
 
             CodingIncidentMessage testIncidentMsg = TestMessageTemplate2();
-            ConvertCodingtoTracker(testIncidentMsg); //Add to gateway tracker
+            ConvertCodingtoTracker(addressList, testIncidentMsg); //Add to gateway tracker
             _CallOut_CodingService.TargetMsg(addressList, testIncidentMsg);
 
             List<Tracking> trackingList = new List<Tracking>();
@@ -561,7 +942,7 @@ namespace CallOut_Gateway
                     }
 
                     //For test message
-                    if (unit.UnitCurrentStation.Equals(""))
+                    if (unit.UnitCurrentStation.Equals("Test"))
                     {
                         unitcallsign.Add(unit.Callsign);
                     }
@@ -614,7 +995,7 @@ namespace CallOut_Gateway
             testUnit1.FromStatus = "";
             testUnit1.UnitLocation = "";
             testUnit1.UnitHomeStation = "";
-            testUnit1.UnitCurrentStation = "";
+            testUnit1.UnitCurrentStation = "Test";
 
             CodingUnits testUnit2 = new CodingUnits();
             testUnit1.ID = 456;
@@ -623,7 +1004,7 @@ namespace CallOut_Gateway
             testUnit2.FromStatus = "";
             testUnit2.UnitLocation = "";
             testUnit2.UnitHomeStation = "";
-            testUnit2.UnitCurrentStation = "";
+            testUnit2.UnitCurrentStation = "Test";
 
             CodingUnits[] testUnitList = new CodingUnits[2];
             testUnitList[0] = testUnit1;
@@ -670,7 +1051,7 @@ namespace CallOut_Gateway
             testUnit1.FromStatus = "";
             testUnit1.UnitLocation = "";
             testUnit1.UnitHomeStation = "";
-            testUnit1.UnitCurrentStation = "";
+            testUnit1.UnitCurrentStation = "Test";
 
             CodingUnits testUnit2 = new CodingUnits();
             testUnit1.ID = 456;
@@ -679,7 +1060,7 @@ namespace CallOut_Gateway
             testUnit2.FromStatus = "";
             testUnit2.UnitLocation = "";
             testUnit2.UnitHomeStation = "";
-            testUnit2.UnitCurrentStation = "";
+            testUnit2.UnitCurrentStation = "Test";
 
             CodingUnits testUnit3 = new CodingUnits();
             testUnit3.ID = 123;
@@ -688,7 +1069,7 @@ namespace CallOut_Gateway
             testUnit3.FromStatus = "";
             testUnit3.UnitLocation = "";
             testUnit3.UnitHomeStation = "";
-            testUnit3.UnitCurrentStation = "";
+            testUnit3.UnitCurrentStation = "Test";
 
             CodingUnits testUnit4 = new CodingUnits();
             testUnit4.ID = 456;
@@ -697,7 +1078,7 @@ namespace CallOut_Gateway
             testUnit4.FromStatus = "";
             testUnit4.UnitLocation = "";
             testUnit4.UnitHomeStation = "";
-            testUnit4.UnitCurrentStation = "";
+            testUnit4.UnitCurrentStation = "Test";
 
             CodingUnits[] testUnitList = new CodingUnits[4];
             testUnitList[0] = testUnit1;
@@ -721,7 +1102,7 @@ namespace CallOut_Gateway
 
         #region Initialise Station Data Grid View
 
-        public void InitStationDataGrid()
+        private void InitStationDataGrid()
         {
             //Initialize the datagridview
             this.dgvStation.AutoGenerateColumns = false;
@@ -760,6 +1141,10 @@ namespace CallOut_Gateway
             this.dgvStation.Columns.Add(targetColumn);
 
             _StationStatusList.Clear();
+            //foreach (StationStatus station in _CallOut_CodingService.GetStationStatus())
+            //{
+            //    _StationStatusList.Add(station);
+            //}
             foreach (StationStatus station in _CallOut_CodingService.GetStationStatus())
             {
                 _StationStatusList.Add(station);
@@ -810,12 +1195,12 @@ namespace CallOut_Gateway
 
         #region CallOut_CodingServiceCallback Methods
 
-        public void GatewayRcvConnStatus(string station)
+        public void GatewayRcvConnStatus(string console)
         {
             SendOrPostCallback callback =
-                delegate(object state)
+                delegate (object state)
                 {
-                    _ToBeRemove.Remove(station);
+                    _ToBeRemove.Remove(console);
                 };
 
             _uiSyncContext.Post(callback, "rcv conn status reply");
@@ -824,7 +1209,7 @@ namespace CallOut_Gateway
         public void EditConnStatus(string StationName, string Status)
         {
             SendOrPostCallback callback =
-                delegate(object state)
+                delegate (object state)
                 {
                     //To toggle the status 
                     foreach (StationStatus station in _StationStatusList)
@@ -851,37 +1236,50 @@ namespace CallOut_Gateway
                             }
                         }
                     }
-                    this.dgvStation.Refresh(); 
+                    this.dgvStation.Refresh();
                 };
 
             _uiSyncContext.Post(callback, "Edit Connection Status");
-            
+
         }
 
         //Notify gateway that deliever of message failed due to console not online (instant failed)
-        public void NotifyConsoleNotConnected(string station, CodingIncidentMessage codingIncidentMsg)
+        public void NotifyConsoleNotConnected(string console, CodingIncidentMessage codingIncidentMsg)
         {
             SendOrPostCallback callback =
-                delegate(object state)
+                delegate (object state)
                 {
-                    //Updated coding status failed
-                    UpdateCodingStatus(codingIncidentMsg.CodingID, "Failed");
-
-                    //Updated message status failed
-                    MessageStatus messagestatus = UpdateMessageStatus(codingIncidentMsg.CodingID, station, "Failed");
-
-                    List<string> unitcallsign = new List<string>();
-                    //To give relevant station units callsign
-                    foreach (CodingUnits unit in codingIncidentMsg.DispatchUnits)
+                    if (CheckNoDelayMsg(codingIncidentMsg.CodingID, console))
                     {
-                        if (unit.UnitCurrentStation.Equals(station))
+                        //Updated coding status failed
+                        UpdateCodingStatus(codingIncidentMsg.CodingID, "Failed");
+
+                        //Updated message status failed
+                        MessageStatus messagestatus = UpdateMessageStatus(codingIncidentMsg.CodingID, console, "Failed");
+
+                        List<string> unitcallsign = new List<string>();
+                        //To give relevant station units callsign
+                        foreach (CodingUnits unit in codingIncidentMsg.DispatchUnits)
                         {
-                            unitcallsign.Add(unit.Callsign);
+                            if (unit.UnitCurrentStation.Equals(console))
+                            {
+                                unitcallsign.Add(unit.Callsign);
+                            }
+                        }
+
+                        //Broadcast Coding status back to CAD (failed)
+                        SendBroadcastIncidentCoding(console, "Failed", unitcallsign.ToArray(), messagestatus);
+
+                        //Update on gateway tracker
+                        foreach (GatewayTracker gatewaytrack in _GatewayTrackerList)
+                        {
+                            //if match codingID and station name, update the station status
+                            if (gatewaytrack.CodingID.Equals(codingIncidentMsg.CodingID) && gatewaytrack.StationStatus.ContainsKey(console))
+                            {
+                                gatewaytrack.StationStatus[console] = "Failed";
+                            }
                         }
                     }
-
-                    //Broadcast Coding status back to CAD (failed)
-                    SendBroadcastIncidentCoding(station, "Failed", unitcallsign.ToArray(), messagestatus);
                 };
 
             _uiSyncContext.Post(callback, "Notify deliever failed");
@@ -890,39 +1288,43 @@ namespace CallOut_Gateway
         public void RcvCodingAckMsg(CodingAckMessage codingAckMsg)
         {
             SendOrPostCallback callback =
-                delegate(object state)
+                delegate (object state)
                 {
-                    //Update Coding Status
-                    UpdateCodingStatus(codingAckMsg.CodingID, codingAckMsg.AckStatus);
-
-                    //Update Message Status
-                    MessageStatus messagestatus = UpdateMessageStatus(codingAckMsg.CodingID, codingAckMsg.ConsoleID, codingAckMsg.AckStatus);
-
-                    //Update Station Status
-                    foreach (StationStatus stationstatus in _StationStatusList)
+                    if (CheckNoDelayMsg(codingAckMsg.CodingID, codingAckMsg.ConsoleID))
                     {
-                        if (stationstatus.Station.Equals(codingAckMsg.ConsoleID))
+                        //Update Coding Status
+                        UpdateCodingStatus(codingAckMsg.CodingID, codingAckMsg.AckStatus);
+
+                        //Update Message Status
+                        MessageStatus messagestatus = UpdateMessageStatus(codingAckMsg.CodingID, codingAckMsg.ConsoleID, codingAckMsg.AckStatus);
+
+                        //Update Station Status
+                        foreach (StationStatus stationstatus in _StationStatusList)
                         {
-                            stationstatus.Update = codingAckMsg.AckTimeStamp;
+                            if (stationstatus.Station.Equals(codingAckMsg.ConsoleID))
+                            {
+                                stationstatus.Update = codingAckMsg.AckTimeStamp;
+                            }
                         }
+
+                        this.dgvStation.Refresh();
+
+                        //Broadcast Coding status back to CAD (Ack,reject,timeout/failed)
+                        SendBroadcastIncidentCoding(codingAckMsg.ConsoleID, codingAckMsg.AckStatus, codingAckMsg.AckUnits, messagestatus);
+                        //for test at 020715
+                        //CallAPI(codingAckMsg.IncidentNo, codingAckMsg.AckStatus);
                     }
-
-                    this.dgvStation.Refresh();
-
-                    //Broadcast Coding status back to CAD (Ack,reject,timeout/failed)
-                    SendBroadcastIncidentCoding(codingAckMsg.ConsoleID, codingAckMsg.AckStatus, codingAckMsg.AckUnits, messagestatus);
-
                 };
 
             _uiSyncContext.Post(callback, "updated Coding Ack Msg");
 
         }
 
-        public void SendBroadcastIncidentCoding(string station, string status, string[] unitcallsign, MessageStatus messagestatus)
+        public void SendBroadcastIncidentCoding(string console, string status, string[] unitcallsign, MessageStatus messagestatus)
         {
             //Get Station tracking
             Tracking stationTrack = new Tracking();
-            stationTrack.Station = station;
+            stationTrack.Station = console;
             stationTrack.Status = status;
             stationTrack.Unit = unitcallsign;
 
@@ -942,9 +1344,8 @@ namespace CallOut_Gateway
         public void StartTargetTimeoutTimer(string console, CodingIncidentMessage codingIncidentMsg)
         {
             SendOrPostCallback callback =
-                delegate(object state)
+                delegate (object state)
                 {
-                    Debug.WriteLine("StartTargetTimeoutTimer");
                     //Start timer for 15 sec to assume console disconnected
                     System.Timers.Timer AutoFailedTimer = new System.Timers.Timer();
                     AutoFailedTimer.Interval = 15000; //15 sec
@@ -958,58 +1359,59 @@ namespace CallOut_Gateway
 
         public void TargetTimeout(string console, string codingID, CodingUnits[] dispatchUnits)
         {
-            Debug.WriteLine("TargetTimeout");
+            //Debug.WriteLine("TargetTimeout");
             //Cross thread 
-            SendOrPostCallback callback = delegate(object state)
+            SendOrPostCallback callback = delegate (object state)
             {
-                //string codingID = codingIncidentMsg.CodingID;
-
-                //Check against Pending number in coding tab, If there is any pending
-                //remove those which had respond base on message tab with codingID
-                foreach (CodingStatus codingstatus in _CodingStatusList)
+                if (CheckNoDelayMsg(codingID, console))
                 {
-                    if (codingstatus.CodingID.Equals(codingID))
+                    //Check against Pending number in coding tab, If there is any pending
+                    //remove those which had respond base on message tab with codingID
+                    foreach (CodingStatus codingstatus in _CodingStatusList)
                     {
-                        if (codingstatus.Pending != "0")
+                        if (codingstatus.CodingID.Equals(codingID))
                         {
-                            //Remove those station that already reply in the list
-                            bool nomatchinmsgstatus = true;
-                            foreach (MessageStatus msgstatus in _MessageStatusList)
+                            if (codingstatus.Pending != "0")
                             {
-                                if (msgstatus.CodingID.Equals(codingID) && msgstatus.AckFrom.Equals(console))
+                                //Remove those station that already reply in the list
+                                bool nomatchinmsgstatus = true;
+                                foreach (MessageStatus msgstatus in _MessageStatusList)
                                 {
-                                    nomatchinmsgstatus = false; //console already acknowledge
-                                }
-                            }
-
-                            //Notify those failed msg to console
-                            //_CallOut_CodingService.RemovefromMsgQueue(console, codingID);
-
-                            if (nomatchinmsgstatus)
-                            {
-                                //update coding status
-                                UpdateCodingStatus(codingID, "Failed");
-                                //update message status
-                                MessageStatus messagestatus = UpdateMessageStatus(codingID, console, "Failed");
-
-                                List<string> unitcallsign = new List<string>();
-                                //To give relevant station units callsign
-                                foreach (CodingUnits unit in dispatchUnits)
-                                {
-                                    if (unit.UnitCurrentStation.Equals(console))
+                                    if (msgstatus.CodingID.Equals(codingID) && msgstatus.AckFrom.Equals(console))
                                     {
-                                        unitcallsign.Add(unit.Callsign);
-                                    }
-
-                                    //For Test message
-                                    if (unit.UnitCurrentStation.Equals(""))
-                                    {
-                                        unitcallsign.Add(unit.Callsign);
+                                        nomatchinmsgstatus = false; //console already acknowledge
                                     }
                                 }
 
-                                //Broadcast Coding status back to CAD (failed)
-                                SendBroadcastIncidentCoding(console, "Failed", unitcallsign.ToArray(), messagestatus);
+                                if (nomatchinmsgstatus)
+                                {
+                                    //Notify those failed msg to console
+                                    _CallOut_CodingService.RemovefromMsgQueue(console, codingID);
+
+                                    //update coding status
+                                    UpdateCodingStatus(codingID, "Failed");
+                                    //update message status
+                                    MessageStatus messagestatus = UpdateMessageStatus(codingID, console, "Failed");
+
+                                    List<string> unitcallsign = new List<string>();
+                                    //To give relevant station units callsign
+                                    foreach (CodingUnits unit in dispatchUnits)
+                                    {
+                                        if (unit.UnitCurrentStation.Equals(console))
+                                        {
+                                            unitcallsign.Add(unit.Callsign);
+                                        }
+
+                                        //For Test message
+                                        if (unit.UnitCurrentStation.Equals("Test"))
+                                        {
+                                            unitcallsign.Add(unit.Callsign);
+                                        }
+                                    }
+
+                                    //Broadcast Coding status back to CAD (failed)
+                                    SendBroadcastIncidentCoding(console, "Failed", unitcallsign.ToArray(), messagestatus);
+                                }
                             }
                         }
                     }
@@ -1030,7 +1432,6 @@ namespace CallOut_Gateway
 
         #endregion
 
-        
         #endregion
 
         #region CallOut_CADServiceCallback Methods
@@ -1040,15 +1441,15 @@ namespace CallOut_Gateway
          * 2) Send the coding message to relevant console 
          * 3) Send Ack back to CAD in order to update mainly codingID
          */
-        public void RcvCADIncidentMsg(DispatchedIncident CADincidentMsg)
+        public void RcvCADIncidentMsg(ServiceReference2.DispatchedIncident CADincidentMsg)
         {
             SendOrPostCallback callback =
-                delegate(object state)
+                delegate (object state)
                 {
                     List<string> tmpstationList = new List<string>();
                     List<Tracking> trackingList = new List<Tracking>();
                     //Only take out the stations on the Current Station
-                    foreach (DispatchedUnit uniqueunit in CADincidentMsg.ListOfUnits)
+                    foreach (ServiceReference2.DispatchedUnit uniqueunit in CADincidentMsg.ListOfUnits)
                     {
                         //Avoid duplicate station name in the list
                         if (!tmpstationList.Contains(uniqueunit.CurrentStation))
@@ -1061,7 +1462,7 @@ namespace CallOut_Gateway
                             List<string> unitcallsign = new List<string>();
 
                             //To give relevant station units callsign
-                            foreach (DispatchedUnit unit in CADincidentMsg.ListOfUnits)
+                            foreach (ServiceReference2.DispatchedUnit unit in CADincidentMsg.ListOfUnits)
                             {
                                 if (unit.CurrentStation.Equals(uniqueunit.CurrentStation))
                                 {
@@ -1078,7 +1479,7 @@ namespace CallOut_Gateway
 
                     //Convert Incident to Coding Message and send to respective console
                     CodingIncidentMessage codingincidentmsg = ConvertIncidentToCoding(CADincidentMsg);
-                    ConvertCodingtoTracker(codingincidentmsg); //Add to gateway tracker
+                    ConvertCodingtoTracker(addressList, codingincidentmsg); //Add to gateway tracker
                     _CallOut_CodingService.TargetMsg(addressList, codingincidentmsg);
 
                     //Send ack back to CAD
@@ -1103,7 +1504,7 @@ namespace CallOut_Gateway
             _uiSyncContext.Post(callback, "Rcv Incident Message");
         }
 
-        public CodingIncidentMessage ConvertIncidentToCoding(DispatchedIncident CADincidentMsg)
+        public CodingIncidentMessage ConvertIncidentToCoding(ServiceReference2.DispatchedIncident CADincidentMsg)
         {
             string codingID = _CallOut_CodingService.GetCodingID();
 
@@ -1117,7 +1518,7 @@ namespace CallOut_Gateway
             incidentLocation.PostalCode = CADincidentMsg.IncidentLocation.PostalCode;
 
             List<CodingUnits> tmpcodingunitList = new List<CodingUnits>();
-            foreach (DispatchedUnit unit in CADincidentMsg.ListOfUnits)
+            foreach (ServiceReference2.DispatchedUnit unit in CADincidentMsg.ListOfUnits)
             {
                 CodingUnits newUnit = new CodingUnits();
                 newUnit.ID = unit.ID;
@@ -1148,34 +1549,35 @@ namespace CallOut_Gateway
         }
 
         //Convert the coding incident message to gateway tracker and add to the tracker list for reference of information
-        public void ConvertCodingtoTracker(CodingIncidentMessage CodingincidentMsg)
+        public void ConvertCodingtoTracker(string[] addressList, CodingIncidentMessage codingincidentMsg)
         {
             GatewayTracker gatewaytrack = new GatewayTracker();
-            gatewaytrack.CodingID = CodingincidentMsg.CodingID;
-            gatewaytrack.IncidentID = CodingincidentMsg.IncidentNo;
+            gatewaytrack.CodingID = codingincidentMsg.CodingID;
+            gatewaytrack.IncidentID = codingincidentMsg.IncidentNo;
 
             List<CodingUnits> dispatchunits = new List<CodingUnits>();
-            Dictionary<string, string> stationstatus = new Dictionary<string, string>();
-            foreach (CodingUnits unit in CodingincidentMsg.DispatchUnits)
+            foreach (CodingUnits unit in codingincidentMsg.DispatchUnits)
             {
                 dispatchunits.Add(unit);
-
-                if (!stationstatus.ContainsKey(unit.UnitCurrentStation))
-                {
-                    stationstatus.Add(unit.UnitCurrentStation, "Pending");
-                }
             }
+
+            Dictionary<string, string> stationstatus = new Dictionary<string, string>();
+            foreach (string station in addressList)
+            {
+                stationstatus.Add(station, "Pending");
+            }
+
             gatewaytrack.DispatchUnits = dispatchunits;
             gatewaytrack.StationStatus = stationstatus;
 
             _GatewayTrackerList.Add(gatewaytrack);
         }
-        
+
         //Retrieve Incident Coding Status base on Query
         public void IncidentCodingStatus(string querycodingID)
         {
             SendOrPostCallback callback =
-                delegate(object state)
+                delegate (object state)
                 {
                     //Gather incident coding status base on coding ID
                     int acktotal = 0;
@@ -1221,8 +1623,7 @@ namespace CallOut_Gateway
                         _MessageStatusList.Add(newMsgStatus);
 
                         //Response back to CAD 
-
-                        List<string> tmpstationList = new List<string>();
+                        
                         List<Tracking> trackingList = new List<Tracking>();
 
                         foreach (GatewayTracker gatewaytrack in _GatewayTrackerList)
@@ -1230,43 +1631,31 @@ namespace CallOut_Gateway
                             if (gatewaytrack.CodingID.Equals(querycodingID))
                             {
                                 //Only take out the stations on the Current Station
-                                foreach (CodingUnits uniqueunit in gatewaytrack.DispatchUnits)
+                                foreach (KeyValuePair<string, string> station in gatewaytrack.StationStatus)
                                 {
-                                    //Avoid duplicate station name in the list
-                                    if (!tmpstationList.Contains(uniqueunit.UnitCurrentStation))
+                                    Tracking newstation = new Tracking();
+                                    newstation.Station = station.Key;
+                                    newstation.Status = station.Value;
+
+                                    List<string> unitcallsign = new List<string>();
+
+                                    //To give relevant station units callsign
+                                    foreach (CodingUnits unit in gatewaytrack.DispatchUnits)
                                     {
-                                        tmpstationList.Add(uniqueunit.UnitCurrentStation);
-                                        Tracking newstation = new Tracking();
-                                        newstation.Station = uniqueunit.UnitCurrentStation;
-
-                                        //get the status from message status
-                                        foreach (MessageStatus msgstatus in _MessageStatusList)
+                                        if (unit.UnitCurrentStation.Equals(station.Key))
                                         {
-
-                                            //If exist in message status ack/reject/failed
-                                            if (msgstatus.CodingID.Equals(querycodingID) && msgstatus.AckFrom.Equals(uniqueunit.UnitCurrentStation))
-                                            {
-                                                newstation.Status = msgstatus.AckStatus;
-                                                break;
-                                            }
-                                            //else its still pending
-                                            newstation.Status = "Pending";
+                                            unitcallsign.Add(unit.Callsign);
                                         }
-
-                                        List<string> unitcallsign = new List<string>();
-
-                                        //To give relevant station units callsign
-                                        foreach (CodingUnits unit in gatewaytrack.DispatchUnits)
+                                        
+                                        //For Test message
+                                        if (unit.UnitCurrentStation.Equals("Test"))
                                         {
-                                            if (unit.UnitCurrentStation.Equals(uniqueunit.UnitCurrentStation))
-                                            {
-                                                unitcallsign.Add(unit.Callsign);
-                                            }
+                                            unitcallsign.Add(unit.Callsign);
                                         }
-
-                                        newstation.Unit = unitcallsign.ToArray();
-                                        trackingList.Add(newstation); //Add into tracking list
                                     }
+
+                                    newstation.Unit = unitcallsign.ToArray();
+                                    trackingList.Add(newstation); //Add into tracking list
                                 }
                             }
                         }
@@ -1284,7 +1673,6 @@ namespace CallOut_Gateway
             _uiSyncContext.Post(callback, "Request incident coding status");
         }
 
-
         #region Methods not for Gateway
         public void UpdateCADIncidentAck(CADIncidentAck CADincidentack)
         { }
@@ -1297,5 +1685,6 @@ namespace CallOut_Gateway
         #endregion
 
         #endregion
+
     }
 }

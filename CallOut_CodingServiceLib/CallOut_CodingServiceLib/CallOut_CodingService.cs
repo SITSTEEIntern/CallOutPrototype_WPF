@@ -1,11 +1,12 @@
-﻿//using System;
-using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
+﻿using System.Collections.Generic;
 using System.IO; //for read from file
 using System.Diagnostics; //for debug
 using System.ServiceModel;// for WCF to happen
+
 using System.Runtime.Serialization;//datacontract
+//using System;
+//using System.Linq;
+//using System.Text;
 
 using CallOut_CodingServiceLib.Class;
 
@@ -71,8 +72,8 @@ namespace CallOut_CodingServiceLib
         void ReplyConnStatus(string station);
 
         //Once the msg in gateway had reached timeout, it will inform console and remove msg from queue
-        //[OperationContract(IsOneWay = true)]
-        //void RemovefromMsgQueue(string station, string CodingID);
+        [OperationContract(IsOneWay = true)]
+        void RemovefromMsgQueue(string station, string CodingID);
 
         //Once Message is displayed on console screen, it will send a response to gateway to start timeout timer [console]
         [OperationContract(IsOneWay = true)]
@@ -105,7 +106,7 @@ namespace CallOut_CodingServiceLib
 
         //[Console] received the station that had already failed/timeout at gateway
         //[OperationContract(IsOneWay = true)]
-        //void UpdateRemoveMsgList(string CodingID);
+        void UpdateRemoveMsgList(string CodingID);
 
         //[Gateway] Start timer for timeout of the incident that displayed on console screen
         [OperationContract(IsOneWay = true)]
@@ -127,7 +128,7 @@ namespace CallOut_CodingServiceLib
     public class CallOut_CodingService : IMessageServiceInbound
     {
         //List of callback channel in order find the link back
-        private static List<IMessageServiceCallback> _ConsoleCallbackList = new List<IMessageServiceCallback>();
+        //private static List<IMessageServiceCallback> _ConsoleCallbackList = new List<IMessageServiceCallback>();
         private static List<IMessageServiceCallback> _GatewayCallbackList = new List<IMessageServiceCallback>();
 
         private static List<string> _ConnectedConsoleList = new List<string>();
@@ -248,31 +249,35 @@ namespace CallOut_CodingServiceLib
             // Add the connected console channel into the list
             IMessageServiceCallback connectedConsole = OperationContext.Current.GetCallbackChannel<IMessageServiceCallback>();
 
-            if (!_ConsoleCallbackList.Contains(connectedConsole))
+            //Overwrite
+            if (_ConnectedConsoleDict.ContainsKey(console))
             {
-                _ConsoleCallbackList.Add(connectedConsole);//Note the callback list is just a list of channels.
-                _ConnectedConsoleList.Add(console);
-                _ConnectedConsoleDict.Add(console, connectedConsole);//Bind the username to the callback channel ID
-                _ConnectedConsoleNo++;
+                _ConnectedConsoleList.Remove(console);
+                _ConnectedConsoleDict.Remove(console);//Bind the username to the callback channel ID
+                _ConnectedConsoleNo--;
+            }
+            
+            _ConnectedConsoleList.Add(console);
+            _ConnectedConsoleDict.Add(console, connectedConsole);//Bind the username to the callback channel ID
+            _ConnectedConsoleNo++;
 
-                //Update the station status (for case if mutiple gateway existed)
-                foreach (StationStatus station in StationIDList)
+            //Update the station status (for case if mutiple gateway existed)
+            foreach (StationStatus station in StationIDList)
+            {
+                if (station.Station.Equals(console))
                 {
-                    if (station.Station.Equals(console))
-                    {
-                        station.Status = "Online";
-                    }
+                    station.Status = "Online";
                 }
-
-                //Handle case where 2 client log in as same ID
             }
 
-            _GatewayCallbackList.ForEach(
-                delegate(IMessageServiceCallback gatewaycallback)
-                {
-                    gatewaycallback.EditConnStatus(console, "Online");
-                });
+            //Handle case where 2 client log in as same ID
 
+
+            _GatewayCallbackList.ForEach(
+            delegate(IMessageServiceCallback gatewaycallback)
+            {
+                gatewaycallback.EditConnStatus(console, "Online");
+            });
         }
 
         public void ConsoleLeave(string console)
@@ -283,22 +288,22 @@ namespace CallOut_CodingServiceLib
             {
                 IMessageServiceCallback connectedConsole = _ConnectedConsoleDict[console];
 
-                if (_ConsoleCallbackList.Contains(connectedConsole))
-                {
-                    _ConsoleCallbackList.Remove(connectedConsole);
-                    _ConnectedConsoleDict.Remove(console);
-                    _ConnectedConsoleList.Remove(console);
-                    _ConnectedConsoleNo--;
+                //if (_ConsoleCallbackList.Contains(connectedConsole))
+                //{
+                //_ConsoleCallbackList.Remove(connectedConsole);
+                _ConnectedConsoleDict.Remove(console);
+                _ConnectedConsoleList.Remove(console);
+                _ConnectedConsoleNo--;
 
-                    //Update the station status
-                    foreach (StationStatus station in StationIDList)
+                //Update the station status
+                foreach (StationStatus station in StationIDList)
+                {
+                    if (station.Station.Equals(console))
                     {
-                        if (station.Station.Equals(console))
-                        {
-                            station.Status = "Offline";
-                        }
+                        station.Status = "Offline";
                     }
                 }
+                //}
 
                 _GatewayCallbackList.ForEach(
                     delegate(IMessageServiceCallback gatewaycallback)
@@ -362,14 +367,14 @@ namespace CallOut_CodingServiceLib
                 });
         }
 
-        //public void RemovefromMsgQueue(string station, string CodingID)
-        //{
-        //    if (_ConnectedConsoleList.Contains(station))
-        //    {
-        //        IMessageServiceCallback tmpCallback = _ConnectedConsoleDict[station];
-        //        tmpCallback.UpdateRemoveMsgList(CodingID);
-        //    }
-        //}
+        public void RemovefromMsgQueue(string station, string CodingID)
+        {
+            if (_ConnectedConsoleList.Contains(station))
+            {
+                IMessageServiceCallback tmpCallback = _ConnectedConsoleDict[station];
+                tmpCallback.UpdateRemoveMsgList(CodingID);
+            }
+        }
 
         public void MsgDisplayedResponse(string console, CodingIncidentMessage codingIncidentMsg)
         {

@@ -19,15 +19,15 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="net.tcp://192.168.2.48:8080/CallOut_CodingService/mex" Protocol="mex" SourceId="1" />
+    <MetadataSource Address="net.tcp://localhost:8000/CallOut_CodingService/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="CallOut_CodingServiceLib.wsdl" MetadataType="Wsdl" ID="c807ebbb-ae28-4217-8725-74c9edc260cb" SourceId="1" SourceUrl="net.tcp://192.168.2.48:8080/CallOut_CodingService/mex" />
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="d648bfe8-3e9a-4195-b01e-4eaa9c57058b" SourceId="1" SourceUrl="net.tcp://192.168.2.48:8080/CallOut_CodingService/mex" />
-    <MetadataFile FileName="CallOut_CodingServiceLib.xsd" MetadataType="Schema" ID="fb8b9518-19ab-44cc-a2ba-b5dd02f3147c" SourceId="1" SourceUrl="net.tcp://192.168.2.48:8080/CallOut_CodingService/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="d6736f83-5dd2-4459-895f-ed73028fcda7" SourceId="1" SourceUrl="net.tcp://192.168.2.48:8080/CallOut_CodingService/mex" />
-    <MetadataFile FileName="CallOut_CodingServiceLib.Class.xsd" MetadataType="Schema" ID="bb06c8d3-55b8-4b5b-a19f-5f23677b1e95" SourceId="1" SourceUrl="net.tcp://192.168.2.48:8080/CallOut_CodingService/mex" />
-    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="8e4b2958-5d83-485c-9c76-ec5a5c006b6f" SourceId="1" SourceUrl="net.tcp://192.168.2.48:8080/CallOut_CodingService/mex" />
+    <MetadataFile FileName="CallOut_CodingServiceLib.wsdl" MetadataType="Wsdl" ID="be968c59-a43c-4120-837a-0b2035cc05a9" SourceId="1" SourceUrl="net.tcp://localhost:8000/CallOut_CodingService/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="7d21bb2c-893b-4f7f-ab63-6a2c15e16833" SourceId="1" SourceUrl="net.tcp://localhost:8000/CallOut_CodingService/mex" />
+    <MetadataFile FileName="CallOut_CodingServiceLib.xsd" MetadataType="Schema" ID="c958d968-f7db-4983-a7eb-9655304c18e1" SourceId="1" SourceUrl="net.tcp://localhost:8000/CallOut_CodingService/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="d72a8940-3a6b-4cdc-92db-8d2ae4462b45" SourceId="1" SourceUrl="net.tcp://localhost:8000/CallOut_CodingService/mex" />
+    <MetadataFile FileName="CallOut_CodingServiceLib.Class.xsd" MetadataType="Schema" ID="ef4bea7a-241f-43c7-b2bb-537c2e1097ad" SourceId="1" SourceUrl="net.tcp://localhost:8000/CallOut_CodingService/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="4794783f-4880-43d8-9bdc-e9ab2e71cfec" SourceId="1" SourceUrl="net.tcp://localhost:8000/CallOut_CodingService/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
