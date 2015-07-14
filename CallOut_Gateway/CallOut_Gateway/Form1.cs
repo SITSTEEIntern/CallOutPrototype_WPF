@@ -1346,9 +1346,9 @@ namespace CallOut_Gateway
             SendOrPostCallback callback =
                 delegate (object state)
                 {
-                    //Start timer for 15 sec to assume console disconnected
+                    //Start timer for 35 sec to assume console disconnected
                     System.Timers.Timer AutoFailedTimer = new System.Timers.Timer();
-                    AutoFailedTimer.Interval = 15000; //15 sec
+                    AutoFailedTimer.Interval = 35000; //35 sec
                     AutoFailedTimer.Elapsed += delegate { TargetTimeout(console, codingIncidentMsg.CodingID, codingIncidentMsg.DispatchUnits); };
                     AutoFailedTimer.AutoReset = false;
                     AutoFailedTimer.Start();

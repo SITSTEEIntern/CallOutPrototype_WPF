@@ -9,14 +9,6 @@ using System.ComponentModel;
 using System.ServiceModel;
 using System.Diagnostics; //for debug
 
-//using System.Windows.Input;
-//using System.Windows.Media;
-//using System.Windows.Media.Imaging;
-//using System.Windows.Shapes;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
-
 // Location of the proxy.
 using CallOut_ConsoleWPF.ServiceReference1;
 

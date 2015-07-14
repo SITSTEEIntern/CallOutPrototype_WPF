@@ -11,17 +11,12 @@ using System.Diagnostics; //for debug
 
 using System.Timers; //Timer
 using System.Text;
-//using system.linq;
-//using system.threading.tasks;
-//using system.windows.input;
-//using system.windows.media;
-//using system.windows.media.imaging;
-//using system.windows.navigation;
-//using system.windows.shapes;
 
 using NAudio.Wave;
 using System.Net;
 using System.IO;
+using System.Speech;
+using System.Speech.Synthesis;
 
 // Location of the proxy.
 using CallOut_ConsoleWPF.ServiceReference1;
@@ -62,9 +57,13 @@ namespace CallOut_ConsoleWPF
         private GridViewColumnHeader listViewSortCol = null;
         private SortAdorner listViewSortAdorner = null;
 
-        //Default string to find the translate
+        //Variable for Text to speech
         private const string URL = "http://translate.google.com/translate_tts?tl={0}&q={1}";
-        private WaveOut waveOut;
+        //System.Media.SoundPlayer player = new System.Media.SoundPlayer();
+        private bool isMsgAlarmPlayed = false;
+        private string speechsentence = "";
+        private static WaveOut waveOut = new WaveOut();
+        private static SpeechSynthesizer speechSynthesizerObj;
 
         //number count for title display
         private bool isfirstdisplay = true;
@@ -107,7 +106,6 @@ namespace CallOut_ConsoleWPF
                 Properties.Settings.Default.CodingIP = "";
                 Properties.Settings.Default.CurrentID = "";
                 Properties.Settings.Default.Save();
-                //_CallOut_CodingService.Close();
             }
 
             //DataGrid Bind
@@ -119,10 +117,10 @@ namespace CallOut_ConsoleWPF
         private void MyWindow_Closing(object sender, CancelEventArgs e)
         {
             //Terminate the connection to the service.
-            if (_isConnected)
-            {
-                _CallOut_CodingService.Close();
-            }
+            //if (_isConnected)
+            //{
+            //    _CallOut_CodingService.Close();
+            //}
 
             //Empty the IP address when closing alway is ""?
             if (Properties.Settings.Default.CodingIP != "" && Properties.Settings.Default.CodingIP != null)
@@ -130,7 +128,16 @@ namespace CallOut_ConsoleWPF
                 Properties.Settings.Default.CodingIP = "";
                 Properties.Settings.Default.CurrentID = "";
                 Properties.Settings.Default.Save();
-                //_CallOut_CodingService.Close();
+                Debug.WriteLine(_CallOut_CodingService.State.ToString());
+                if (isInternetup)
+                {
+                    _CallOut_CodingService.Close();
+                }
+                else 
+                {
+                    _CallOut_CodingService.Abort();
+                }
+                
             }
 
         }
@@ -161,12 +168,13 @@ namespace CallOut_ConsoleWPF
                 ShowMessageBox("Internet connection is up...");
                 //establish new
                 //Or check one of the config file variable for IP address or null (check for codingservice null to determine is offline at setting or main window)
-                if (Properties.Settings.Default.CodingIP != null && Properties.Settings.Default.CodingIP != "" && _CallOut_CodingService != null)
+                if (Properties.Settings.Default.CodingIP != null && Properties.Settings.Default.CodingIP != "")
                 {
                     string endpointaddress = "net.tcp://" + Properties.Settings.Default.CodingIP + ":8000/CallOut_CodingService/service";
                     EndpointAddress endpointaddr = new EndpointAddress(new Uri(endpointaddress));
                     _CallOut_CodingService = new ServiceReference1.CallOut_CodingServiceClient(new InstanceContext(this), "NetTcpBinding_CallOut_CodingService", endpointaddr);
                     _CallOut_CodingService.Open();
+                    Debug.WriteLine(_CallOut_CodingService.State.ToString());
                 }
             }
             else
@@ -178,6 +186,7 @@ namespace CallOut_ConsoleWPF
                 if (Properties.Settings.Default.CodingIP != null && Properties.Settings.Default.CodingIP != "" && _CallOut_CodingService!= null)
                 {
                     _CallOut_CodingService.Abort();
+                    //_CallOut_CodingService = null;
                 }
                 //Clear everything once internet is cut off, everything drop
                 SendOrPostCallback callback =
@@ -229,6 +238,7 @@ namespace CallOut_ConsoleWPF
                     if (_CallOut_CodingService != null)
                     {
                         _CallOut_CodingService.Close();
+                        //_CallOut_CodingService = null;
                     }
 
                     //Or check one of the config file variable for IP address or null
@@ -401,11 +411,13 @@ namespace CallOut_ConsoleWPF
 
         private void SendAckCodingIncidentMsg(string status)
         {
-            //cut voice
-            waveOut.Stop();
-
+            
             if(isInternetup)
             {
+                //cut google TTS
+                waveOut.Stop();
+                isMsgAlarmPlayed = false;
+
                 CodingAckMessage codingackmsg = new CodingAckMessage();
                 codingackmsg.ConsoleID = Properties.Settings.Default.CurrentID;
                 codingackmsg.IncidentNo = _currIncidentNo;
@@ -423,6 +435,9 @@ namespace CallOut_ConsoleWPF
             }
             else
             {
+                //cut mircosoft TTS
+                speechSynthesizerObj.Dispose();
+                isMsgAlarmPlayed = false;
                 ShowMessageBox("Please check the internet connection to continue");
             }
         }
@@ -518,9 +533,19 @@ namespace CallOut_ConsoleWPF
                 string PriorAlarmSpeech = "PRIORITY, " + codingIncidentMsg.IncidentPriority.ToString() +
                     "  . ALARM, " + codingIncidentMsg.IncidentAlarm.ToString() +
                     "  . DISPATCHED, " + String.Format("{0:g}", codingIncidentMsg.DispatchDateTime);
-                string speechsentence = IncidentNoSpeech + this.txtLocationSummary.Text + ". " + PriorAlarmSpeech;
+                speechsentence = IncidentNoSpeech + this.txtLocationSummary.Text + ". " + PriorAlarmSpeech;
                 string strURL = string.Format(URL, "en", speechsentence.ToLower().Replace(" ", "%20"));
-                GenerateSpeechFromText(strURL);
+
+                WaveFileReader wavreader = new WaveFileReader(Properties.Resources.incomingmsg);
+                waveOut = new WaveOut();
+                waveOut.Init(wavreader);
+                waveOut.Play();
+                isMsgAlarmPlayed = true;
+                System.Timers.Timer MsgAlarmTimer = new System.Timers.Timer();
+                MsgAlarmTimer.Interval = wavreader.Length/100; //30 sec
+                MsgAlarmTimer.Elapsed += delegate { MsgAlarmCompleted(strURL, speechsentence); };
+                MsgAlarmTimer.AutoReset = false;
+                MsgAlarmTimer.Start();
 
 
                 //Start timer for 10 sec to auto reject, tag with coding ID more unqiue
@@ -529,6 +554,26 @@ namespace CallOut_ConsoleWPF
                 AutoRejectTimer.Elapsed += delegate { Timeout(codingIncidentMsg.CodingID); };
                 AutoRejectTimer.AutoReset = false;
                 AutoRejectTimer.Start();
+            }
+        }
+
+        private void MsgAlarmCompleted(string strURL, string speechsentence)
+        {
+            if (isMsgAlarmPlayed)
+            {
+                waveOut.Stop();
+                isMsgAlarmPlayed = false;
+
+                if (isInternetup)
+                {
+                    GenerateSpeechFromText(strURL);
+                }
+                else
+                {
+                    speechSynthesizerObj = new SpeechSynthesizer();
+                    speechSynthesizerObj.SpeakAsync(speechsentence);
+                    speechsentence = "";
+                }
             }
         }
 
@@ -545,7 +590,10 @@ namespace CallOut_ConsoleWPF
             }
             catch (Exception)
             {
-                MessageBox.Show("An error occured while requesting Google REST API !");
+                speechSynthesizerObj = new SpeechSynthesizer();
+                speechSynthesizerObj.SpeakAsync(speechsentence);
+                speechsentence = "";
+                //MessageBox.Show("An error occured while requesting Google REST API !");
             }
         }
 
@@ -558,7 +606,10 @@ namespace CallOut_ConsoleWPF
             }
             else
             {
-                MessageBox.Show("An error occured while requesting Google REST API !");
+                speechSynthesizerObj = new SpeechSynthesizer();
+                speechSynthesizerObj.SpeakAsync(speechsentence);
+                speechsentence = "";
+                //MessageBox.Show("An error occured while requesting Google REST API !");
             }
         }
 
@@ -568,9 +619,8 @@ namespace CallOut_ConsoleWPF
 
             if (stream != null)
             {
-                Mp3FileReader reader = new Mp3FileReader(stream);
-                waveOut = new WaveOut();
-                waveOut.Init(reader);
+                Mp3FileReader mp3reader = new Mp3FileReader(stream);
+                waveOut.Init(mp3reader);
                 waveOut.Play();
             }
         }
@@ -644,8 +694,15 @@ namespace CallOut_ConsoleWPF
             {
                 countdisplay = 1;
                 counttotal = 0;
-                this.Title = "Call Out Console [" + Properties.Settings.Default.CurrentID + "]";
-                isfirstdisplay = true;
+                if (isInternetup)
+                {
+                    this.Title = "Call Out Console [" + Properties.Settings.Default.CurrentID + "]";
+                }
+                else 
+                {
+                    this.Title = "Call Out Console";
+                }
+                    isfirstdisplay = true;
                 EmptyDisplay();
             }
 
@@ -748,6 +805,5 @@ namespace CallOut_ConsoleWPF
         #endregion
 
         #endregion
-
     }
 }

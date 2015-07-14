@@ -94,3 +94,4 @@ C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Ga
 C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.csproj.GenerateResource.Cache
 C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.exe
 C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.pdb
+C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.csprojResolveAssemblyReference.cache
