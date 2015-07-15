@@ -8,12 +8,13 @@ using System.Windows.Documents;
 using System.ServiceModel;
 using System.ComponentModel; //for bindinglist, inotify
 using System.Diagnostics; //for debug
+using System.Net;
+using System.Net.NetworkInformation;
 
 using System.Timers; //Timer
 using System.Text;
 
 using NAudio.Wave;
-using System.Net;
 using System.IO;
 using System.Speech;
 using System.Speech.Synthesis;
@@ -24,7 +25,6 @@ using System.Collections.ObjectModel;
 
 //Class
 using CallOut_ConsoleWPF.Class;
-using CallOut_ConsoleWPF.Network;
 
 namespace CallOut_ConsoleWPF
 {
@@ -59,7 +59,6 @@ namespace CallOut_ConsoleWPF
 
         //Variable for Text to speech
         private const string URL = "http://translate.google.com/translate_tts?tl={0}&q={1}";
-        //System.Media.SoundPlayer player = new System.Media.SoundPlayer();
         private bool isMsgAlarmPlayed = false;
         private string speechsentence = "";
         private static WaveOut waveOut = new WaveOut();
@@ -70,9 +69,13 @@ namespace CallOut_ConsoleWPF
         private int countdisplay = 1;
         private int counttotal = 0;
 
+        //Hidden string
+        private string lblCodingID = "";
+        private string lblStatus = "";
+
         //Internet connection
-        //private InternetAvailability checkinternetconn = new InternetAvailability();
-        private bool isInternetup = true; 
+        private bool isInternetup = true;
+        private bool beenCutOffBefore = false;
 
         public MainWindow()
         {
@@ -80,11 +83,12 @@ namespace CallOut_ConsoleWPF
             //Sub window load and closing eventhandler
             Loaded += MyWindow_Loaded;
             Closing += MyWindow_Closing;
-            NetworkStatus.AvailabilityChanged +=
-                new NetworkStatusChangedHandler(DoAvailabilityChanged);
+
+            NetworkChange.NetworkAvailabilityChanged +=
+                new NetworkAvailabilityChangedEventHandler(DoNetworkChanged);
 
             //Check for internet connection first
-            if (NetworkStatus.IsAvailable)
+            if (CheckForInternetConnection())
             {
                 isInternetup = true;
             }
@@ -128,7 +132,6 @@ namespace CallOut_ConsoleWPF
                 Properties.Settings.Default.CodingIP = "";
                 Properties.Settings.Default.CurrentID = "";
                 Properties.Settings.Default.Save();
-                Debug.WriteLine(_CallOut_CodingService.State.ToString());
                 if (isInternetup)
                 {
                     _CallOut_CodingService.Close();
@@ -150,9 +153,32 @@ namespace CallOut_ConsoleWPF
         /// <param name="sender"></param>
         /// <param name="e"></param>
 
-        void DoAvailabilityChanged(object sender, NetworkStatusChangedArgs e)
+        void DoNetworkChanged(object sender, NetworkAvailabilityEventArgs e)
         {
             ReportAvailability();
+        }
+
+        public static bool CheckForInternetConnection()
+        {
+            if (NetworkInterface.GetIsNetworkAvailable()) 
+            {
+                try
+                {
+                    Ping myPing = new Ping();
+                    String host = "8.8.8.8"; //google DNS (if one is not enought can ping together stable website)
+                    byte[] buffer = new byte[32];
+                    int timeout = 1000;
+                    PingOptions pingOptions = new PingOptions();
+                    PingReply reply = myPing.Send(host, timeout, buffer, pingOptions);
+                    return (reply.Status == IPStatus.Success);
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -161,9 +187,13 @@ namespace CallOut_ConsoleWPF
 
         private void ReportAvailability()
         {
-            if (NetworkStatus.IsAvailable)
+            if (CheckForInternetConnection())
             {
                 isInternetup = true;
+                if (IncidentMsgQueue.Count == 0)
+                {
+                    beenCutOffBefore = false;
+                }
                 //open another thread to show message box so it wont hold up the rest of the code
                 ShowMessageBox("Internet connection is up...");
                 //establish new
@@ -174,12 +204,12 @@ namespace CallOut_ConsoleWPF
                     EndpointAddress endpointaddr = new EndpointAddress(new Uri(endpointaddress));
                     _CallOut_CodingService = new ServiceReference1.CallOut_CodingServiceClient(new InstanceContext(this), "NetTcpBinding_CallOut_CodingService", endpointaddr);
                     _CallOut_CodingService.Open();
-                    Debug.WriteLine(_CallOut_CodingService.State.ToString());
                 }
             }
             else
             {
                 isInternetup = false;
+                beenCutOffBefore = true;
                 //open another thread to show message box so it wont hold up the rest of the code
                 ShowMessageBox("Internet connection is down...");
                 //abort only closes the client. The service instance/session is still alive until instance timeout.
@@ -192,22 +222,14 @@ namespace CallOut_ConsoleWPF
                 SendOrPostCallback callback =
                     delegate(object state)
                     {
-                        //if (waveOut != null)
-                        //{
-                        //    waveOut.Stop();
-                        //}
-                        //EmptyDisplay();
-                        //IncidentMsgQueue.Clear();
-
-                        //this.Title = "Call Out Console";
+                        if (counttotal != 0)
+                        {
+                            this.Title = "Call Out Console (" + countdisplay.ToString() + " of " + counttotal.ToString() + ")";
+                        }
                         _isConnected = false;
                         this.btnConnect.IsChecked = false;
                         //Update hidden label
-                        //this.lblStatus.Text = "";
-                        //isfirstdisplay = true;
-                        //countdisplay = 1;
-                        //counttotal = 0;
-
+                        lblStatus = "";
                     };
 
                 _uiSyncContext.Post(callback, "Internet Down");
@@ -278,12 +300,16 @@ namespace CallOut_ConsoleWPF
                         //Toggle button display
                         _isConnected = false;
 
+                        if (waveOut != null)
+                        {
+                            waveOut.Stop();
+                        }
                         //Empty Display
                         EmptyDisplay();
+                        IncidentMsgQueue.Clear();
 
                         //Update hidden label
-                        this.lblStatus.Text = "";
-
+                        lblStatus = "";
                         isfirstdisplay = true;
                         countdisplay = 1;
                         counttotal = 0;
@@ -316,8 +342,16 @@ namespace CallOut_ConsoleWPF
 
         private void btnAck_Click(object sender, RoutedEventArgs e)
         {
-            if (isInternetup)
+            if (isInternetup && !beenCutOffBefore)
             {
+                if (speechSynthesizerObj != null)
+                {
+                    speechSynthesizerObj.Dispose();
+                }
+                else
+                {
+                    waveOut.Stop();
+                }
                 //Create a console log entry
                 CreateConsoleLogEntry("Acknowledged");
 
@@ -328,8 +362,8 @@ namespace CallOut_ConsoleWPF
                 this.btnAck.Visibility = Visibility.Collapsed;
                 this.btnReject.Visibility = Visibility.Collapsed;
 
-                this.lblCodingID.Text = "";
-                this.lblStatus.Text = "Acknowledged";
+                lblCodingID = "";
+                lblStatus = "Acknowledged";
 
                 //Take out from msg queue and show on display
                 NotifyNewMsg();
@@ -337,13 +371,36 @@ namespace CallOut_ConsoleWPF
             else 
             {
                 ShowMessageBox("Please check the internet connection to continue");
+                if (speechSynthesizerObj != null)
+                {
+                    speechSynthesizerObj.Dispose();
+                }
+                else
+                {
+                    waveOut.Stop();
+                }
+                CreateConsoleLogEntry("Failed");
+                //Empty Display
+                EmptyDisplay();
+                lblStatus = "Failed";
+                //Take out from msg queue and show on display
+                NotifyNewMsg();
             }
         }
 
         private void btnReject_Click(object sender, RoutedEventArgs e)
         {
-            if(isInternetup)
+            if (isInternetup && !beenCutOffBefore)
             {
+                if (speechSynthesizerObj != null)
+                {
+                    speechSynthesizerObj.Dispose();
+                }
+                else
+                {
+                    waveOut.Stop();
+                }
+
                 //Create a console log entry
                 CreateConsoleLogEntry("Rejected");
 
@@ -353,7 +410,7 @@ namespace CallOut_ConsoleWPF
                 //Empty Display
                 EmptyDisplay();
 
-                this.lblStatus.Text = "Rejected";
+                lblStatus = "Rejected";
 
                 //Take out from msg queue and show on display
                 NotifyNewMsg();
@@ -361,6 +418,20 @@ namespace CallOut_ConsoleWPF
             else
             {
                 ShowMessageBox("Please check the internet connection to continue");
+                if (speechSynthesizerObj != null)
+                {
+                    speechSynthesizerObj.Dispose();
+                }
+                else
+                {
+                    waveOut.Stop();
+                }
+                CreateConsoleLogEntry("Failed");
+                //Empty Display
+                EmptyDisplay();
+                lblStatus = "Failed";
+                //Take out from msg queue and show on display
+                NotifyNewMsg();
             }
         }
 
@@ -392,6 +463,8 @@ namespace CallOut_ConsoleWPF
         private void EmptyDisplay()
         {
             this.gIncidentSummary.Visibility = Visibility.Collapsed;
+            this.gPriorAlarm.Visibility = Visibility.Collapsed;
+            this.gAddress.Visibility = Visibility.Collapsed;
             this.txtIncidentSummary.Text = "";
             this.txtLocationSummary.Text = "";
             this.txtPriorAlarm.Text = "";
@@ -406,7 +479,7 @@ namespace CallOut_ConsoleWPF
             this.btnReject.Visibility = Visibility.Collapsed;
 
             //Update hidden label
-            this.lblCodingID.Text = "";
+            lblCodingID = "";
         }
 
         private void SendAckCodingIncidentMsg(string status)
@@ -454,7 +527,7 @@ namespace CallOut_ConsoleWPF
                 //Empty Display
                 EmptyDisplay();
 
-                this.lblStatus.Text = "Failed";
+                lblStatus = "Failed";
 
                 FailedCodingID.Remove(codingIncidentMsg.CodingID);
 
@@ -464,14 +537,14 @@ namespace CallOut_ConsoleWPF
             else
             {
                 //Update the Display panel details
-                this.txtIncidentSummary.Text = codingIncidentMsg.IncidentNo + ": " + codingIncidentMsg.IncidentType;
+                this.txtIncidentSummary.Text = (codingIncidentMsg.IncidentNo + ": " + codingIncidentMsg.IncidentType).ToUpper();
                 this.txtLocationSummary.Text = codingIncidentMsg.IncidentType + " at " + codingIncidentMsg.IncidentLocation.Street;
                 string prioralarm = "PRIORITY: " + codingIncidentMsg.IncidentPriority.ToString() +
                     "  - ALARM: " + codingIncidentMsg.IncidentAlarm.ToString() +
                     "  - DISPATCHED: " + String.Format("{0:g}", codingIncidentMsg.DispatchDateTime);
                 this.txtPriorAlarm.Text = prioralarm;
 
-                this.txtLocationName.Text = codingIncidentMsg.IncidentLocation.Name;
+                this.txtLocationName.Text = codingIncidentMsg.IncidentLocation.Name.ToUpper();
                 this.txtLocationStreet.Text = codingIncidentMsg.IncidentLocation.Street;
                 this.txtLocationUnit.Text = codingIncidentMsg.IncidentLocation.Unit;
                 this.txtLocationStateCity.Text = "City: " + codingIncidentMsg.IncidentLocation.City +
@@ -479,11 +552,13 @@ namespace CallOut_ConsoleWPF
                 this.txtLocationPostal.Text = "Singapore " + codingIncidentMsg.IncidentLocation.PostalCode;
 
                 //Update the hidden value
-                this.lblCodingID.Text = codingIncidentMsg.CodingID;
-                this.lblStatus.Text = "";
+                lblCodingID = codingIncidentMsg.CodingID;
+                lblStatus = "";
 
                 //the red top bar and unit listview visible
                 this.gIncidentSummary.Visibility = Visibility.Visible;
+                this.gPriorAlarm.Visibility = Visibility.Visible;
+                this.gAddress.Visibility = Visibility.Visible;
                 this.lvUnits.Visibility = Visibility.Visible;
 
                 this.btnAck.Visibility = Visibility.Visible;
@@ -634,7 +709,7 @@ namespace CallOut_ConsoleWPF
                     {
                         
                             //Already ack or reject 10 sec do nth, timeout tag withincident no so wont affect other
-                            if (this.lblStatus.Text.Equals("") && this.lblCodingID.Text.Equals(codingID))
+                            if (lblStatus.Equals("") && lblCodingID.Equals(codingID))
                             {
                                 if (isInternetup)
                                 {
@@ -644,16 +719,16 @@ namespace CallOut_ConsoleWPF
                                     //Send Coding ack message back to gateway
                                     SendAckCodingIncidentMsg("Rejected");
 
-                                    this.lblStatus.Text = "Rejected";
+                                    lblStatus = "Rejected";
                                 }
                                 else
                                 {
                                     //ShowMessageBox("Please check the internet connection to continue");
                                     CreateConsoleLogEntry("Failed");
-                                    this.lblStatus.Text = "Failed";
+                                    lblStatus = "Failed";
                                 }
 
-                                this.lblCodingID.Text = "";
+                                lblCodingID = "";
 
                                 //Take out from msg queue and show on display
                                 NotifyNewMsg();
@@ -686,12 +761,22 @@ namespace CallOut_ConsoleWPF
                 {
                     countdisplay++;
                 }
-                this.Title = "Call Out Console [" + Properties.Settings.Default.CurrentID + "] (" + countdisplay.ToString() + " of " + counttotal.ToString() + ")";
+
+                if (isInternetup && !beenCutOffBefore)
+                {
+                    this.Title = "Call Out Console [" + Properties.Settings.Default.CurrentID + "] (" + countdisplay.ToString() + " of " + counttotal.ToString() + ")";
+                }
+                else 
+                {
+                    this.Title = "Call Out Console (" + countdisplay.ToString() + " of " + counttotal.ToString() + ")";
+                }
+                
                 this.UpdateDetails(IncidentMsgQueue.Dequeue());
                 isfirstdisplay = false;
             }
             else
             {
+                beenCutOffBefore = false;
                 countdisplay = 1;
                 counttotal = 0;
                 if (isInternetup)
@@ -722,7 +807,7 @@ namespace CallOut_ConsoleWPF
                     counttotal++; //increase number of msg on queue
                     this.Title = "Call Out Console [" + Properties.Settings.Default.CurrentID + "] (" + countdisplay.ToString() + " of " + counttotal.ToString() + ")";
                     //If currently does not servicing any message
-                    if (this.lblCodingID.Text.Equals(""))
+                    if (lblCodingID.Equals(""))
                     {
                         NotifyNewMsg();
                     }
@@ -765,7 +850,7 @@ namespace CallOut_ConsoleWPF
                         FailedCodingID.Add(CodingID);
 
                         //If current display is msg of codingID, throw away with failed
-                        if (this.lblCodingID.Text.Equals(CodingID))
+                        if (lblCodingID.Equals(CodingID))
                         {
                             //Create a console log entry
                             CreateConsoleLogEntry("Failed");
@@ -773,7 +858,7 @@ namespace CallOut_ConsoleWPF
                             //Empty Display
                             EmptyDisplay();
 
-                            this.lblStatus.Text = "Failed";
+                            lblStatus = "Failed";
 
                             //Take out from msg queue and show on display
                             NotifyNewMsg();

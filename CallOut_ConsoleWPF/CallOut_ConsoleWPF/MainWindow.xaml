@@ -4,7 +4,7 @@
         Title="Call Out Console" Height="403.507" Width="525"
         x:Name="mainwindow">
     <!-- Display panel where display the incident details-->
-    <Grid x:Name="panelDisplay">
+    <Grid x:Name="panelDisplay" Background="Black">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="380*"/>
             <ColumnDefinition Width="50*"/>
@@ -24,47 +24,63 @@
         <Grid x:Name="gIncidentSummary" Grid.Row="0" Grid.ColumnSpan="3" Background="#FFCA0000"  Visibility="Collapsed">
             <Viewbox HorizontalAlignment="Center"  VerticalAlignment="Center">
                 <StackPanel>
-                    <TextBlock x:Name="txtIncidentSummary" Text="" FontWeight="Bold" Margin="5 2 5 2" />
+                    <TextBlock x:Name="txtIncidentSummary" Text="" Foreground="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" FontFamily="Cambria" Margin="5 2 5 2" />
                 </StackPanel>
             </Viewbox>
         </Grid>
-        <Viewbox Stretch="Uniform"  StretchDirection="Both"  Grid.Row="1" Grid.ColumnSpan="3">
-            <Grid>
-                <TextBlock x:Name="txtLocationSummary" Text="" FontWeight="Bold" Margin="5 2 5 2" />
-            </Grid>
-        </Viewbox>
-
-        <Button x:Name="btnAck" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3" Grid.Column="1" Click="btnAck_Click" Margin="5 2 5 2" Grid.ColumnSpan="2" Visibility="Collapsed">
-            <Viewbox Stretch="Uniform">
-                <TextBlock x:Name="txtAck" Text="Acknowledge"/>
-            </Viewbox>
-        </Button>
-        <Button x:Name="btnReject" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="4" Grid.Column="1" Click="btnReject_Click" Margin="5 2 5 2" Grid.ColumnSpan="2" Visibility="Collapsed">
-            <Viewbox Stretch="Uniform">
-                <TextBlock x:Name="txtReject" Text="Reject"/>
-            </Viewbox>
-        </Button>
-        <!--Incident Detail -->
-        <Viewbox HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.Row="2" Grid.Column="0">
-            <Grid>
-                <TextBlock x:Name="txtPriorAlarm" Text="" Margin="5 2 5 2" />
-            </Grid>
-        </Viewbox>
-        <!-- -->
-        <Viewbox HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.Row="3" Grid.Column="0" Grid.RowSpan="3">
-            <Grid>
-                <StackPanel Margin="5 5 5 5">
-                    <TextBlock x:Name="txtLocationName" Text=""/>
-                    <TextBlock x:Name="txtLocationStreet" Text=""/>
-                    <TextBlock x:Name="txtLocationUnit" Text=""/>
-                    <TextBlock x:Name="txtLocationStateCity" Text=""/>
-                    <TextBlock x:Name="txtLocationPostal" Text=""/>
+        <Grid Grid.Row="1" Grid.ColumnSpan="3" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}">
+            <Viewbox Stretch="Uniform"  StretchDirection="Both"  >
+                <StackPanel>
+                    <TextBlock x:Name="txtLocationSummary" Text="" Foreground="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" FontFamily="Cambria"  Margin="5 2 5 2" />
                 </StackPanel>
-            </Grid>
+            </Viewbox>
+        </Grid>
+        <!--Ack and Reject Button-->
+        <Viewbox Grid.Row="3" Grid.Column="1" Margin="5 2 5 2" Grid.ColumnSpan="2" Stretch="Uniform">
+            <Button x:Name="btnAck" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnAck_Click" Background="Transparent" BorderBrush="{x:Null}" Visibility="Collapsed">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Border HorizontalAlignment="Center" VerticalAlignment="Center" >
+                            <Image Source="Icon/AckButton.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
         </Viewbox>
+        <Viewbox Grid.Row="4" Grid.Column="1" Margin="5 2 5 2" Grid.ColumnSpan="2" Stretch="Uniform">
+            <Button x:Name="btnReject" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnReject_Click" Background="Transparent" BorderBrush="{x:Null}" Visibility="Collapsed">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Border HorizontalAlignment="Center" VerticalAlignment="Center" >
+                            <Image Source="Icon/RejectButton.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </Viewbox>
+        <!--Incident Prior Alarm -->
+        <Grid x:Name="gPriorAlarm" Grid.Row="2" Grid.Column="0" Background="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" Margin="10 0 5 0" Visibility="Collapsed">
+            <Viewbox HorizontalAlignment="Left" VerticalAlignment="Stretch">
+                <StackPanel>
+                    <TextBlock x:Name="txtPriorAlarm" Text="" Foreground="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" FontFamily="Cambria" Margin="5 2 5 2" />
+                </StackPanel>
+            </Viewbox>
+        </Grid>
+        <!--Incident Address Detail-->
+        <Grid x:Name="gAddress" Background="#FFFFF700"  Grid.Row="3" Grid.Column="0" Grid.RowSpan="3" Margin="10 0 5 0" Visibility="Collapsed">
+            <Viewbox HorizontalAlignment="Left" VerticalAlignment="Stretch">
+                <StackPanel Margin="5 5 5 5">
+                    <TextBlock x:Name="txtLocationName" Text="" FontFamily="Cambria"/>
+                    <TextBlock x:Name="txtLocationStreet" Text="" FontFamily="Cambria"/>
+                    <TextBlock x:Name="txtLocationUnit" Text="" FontFamily="Cambria"/>
+                    <TextBlock x:Name="txtLocationStateCity" Text="" FontFamily="Cambria"/>
+                    <TextBlock x:Name="txtLocationPostal" Text="" FontFamily="Cambria"/>
+                </StackPanel>
+            </Viewbox>
+        </Grid>
         <!--Dispatch Units -->
-        <Viewbox Grid.Row="6" Grid.Column="0" Grid.RowSpan="2" MinHeight="100" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,0,0,0">
-            <ListView x:Name="lvUnits" Height="90" Visibility="Collapsed">
+        <Viewbox Grid.Row="6" Grid.Column="0" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Top" Stretch="Fill"  Margin="10px 0px 5px 0px">
+            <ListView x:Name="lvUnits" Height="100" Visibility="Collapsed">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Width="200" DisplayMemberBinding="{Binding CallSign}">
@@ -81,27 +97,25 @@
                 </ListView.View>
             </ListView>
         </Viewbox>
-        <!--Test Status Label [Hidden]-->
-        <TextBlock x:Name="lblCodingID" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="5" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Visibility="Collapsed"/>
-        <TextBlock x:Name="lblStatus" Grid.Column="2" HorizontalAlignment="Left" Grid.Row="5" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Visibility="Collapsed"/>
-
-        <Viewbox Grid.Column="1" Grid.Row="7" Stretch="Uniform">
+        
+        <!--Setting & login button-->
+        <Viewbox Grid.Column="1" Grid.Row="7" Stretch="Uniform" Margin="5 5 5 5">
             <Button x:Name="btnSettings" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnSettings_Click" Background="Transparent" BorderBrush="{x:Null}">
                 <Button.Template>
                     <ControlTemplate>
                         <Border HorizontalAlignment="Center" VerticalAlignment="Center" >
-                            <Image Source="Icon/Settings.png" />
+                            <Image Source="Icon/Settings.png" RenderOptions.BitmapScalingMode="HighQuality"/>
                         </Border>
                     </ControlTemplate>
                 </Button.Template>
             </Button>
         </Viewbox>
-        <Viewbox Grid.Column="2" Grid.Row="7" Stretch="Uniform">
+        <Viewbox Grid.Column="2" Grid.Row="7" Stretch="Uniform" Margin="5 5 5 5">
             <ToggleButton x:Name="btnConnect" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnConnect_Click" Background="Transparent" BorderBrush="{x:Null}">
                 <ToggleButton.Template>
                     <ControlTemplate TargetType="ToggleButton">
                         <Border HorizontalAlignment="Center" VerticalAlignment="Center" >
-                            <Image x:Name="imgConnect" Source="Icon/Logout.png"/>
+                            <Image x:Name="imgConnect" Source="Icon/Logout.png" RenderOptions.BitmapScalingMode="HighQuality"/>
                         </Border>
 
                         <ControlTemplate.Triggers>

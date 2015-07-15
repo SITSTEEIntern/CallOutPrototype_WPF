@@ -4,7 +4,7 @@ using System.Diagnostics; //for debug
 using System.ServiceModel;// for WCF to happen
 
 using System.Runtime.Serialization;//datacontract
-//using System;
+using System;
 //using System.Linq;
 //using System.Text;
 
@@ -352,9 +352,22 @@ namespace CallOut_CodingServiceLib
                 IMessageServiceCallback tmpCallback = _ConnectedConsoleDict[station];
                 if (((ICommunicationObject)tmpCallback).State == CommunicationState.Opened)
                 {
-                    tmpCallback.ConsoleRcvConnStatus();
+                    try
+                    {
+                        tmpCallback.ConsoleRcvConnStatus();
+                    }
+                    catch (Exception E)
+                    { 
+                        //Catch those console crash and proxy is still open
+                        //trigger to drop this station from connected list
+                        
+                    }
                 }
-
+                else 
+                { 
+                    //if aborted or closed still in this list
+                    //trigger to drop this station from connected list
+                }
             }
         }
 

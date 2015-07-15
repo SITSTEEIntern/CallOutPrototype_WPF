@@ -8,13 +8,13 @@ using System.Threading;
 using System.ComponentModel;
 using System.ServiceModel;
 using System.Diagnostics; //for debug
+using System.Net.NetworkInformation;
 
 // Location of the proxy.
 using CallOut_ConsoleWPF.ServiceReference1;
 
 //Class
 using CallOut_ConsoleWPF.Class;
-using CallOut_ConsoleWPF.Network;
 
 namespace CallOut_ConsoleWPF
 {
@@ -49,11 +49,11 @@ namespace CallOut_ConsoleWPF
             //Sub window load and closing eventhandler
             Loaded += MyWindow_Loaded;
             Closing += MyWindow_Closing;
-            NetworkStatus.AvailabilityChanged +=
-                new NetworkStatusChangedHandler(DoAvailabilityChanged);
+            NetworkChange.NetworkAvailabilityChanged +=
+                new NetworkAvailabilityChangedEventHandler(DoNetworkChanged);
 
             //Check for internet connection first
-            if (NetworkStatus.IsAvailable)
+            if (CheckForInternetConnection())
             {
                 isInternetup = true;
             }
@@ -149,8 +149,8 @@ namespace CallOut_ConsoleWPF
             }
 
             //remove the networkstatus handler
-            NetworkStatus.AvailabilityChanged -=
-                new NetworkStatusChangedHandler(DoAvailabilityChanged);
+            NetworkChange.NetworkAvailabilityChanged -=
+                new NetworkAvailabilityChangedEventHandler(DoNetworkChanged);
         }
 
         #region NETWORK
@@ -161,9 +161,32 @@ namespace CallOut_ConsoleWPF
         /// <param name="sender"></param>
         /// <param name="e"></param>
 
-        void DoAvailabilityChanged(object sender, NetworkStatusChangedArgs e)
+        void DoNetworkChanged(object sender, NetworkAvailabilityEventArgs e)
         {
             ReportAvailability();
+        }
+
+        public static bool CheckForInternetConnection()
+        {
+            if (NetworkInterface.GetIsNetworkAvailable())
+            {
+                try
+                {
+                    Ping myPing = new Ping();
+                    String host = "8.8.8.8"; //google DNS (if one is not enought can ping together stable website)
+                    byte[] buffer = new byte[32];
+                    int timeout = 1000;
+                    PingOptions pingOptions = new PingOptions();
+                    PingReply reply = myPing.Send(host, timeout, buffer, pingOptions);
+                    return (reply.Status == IPStatus.Success);
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -172,7 +195,7 @@ namespace CallOut_ConsoleWPF
 
         private void ReportAvailability()
         {
-            if (NetworkStatus.IsAvailable)
+            if (CheckForInternetConnection())
             {
                 isInternetup = true;
                 //Do not have to open another messagebox or proxy as mainwindow had been triggered

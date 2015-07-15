@@ -8,6 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("sound/incomingmsg.wav")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("icon/ackbutton.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("icon/rejectbutton.png")]
 
 
