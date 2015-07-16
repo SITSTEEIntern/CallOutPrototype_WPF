@@ -77,6 +77,15 @@ namespace CallOut_ConsoleWPF
         private bool isInternetup = true;
         private bool beenCutOffBefore = false;
 
+        //For stats counting purpose
+        
+        private int IncidentCount = 0;
+        private int AckCount = 0;
+        private int RejectedCount = 0;
+        private int FailedCount = 0;
+        private List<StatsRecord> StatsRecordList = new List<StatsRecord>();
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -218,7 +227,7 @@ namespace CallOut_ConsoleWPF
                     _CallOut_CodingService.Abort();
                     //_CallOut_CodingService = null;
                 }
-                //Clear everything once internet is cut off, everything drop
+                //Simulate Logout from console ID
                 SendOrPostCallback callback =
                     delegate(object state)
                     {
@@ -230,6 +239,25 @@ namespace CallOut_ConsoleWPF
                         this.btnConnect.IsChecked = false;
                         //Update hidden label
                         lblStatus = "";
+
+                        //bool isNewStatsRecord = true; 
+                        //foreach (StatsRecord record in StatsRecordList)
+                        //{
+                        //    if (record.ConsoleName.Equals(Properties.Settings.Default.CurrentID))
+                        //    {
+                        //        isNewStatsRecord = false;
+                        //        break;
+                        //    }
+                        //}
+                        //if (isNewStatsRecord)
+                        //{
+                        //    StatsRecord newstatsrecord = new StatsRecord(Properties.Settings.Default.CurrentID, IncidentCount, AckCount, RejectedCount, FailedCount);
+                        //    StatsRecordList.Add(newstatsrecord);
+                        //}
+                        IncidentCount = 0;
+                        AckCount = 0;
+                        RejectedCount = 0;
+                        FailedCount = 0;
                     };
 
                 _uiSyncContext.Post(callback, "Internet Down");
@@ -294,6 +322,17 @@ namespace CallOut_ConsoleWPF
                         //DISCONNECTED
                         _CallOut_CodingService.ConsoleLeave(Properties.Settings.Default.CurrentID);
 
+                        IncidentCount = 0;
+                        AckCount = 0;
+                        RejectedCount = 0;
+                        FailedCount = 0;
+
+                        this.txtConsoleName.Text = "";
+                        this.txtIncidentAmt.Text = IncidentCount.ToString();
+                        this.txtAckAmt.Text = AckCount.ToString();
+                        this.txtRejectAmt.Text = RejectedCount.ToString();
+                        this.txtFailedAmt.Text = FailedCount.ToString();
+
                         //Change title of application
                         this.Title = "Call Out Console";
 
@@ -319,6 +358,48 @@ namespace CallOut_ConsoleWPF
                         //CONNECTED
                         //contact the service.
                         _CallOut_CodingService.ConsoleJoin(Properties.Settings.Default.CurrentID);
+
+                        bool isNewStatsRecord = true;
+                        foreach (StatsRecord record in StatsRecordList)
+                        {
+                            if (record.ConsoleName.Equals(Properties.Settings.Default.CurrentID))
+                            {
+                                //Continue counting from the leaveover
+                                IncidentCount = record.IncidentCount;
+                                AckCount = record.AckCount;
+                                RejectedCount = record.RejectedCount;
+                                FailedCount = record.FailedCount;
+                                isNewStatsRecord = false;
+                                break;
+                            }
+                        }
+
+                        if (isNewStatsRecord)
+                        {
+                            StatsRecord newstatsrecord = new StatsRecord(Properties.Settings.Default.CurrentID, IncidentCount, AckCount, RejectedCount, FailedCount);
+                            StatsRecordList.Add(newstatsrecord);
+                        }
+                        //else
+                        //{
+                        //    //Check whether count exist
+                        //    foreach (StatsRecord record in StatsRecordList)
+                        //    {
+                        //        if (record.ConsoleName.Equals(Properties.Settings.Default.CurrentID))
+                        //        {
+                        //            //Continue counting from the leaveover
+                        //            IncidentCount = record.IncidentCount;
+                        //            AckCount = record.AckCount;
+                        //            RejectedCount = record.RejectedCount;
+                        //            FailedCount = record.FailedCount;
+                        //            break;
+                        //        }
+                        //    }
+                        //}
+                        this.txtConsoleName.Text = Properties.Settings.Default.CurrentID;
+                        this.txtIncidentAmt.Text = IncidentCount.ToString();
+                        this.txtAckAmt.Text = AckCount.ToString();
+                        this.txtRejectAmt.Text = RejectedCount.ToString();
+                        this.txtFailedAmt.Text = FailedCount.ToString();
 
                         //Change title of application
                         this.Title = "Call Out Console [" + Properties.Settings.Default.CurrentID + "]";
@@ -352,6 +433,17 @@ namespace CallOut_ConsoleWPF
                 {
                     waveOut.Stop();
                 }
+
+                //increase Ack count
+                foreach (StatsRecord record in StatsRecordList)
+                {
+                    if (record.ConsoleName.Equals(Properties.Settings.Default.CurrentID))
+                    {
+                        record.AckCount++;
+                        break;
+                    }
+                }
+
                 //Create a console log entry
                 CreateConsoleLogEntry("Acknowledged");
 
@@ -362,7 +454,7 @@ namespace CallOut_ConsoleWPF
                 this.btnAck.Visibility = Visibility.Collapsed;
                 this.btnReject.Visibility = Visibility.Collapsed;
 
-                lblCodingID = "";
+                EmptyDisplay();
                 lblStatus = "Acknowledged";
 
                 //Take out from msg queue and show on display
@@ -379,6 +471,17 @@ namespace CallOut_ConsoleWPF
                 {
                     waveOut.Stop();
                 }
+
+                //increase Failed Count
+                foreach (StatsRecord record in StatsRecordList)
+                {
+                    if (record.ConsoleName.Equals(Properties.Settings.Default.CurrentID))
+                    {
+                        record.FailedCount++;
+                        break;
+                    }
+                }
+
                 CreateConsoleLogEntry("Failed");
                 //Empty Display
                 EmptyDisplay();
@@ -399,6 +502,16 @@ namespace CallOut_ConsoleWPF
                 else
                 {
                     waveOut.Stop();
+                }
+
+                //increase Reject count
+                foreach (StatsRecord record in StatsRecordList)
+                {
+                    if (record.ConsoleName.Equals(Properties.Settings.Default.CurrentID))
+                    {
+                        record.RejectedCount++;
+                        break;
+                    }
                 }
 
                 //Create a console log entry
@@ -426,6 +539,17 @@ namespace CallOut_ConsoleWPF
                 {
                     waveOut.Stop();
                 }
+
+                //increase Failed Count
+                foreach (StatsRecord record in StatsRecordList)
+                {
+                    if (record.ConsoleName.Equals(Properties.Settings.Default.CurrentID))
+                    {
+                        record.FailedCount++;
+                        break;
+                    }
+                }
+
                 CreateConsoleLogEntry("Failed");
                 //Empty Display
                 EmptyDisplay();
@@ -480,6 +604,37 @@ namespace CallOut_ConsoleWPF
 
             //Update hidden label
             lblCodingID = "";
+
+            //Display Stats Record 
+            if (Properties.Settings.Default.CurrentID != null && Properties.Settings.Default.CurrentID != "" && _isConnected)
+            {
+                this.txtConsoleName.Text = Properties.Settings.Default.CurrentID;
+                foreach (StatsRecord record in StatsRecordList)
+                {
+                    if (record.ConsoleName.Equals(Properties.Settings.Default.CurrentID))
+                    {
+                        //Continue counting from the leaveover
+                        IncidentCount = record.IncidentCount;
+                        AckCount = record.AckCount;
+                        RejectedCount = record.RejectedCount;
+                        FailedCount = record.FailedCount;
+                        break;
+                    }
+                }
+            }
+            else 
+            {
+                this.txtConsoleName.Text = "";
+                IncidentCount = 0;
+                AckCount = 0;
+                RejectedCount = 0;
+                FailedCount = 0;
+            }
+            this.txtIncidentAmt.Text = IncidentCount.ToString();
+            this.txtAckAmt.Text = AckCount.ToString();
+            this.txtRejectAmt.Text = RejectedCount.ToString();
+            this.txtFailedAmt.Text = FailedCount.ToString();
+            this.panelStatus.Visibility = Visibility.Visible;
         }
 
         private void SendAckCodingIncidentMsg(string status)
@@ -536,6 +691,16 @@ namespace CallOut_ConsoleWPF
             }
             else
             {
+                //increase incident count
+                foreach (StatsRecord record in StatsRecordList)
+                {
+                    if (record.ConsoleName.Equals(Properties.Settings.Default.CurrentID))
+                    {
+                        record.IncidentCount++;
+                        break;
+                    }
+                }
+
                 //Update the Display panel details
                 this.txtIncidentSummary.Text = (codingIncidentMsg.IncidentNo + ": " + codingIncidentMsg.IncidentType).ToUpper();
                 this.txtLocationSummary.Text = codingIncidentMsg.IncidentType + " at " + codingIncidentMsg.IncidentLocation.Street;
@@ -554,6 +719,9 @@ namespace CallOut_ConsoleWPF
                 //Update the hidden value
                 lblCodingID = codingIncidentMsg.CodingID;
                 lblStatus = "";
+
+                //Disable status record panel
+                this.panelStatus.Visibility = Visibility.Collapsed;
 
                 //the red top bar and unit listview visible
                 this.gIncidentSummary.Visibility = Visibility.Visible;
@@ -713,6 +881,16 @@ namespace CallOut_ConsoleWPF
                             {
                                 if (isInternetup)
                                 {
+                                    //increase Reject count
+                                    foreach (StatsRecord record in StatsRecordList)
+                                    {
+                                        if (record.ConsoleName.Equals(Properties.Settings.Default.CurrentID))
+                                        {
+                                            record.RejectedCount++;
+                                            break;
+                                        }
+                                    }
+
                                     //Create a console log entry
                                     CreateConsoleLogEntry("Rejected");
 
@@ -723,6 +901,16 @@ namespace CallOut_ConsoleWPF
                                 }
                                 else
                                 {
+                                    //increase Failed count
+                                    foreach (StatsRecord record in StatsRecordList)
+                                    {
+                                        if (record.ConsoleName.Equals(Properties.Settings.Default.CurrentID))
+                                        {
+                                            record.FailedCount++;
+                                            break;
+                                        }
+                                    }
+
                                     //ShowMessageBox("Please check the internet connection to continue");
                                     CreateConsoleLogEntry("Failed");
                                     lblStatus = "Failed";
@@ -787,7 +975,7 @@ namespace CallOut_ConsoleWPF
                 {
                     this.Title = "Call Out Console";
                 }
-                    isfirstdisplay = true;
+                isfirstdisplay = true;
                 EmptyDisplay();
             }
 

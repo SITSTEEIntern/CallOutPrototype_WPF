@@ -313,7 +313,7 @@ namespace CallOut_ConsoleWPF
                         _isCodingSvcIPSet = true;
                         this.btnSetIP.Content = "Unset IP";
                     }
-                    catch (Exception exception)
+                    catch (Exception E)
                     {
                         MessageBox.Show("Invalid IP address...");
                     }
@@ -329,52 +329,59 @@ namespace CallOut_ConsoleWPF
         {
             if (isInternetup)
             {
-                if (_isStationIDSet)
+                if (_isCodingSvcIPSet)
                 {
-                    //unset
-                    //Enable the combobox to allow user to change station
-                    this.comboID.IsEnabled = true;
-                    _isStationIDSet = false;
-                    this.btnSetID.Content = "Set";
-                    Properties.Settings.Default.CurrentID = "";
-                    Properties.Settings.Default.Save();
-                    //Clear the datagrid
-                    _ConsoleLogList.Clear();
-                    //this.lvConsoleLog.Items.Refresh();
-                    //Had to use this instead of refresh as the columnh header sort overlay on the itemsource
-                    this.lvConsoleLog.ItemsSource = null;
-                    this.lvConsoleLog.ItemsSource = _ConsoleLogList;
+                    if (_isStationIDSet)
+                    {
+                        //unset
+                        //Enable the combobox to allow user to change station
+                        this.comboID.IsEnabled = true;
+                        _isStationIDSet = false;
+                        this.btnSetID.Content = "Set";
+                        Properties.Settings.Default.CurrentID = "";
+                        Properties.Settings.Default.Save();
+                        //Clear the datagrid
+                        _ConsoleLogList.Clear();
+                        //this.lvConsoleLog.Items.Refresh();
+                        //Had to use this instead of refresh as the columnh header sort overlay on the itemsource
+                        this.lvConsoleLog.ItemsSource = null;
+                        this.lvConsoleLog.ItemsSource = _ConsoleLogList;
+                    }
+                    else
+                    {
+                        //set
+                        //Disable the combobox
+                        this.comboID.IsEnabled = false;
+                        _isStationIDSet = true;
+                        this.btnSetID.Content = "Unset";
+                        //Set the stationID chosen to "currentstation" in the setting 
+                        Properties.Settings.Default.CurrentID = this.comboID.Text;
+                        Properties.Settings.Default.Save();
+
+                        if (Properties.Settings.Default.ConsoleLogList != null)
+                        {
+                            foreach (string log in Properties.Settings.Default.ConsoleLogList)
+                            {
+                                string[] parts = log.Split(',');
+                                //Check is it corresponding stationID
+                                if (parts[0] == this.comboID.Text)
+                                {
+                                    ConsoleLog consolelog = new ConsoleLog();
+                                    consolelog.CodingID = parts[1];
+                                    consolelog.AckTimeStamp = parts[2];
+                                    consolelog.AckFrom = parts[3];
+                                    consolelog.AckStatus = parts[4];
+                                    _ConsoleLogList.Add(consolelog);
+                                }
+                            }
+                        }
+                        this.lvConsoleLog.ItemsSource = null;
+                        this.lvConsoleLog.ItemsSource = _ConsoleLogList;
+                    }
                 }
                 else
                 {
-                    //set
-                    //Disable the combobox
-                    this.comboID.IsEnabled = false;
-                    _isStationIDSet = true;
-                    this.btnSetID.Content = "Unset";
-                    //Set the stationID chosen to "currentstation" in the setting 
-                    Properties.Settings.Default.CurrentID = this.comboID.Text;
-                    Properties.Settings.Default.Save();
-
-                    if (Properties.Settings.Default.ConsoleLogList != null)
-                    {
-                        foreach (string log in Properties.Settings.Default.ConsoleLogList)
-                        {
-                            string[] parts = log.Split(',');
-                            //Check is it corresponding stationID
-                            if (parts[0] == this.comboID.Text)
-                            {
-                                ConsoleLog consolelog = new ConsoleLog();
-                                consolelog.CodingID = parts[1];
-                                consolelog.AckTimeStamp = parts[2];
-                                consolelog.AckFrom = parts[3];
-                                consolelog.AckStatus = parts[4];
-                                _ConsoleLogList.Add(consolelog);
-                            }
-                        }
-                    }
-                    this.lvConsoleLog.ItemsSource = null;
-                    this.lvConsoleLog.ItemsSource = _ConsoleLogList;
+                    ShowMessageBox("IP address had not been set...");
                 }
             }
             else

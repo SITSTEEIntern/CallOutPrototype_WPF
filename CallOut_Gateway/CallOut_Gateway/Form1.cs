@@ -381,31 +381,38 @@ namespace CallOut_Gateway
 
         private void btnJoinCAD_Click(object sender, EventArgs e)
         {
-            if (_isCADConnected)
+            if (_isSimulateCADSvcIPSet)
             {
-                // Let the service know that this user is leaving
-                _CallOut_CADService.GatewayLeave();
-
-                //Toggle button display
-                _isCADConnected = false;
-                this.btnJoinCAD.Text = "Join CAD";
-            }
-            else
-            {
-                try
+                if (_isCADConnected)
                 {
-                    //contact the service.
-                    _CallOut_CADService.GatewayJoin();
+                    // Let the service know that this user is leaving
+                    _CallOut_CADService.GatewayLeave();
 
                     //Toggle button display
-                    _isCADConnected = true;
-                    this.btnJoinCAD.Text = "Leave CAD";
+                    _isCADConnected = false;
+                    this.btnJoinCAD.Text = "Join CAD";
                 }
-                catch(Exception exception)
+                else
                 {
-                    MessageBox.Show("IP address had not been set...");
-                }
+                    try
+                    {
+                        //contact the service.
+                        _CallOut_CADService.GatewayJoin();
 
+                        //Toggle button display
+                        _isCADConnected = true;
+                        this.btnJoinCAD.Text = "Leave CAD";
+                    }
+                    catch (Exception exception)
+                    {
+                        MessageBox.Show("IP address had not been set...");
+                    }
+
+                }
+            }
+            else 
+            {
+                MessageBox.Show("IP address had not been set...");
             }
 
         }
@@ -460,30 +467,37 @@ namespace CallOut_Gateway
 
         private void btnJoinConsole_Click(object sender, EventArgs e)
         {
-            if (_isConsoleConnected)
+            if (_isCodingSvcIPSet)
             {
-                // Let the service know that this user is leaving
-                _CallOut_CodingService.GatewayLeave();
-
-                //Toggle button display
-                _isConsoleConnected = false;
-                this.btnJoinConsole.Text = "Join Console";
-            }
-            else
-            {
-                try
+                if (_isConsoleConnected)
                 {
-                    //contact the service.
-                    _CallOut_CodingService.GatewayJoin();
+                    // Let the service know that this user is leaving
+                    _CallOut_CodingService.GatewayLeave();
 
                     //Toggle button display
-                    _isConsoleConnected = true;
-                    this.btnJoinConsole.Text = "Leave Console";
+                    _isConsoleConnected = false;
+                    this.btnJoinConsole.Text = "Join Console";
                 }
-                catch (Exception exception)
+                else
                 {
-                    MessageBox.Show("IP address had not been set...");
+                    try
+                    {
+                        //contact the service.
+                        _CallOut_CodingService.GatewayJoin();
+
+                        //Toggle button display
+                        _isConsoleConnected = true;
+                        this.btnJoinConsole.Text = "Leave Console";
+                    }
+                    catch (Exception exception)
+                    {
+                        MessageBox.Show("IP address had not been set...");
+                    }
                 }
+            }
+            else 
+            {
+                MessageBox.Show("IP address had not been set...");
             }
         }
 

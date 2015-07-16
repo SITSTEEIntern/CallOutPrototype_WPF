@@ -105,3 +105,4 @@ C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_ConsoleWPF\CallOut_ConsoleW
 C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_ConsoleWPF\CallOut_ConsoleWPF\bin\Debug\NAudio.dll
 C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Debug\CallOut_ConsoleWPF.exe
 C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Debug\CallOut_ConsoleWPF.pdb
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Debug\CallOut_ConsoleWPF.csprojResolveAssemblyReference.cache

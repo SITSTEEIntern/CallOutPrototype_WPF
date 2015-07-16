@@ -21,6 +21,7 @@
             <RowDefinition Height="40*"/>
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
+        
         <Grid x:Name="gIncidentSummary" Grid.Row="0" Grid.ColumnSpan="3" Background="#FFCA0000"  Visibility="Collapsed">
             <Viewbox HorizontalAlignment="Center"  VerticalAlignment="Center">
                 <StackPanel>
@@ -97,7 +98,7 @@
                 </ListView.View>
             </ListView>
         </Viewbox>
-        
+
         <!--Setting & login button-->
         <Viewbox Grid.Column="1" Grid.Row="7" Stretch="Uniform" Margin="5 5 5 5">
             <Button x:Name="btnSettings" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnSettings_Click" Background="Transparent" BorderBrush="{x:Null}">
@@ -127,5 +128,150 @@
                 </ToggleButton.Template>
             </ToggleButton>
         </Viewbox>
+
+        <!--Status Panel-->
+        <Grid x:Name="panelStatus" Grid.Row="0" Grid.Column="0" Grid.RowSpan="7" Grid.ColumnSpan="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75*"/>
+                <RowDefinition Height="30*"/>
+                <RowDefinition Height="100*"/>
+                <RowDefinition Height="100*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250*"/>
+                <ColumnDefinition Width="250*"/>
+            </Grid.ColumnDefinitions>
+
+            <!--Name of the station-->
+            <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+                <Viewbox HorizontalAlignment="Center"  VerticalAlignment="Center" >
+                    <StackPanel>
+                        <TextBlock x:Name="txtConsoleName" Text="" Foreground="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" FontFamily="Cambria" Margin="5 5 5 5" />
+                    </StackPanel>
+                </Viewbox>
+            </Grid>
+
+            <!--Stats title-->
+            <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                <Viewbox HorizontalAlignment="Center"  VerticalAlignment="Center" >
+                    <StackPanel>
+                        <TextBlock x:Name="txtStatsTitle" Text="Today Statistic" Foreground="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" FontFamily="Cambria" Margin="5 2 5 2" />
+                    </StackPanel>
+                </Viewbox>
+            </Grid>
+
+            <!--Incident Count-->
+            <Grid Grid.Row="2" Grid.Column="0" Margin="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70*"/>
+                    <RowDefinition Height="30*"/>
+                </Grid.RowDefinitions>
+                <Rectangle RadiusX="5" RadiusY="5" Fill="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" Stroke="WhiteSmoke" StrokeThickness="1" Grid.RowSpan="2">
+                    <Rectangle.BitmapEffect>
+                        <DropShadowBitmapEffect ShadowDepth="10" Softness="0" Color="LightGray"/>
+                    </Rectangle.BitmapEffect>
+                </Rectangle>
+
+                <Grid Grid.Row="0" Grid.Column="0">
+                    <Viewbox HorizontalAlignment="Center"  VerticalAlignment="Center" >
+                        <StackPanel>
+                            <TextBlock x:Name="txtIncidentAmt" Text="0" FontWeight="Bold" Foreground="Black" FontFamily="Cambria"/>
+                        </StackPanel>
+                    </Viewbox>
+                </Grid>
+                <Grid Grid.Row="1" Grid.Column="0">
+                    <Viewbox HorizontalAlignment="Center"  VerticalAlignment="Center" >
+                        <StackPanel>
+                            <TextBlock Text="Incident" FontWeight="Bold" Foreground="Black" FontFamily="Cambria" Margin="2 0 2 2"/>
+                        </StackPanel>
+                    </Viewbox>
+                </Grid>
+            </Grid>
+
+            <!--Acknowledge Count-->
+            <Grid Grid.Row="2" Grid.Column="1" Margin="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70*"/>
+                    <RowDefinition Height="30*"/>
+                </Grid.RowDefinitions>
+                <Rectangle RadiusX="5" RadiusY="5" Fill="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" Stroke="WhiteSmoke" StrokeThickness="1" Grid.RowSpan="2">
+                    <Rectangle.BitmapEffect>
+                        <DropShadowBitmapEffect ShadowDepth="10" Softness="0" Color="LightGray"/>
+                    </Rectangle.BitmapEffect>
+                </Rectangle>
+
+                <Grid Grid.Row="0" Grid.Column="0">
+                    <Viewbox HorizontalAlignment="Center"  VerticalAlignment="Center" >
+                        <StackPanel>
+                            <TextBlock x:Name="txtAckAmt" Text="0" FontWeight="Bold" Foreground="Black" FontFamily="Cambria"/>
+                        </StackPanel>
+                    </Viewbox>
+                </Grid>
+                <Grid Grid.Row="1" Grid.Column="0">
+                    <Viewbox HorizontalAlignment="Center"  VerticalAlignment="Center" >
+                        <StackPanel>
+                            <TextBlock Text="Acknowledged" FontWeight="Bold" Foreground="Black" FontFamily="Cambria" Margin="2 0 2 2"/>
+                        </StackPanel>
+                    </Viewbox>
+                </Grid>
+            </Grid>
+
+            <!--Rejected Count-->
+            <Grid Grid.Row="3" Grid.Column="0" Margin="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70*"/>
+                    <RowDefinition Height="30*"/>
+                </Grid.RowDefinitions>
+                <Rectangle RadiusX="5" RadiusY="5" Fill="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" Stroke="WhiteSmoke" StrokeThickness="1" Grid.RowSpan="2">
+                    <Rectangle.BitmapEffect>
+                        <DropShadowBitmapEffect ShadowDepth="10" Softness="0" Color="LightGray"/>
+                    </Rectangle.BitmapEffect>
+                </Rectangle>
+
+                <Grid Grid.Row="0" Grid.Column="0">
+                    <Viewbox HorizontalAlignment="Center"  VerticalAlignment="Center" >
+                        <StackPanel>
+                            <TextBlock x:Name="txtRejectAmt" Text="0" FontWeight="Bold" Foreground="Black" FontFamily="Cambria"/>
+                        </StackPanel>
+                    </Viewbox>
+                </Grid>
+                <Grid Grid.Row="1" Grid.Column="0">
+                    <Viewbox HorizontalAlignment="Center"  VerticalAlignment="Center" >
+                        <StackPanel>
+                            <TextBlock Text="Rejected" FontWeight="Bold" Foreground="Black" FontFamily="Cambria" Margin="2 0 2 2"/>
+                        </StackPanel>
+                    </Viewbox>
+                </Grid>
+            </Grid>
+
+            <!--Failed Count-->
+            <Grid Grid.Row="3" Grid.Column="1" Margin="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70*"/>
+                    <RowDefinition Height="30*"/>
+                </Grid.RowDefinitions>
+                <Rectangle RadiusX="5" RadiusY="5" Fill="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" Stroke="WhiteSmoke" StrokeThickness="1" Grid.RowSpan="2">
+                    <Rectangle.BitmapEffect>
+                        <DropShadowBitmapEffect ShadowDepth="10" Softness="0" Color="LightGray"/>
+                    </Rectangle.BitmapEffect>
+                </Rectangle>
+
+                <Grid Grid.Row="0" Grid.Column="0">
+                    <Viewbox HorizontalAlignment="Center"  VerticalAlignment="Center" >
+                        <StackPanel>
+                            <TextBlock x:Name="txtFailedAmt" Text="0" FontWeight="Bold" Foreground="Black" FontFamily="Cambria"/>
+                        </StackPanel>
+                    </Viewbox>
+                </Grid>
+                <Grid Grid.Row="1" Grid.Column="0">
+                    <Viewbox HorizontalAlignment="Center"  VerticalAlignment="Center" >
+                        <StackPanel>
+                            <TextBlock Text="Failed" FontWeight="Bold" Foreground="Black" FontFamily="Cambria" Margin="2 0 2 2"/>
+                        </StackPanel>
+                    </Viewbox>
+                </Grid>
+            </Grid>
+
+        </Grid>
     </Grid>
 </Window>

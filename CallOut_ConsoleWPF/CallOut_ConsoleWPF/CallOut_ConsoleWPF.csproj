@@ -64,6 +64,7 @@
     <Compile Include="Class\ConsoleLog.cs" />
     <Compile Include="Class\InternetAvailability.cs" />
     <Compile Include="Class\SortAdorner.cs" />
+    <Compile Include="Class\StatsRecord.cs" />
     <Compile Include="Class\UnitsStatus.cs" />
     <Compile Include="Service References\ServiceReference1\Reference.cs">
       <AutoGen>True</AutoGen>
