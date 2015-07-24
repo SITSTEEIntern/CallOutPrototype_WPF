@@ -1,0 +1,1454 @@
+[24/7/2015 9:44:48 AM] Open Simulate CAD service proxy [Gateway]
+[24/7/2015 9:44:49 AM] Open Coding Service proxy [Gateway]
+[24/7/2015 9:44:52 AM] Gateway join Coding Service [Gateway]
+[24/7/2015 9:44:52 AM] Gateway Join CAD Service [Gateway]
+[24/7/2015 9:45:10 AM] Set session and incident session [Gateway]
+[24/7/2015 9:49:33 AM] Open Simulate CAD service proxy [Gateway]
+[24/7/2015 9:49:36 AM] Open Coding Service proxy [Gateway]
+[24/7/2015 9:49:38 AM] Gateway Join CAD Service [Gateway]
+[24/7/2015 9:49:38 AM] Gateway join Coding Service [Gateway]
+[24/7/2015 9:49:39 AM] Set session and incident session [Gateway]
+[24/7/2015 9:49:40 AM] Start service to receive dispatched incident [Gateway]
+[24/7/2015 9:49:56 AM] Open coding service proxy [Console]
+[24/7/2015 9:49:59 AM] Open Coding Service proxy [Console]
+[24/7/2015 9:50:00 AM] Console join Coding service [Console]
+[24/7/2015 9:51:35 AM] Console leave Coding service [Console]
+[24/7/2015 9:51:35 AM] Console join Coding service [Console]
+[24/7/2015 9:52:41 AM] Console leave Coding service [Console]
+[24/7/2015 9:53:34 AM] Gateway Leave Coding Service [Gateway]
+[24/7/2015 9:53:35 AM] Gateway Leave CAD Service [Gateway]
+[24/7/2015 9:54:58 AM] Set session and incident session [Gateway]
+[24/7/2015 9:54:58 AM] Open Simulate CAD service proxy [Gateway]
+[24/7/2015 9:54:59 AM] Open Coding Service proxy [Gateway]
+[24/7/2015 9:55:00 AM] Gateway join Coding Service [Gateway]
+[24/7/2015 9:55:00 AM] Gateway Join CAD Service [Gateway]
+[24/7/2015 9:55:01 AM] Start service to receive dispatched incident [Gateway]
+[24/7/2015 9:55:57 AM] Open coding service proxy [Console]
+[24/7/2015 9:56:00 AM] Open Coding Service proxy [Console]
+[24/7/2015 9:56:01 AM] Console join Coding service [Console]
+[24/7/2015 9:56:03 AM] Send broadcast test message [Gateway]
+[24/7/2015 9:56:03 AM] Send Ack to CAD for broadcast test message [Gateway]
+[24/7/2015 9:56:05 AM] Send Status back to gateway [Console]
+[24/7/2015 9:56:05 AM] Broadcast status back to CAD [Gateway]
+[24/7/2015 9:58:00 AM] open new coding service proxy from setting window [Console]
+[24/7/2015 9:58:01 AM] Open Coding Service proxy [Console]
+[24/7/2015 9:58:02 AM] Console leave Coding service [Console]
+[24/7/2015 10:05:12 AM] Gateway Leave CAD Service [Gateway]
+[24/7/2015 10:05:13 AM] Gateway Leave Coding Service [Gateway]
+[24/7/2015 10:06:29 AM] Open Simulate CAD service proxy [Gateway]
+[24/7/2015 10:06:29 AM] Open Coding Service proxy [Gateway]
+[24/7/2015 10:06:30 AM] Gateway join Coding Service [Gateway]
+[24/7/2015 10:06:30 AM] Gateway Join CAD Service [Gateway]
+[24/7/2015 10:06:32 AM] Set session and incident session [Gateway]
+[24/7/2015 10:06:33 AM] Start service to receive dispatched incident [Gateway]
+[24/7/2015 10:07:04 AM] Forward message from Real CAD to respective console [Gateway]
+[24/7/2015 10:07:10 AM] Sending message back to CAD [Gateway]
+[24/7/2015 10:07:10 AM] Create Client Session [Gateway]
+[24/7/2015 10:07:31 AM] Update Comment Failed. [Gateway]
+[24/7/2015 10:07:31 AM] System.ServiceModel.EndpointNotFoundException: Could not connect to net.tcp://192.168.0.97:2041/IntegrationSessionService/. The connection attempt lasted for a time span of 00:00:01.0260587. TCP error code 10061: No connection could be made because the target machine actively refused it 192.168.0.97:2041.  ---> System.Net.Sockets.SocketException: No connection could be made because the target machine actively refused it 192.168.0.97:2041
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   at System.ServiceModel.Channels.SocketConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.SocketConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   at System.ServiceModel.Channels.BufferedConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, AccountType account)
+   at gCAD.Integration.AppLib.ClientSession.Initiate(String username, String password, AccountType account) in c:\Projects\SERIS-CAD\SC\CAD Client\CADIntegration\gCAD.Integration.AppLib\ClientSession.cs:line 75
+   at CallOut_Gateway.Form1.CreateClientSession() in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 228
+   at CallOut_Gateway.Form1.CallAPI(String IncidentNumber, String Comment) in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 239 [Gateway]
+[24/7/2015 10:07:31 AM] Broadcast status back to CAD [Gateway]
+[24/7/2015 10:12:29 AM] Open coding service proxy [Console]
+[24/7/2015 10:12:38 AM] Open Coding Service proxy [Console]
+[24/7/2015 10:12:39 AM] Console join Coding service [Console]
+[24/7/2015 10:13:46 AM] Forward message from Real CAD to respective console [Gateway]
+[24/7/2015 10:13:59 AM] Sending message back to CAD [Gateway]
+[24/7/2015 10:13:59 AM] Create Client Session [Gateway]
+[24/7/2015 10:14:00 AM] Update Comment Failed. [Gateway]
+[24/7/2015 10:14:00 AM] System.ServiceModel.EndpointNotFoundException: Could not connect to net.tcp://192.168.0.97:2041/IntegrationSessionService/. The connection attempt lasted for a time span of 00:00:01.1190640. TCP error code 10061: No connection could be made because the target machine actively refused it 192.168.0.97:2041.  ---> System.Net.Sockets.SocketException: No connection could be made because the target machine actively refused it 192.168.0.97:2041
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   at System.ServiceModel.Channels.SocketConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.SocketConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   at System.ServiceModel.Channels.BufferedConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, AccountType account)
+   at gCAD.Integration.AppLib.ClientSession.Initiate(String username, String password, AccountType account) in c:\Projects\SERIS-CAD\SC\CAD Client\CADIntegration\gCAD.Integration.AppLib\ClientSession.cs:line 75
+   at CallOut_Gateway.Form1.CreateClientSession() in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 228
+   at CallOut_Gateway.Form1.CallAPI(String IncidentNumber, String Comment) in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 239 [Gateway]
+[24/7/2015 10:14:06 AM] Send Status back to gateway [Console]
+[24/7/2015 10:14:06 AM] Broadcast status back to CAD [Gateway]
+[24/7/2015 10:17:17 AM] Forward message from Real CAD to respective console [Gateway]
+[24/7/2015 10:17:23 AM] Sending message back to CAD [Gateway]
+[24/7/2015 10:17:24 AM] Create Client Session [Gateway]
+[24/7/2015 10:17:42 AM] Update Comment Failed. [Gateway]
+[24/7/2015 10:17:42 AM] System.ServiceModel.EndpointNotFoundException: Could not connect to net.tcp://192.168.0.97:2041/IntegrationSessionService/. The connection attempt lasted for a time span of 00:00:01.0370593. TCP error code 10061: No connection could be made because the target machine actively refused it 192.168.0.97:2041.  ---> System.Net.Sockets.SocketException: No connection could be made because the target machine actively refused it 192.168.0.97:2041
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   at System.ServiceModel.Channels.SocketConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.SocketConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   at System.ServiceModel.Channels.BufferedConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, AccountType account)
+   at gCAD.Integration.AppLib.ClientSession.Initiate(String username, String password, AccountType account) in c:\Projects\SERIS-CAD\SC\CAD Client\CADIntegration\gCAD.Integration.AppLib\ClientSession.cs:line 75
+   at CallOut_Gateway.Form1.CreateClientSession() in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 228
+   at CallOut_Gateway.Form1.CallAPI(String IncidentNumber, String Comment) in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 239 [Gateway]
+[24/7/2015 10:17:48 AM] Send Status back to gateway [Console]
+[24/7/2015 10:17:48 AM] Broadcast status back to CAD [Gateway]
+[24/7/2015 10:17:50 AM] Console leave Coding service [Console]
+[24/7/2015 10:17:51 AM] Console join Coding service [Console]
+[24/7/2015 10:17:55 AM] open new coding service proxy from setting window [Console]
+[24/7/2015 10:18:01 AM] Open Coding Service proxy [Console]
+[24/7/2015 10:18:07 AM] Console leave Coding service [Console]
+[24/7/2015 10:18:08 AM] Gateway Leave Coding Service [Gateway]
+[24/7/2015 10:18:09 AM] Gateway Leave CAD Service [Gateway]
+[24/7/2015 10:20:39 AM] Open Simulate CAD service proxy [Gateway]
+[24/7/2015 10:20:40 AM] Open Coding Service proxy [Gateway]
+[24/7/2015 10:20:41 AM] Gateway join Coding Service [Gateway]
+[24/7/2015 10:20:41 AM] Gateway Join CAD Service [Gateway]
+[24/7/2015 10:20:42 AM] Start service to receive dispatched incident [Gateway]
+[24/7/2015 10:20:43 AM] Set session and incident session [Gateway]
+[24/7/2015 10:22:04 AM] Gateway Leave CAD Service [Gateway]
+[24/7/2015 10:22:05 AM] Gateway Leave Coding Service [Gateway]
+[24/7/2015 10:38:49 AM] Open Simulate CAD service proxy [Gateway]
+[24/7/2015 10:38:50 AM] Open Coding Service proxy [Gateway]
+[24/7/2015 10:38:51 AM] Gateway Join CAD Service [Gateway]
+[24/7/2015 10:38:51 AM] Gateway join Coding Service [Gateway]
+[24/7/2015 10:40:37 AM] [Gateway] "Open Coding Service proxy"
+[24/7/2015 10:40:40 AM] [Gateway] "Open Simulate CAD service proxy"
+[24/7/2015 10:40:40 AM] [Gateway] "Gateway Join CAD Service"
+[24/7/2015 10:40:41 AM] [Gateway] "Gateway join Coding Service"
+[24/7/2015 10:41:12 AM] [Gateway] "Gateway Leave Coding Service"
+[24/7/2015 10:41:13 AM] [Gateway] "Gateway Leave CAD Service"
+[24/7/2015 10:42:11 AM] [Gateway] "Open Coding Service proxy"
+[24/7/2015 10:42:12 AM] [Gateway] "Open Simulate CAD service proxy"
+[24/7/2015 10:42:13 AM] [Gateway] "Gateway Join CAD Service"
+[24/7/2015 10:42:13 AM] [Gateway] "Gateway join Coding Service"
+[24/7/2015 10:42:25 AM] [Gateway] "Gateway Leave Coding Service"
+[24/7/2015 10:42:25 AM] [Gateway] "Gateway Leave CAD Service"
+[24/7/2015 10:52:23 AM] [Gateway] "Open Coding Service proxy"
+[24/7/2015 10:52:25 AM] [Gateway] "Open Simulate CAD service proxy"
+[24/7/2015 10:52:26 AM] [Gateway] "Gateway Join CAD Service"
+[24/7/2015 10:52:26 AM] [Gateway] "Gateway join Coding Service"
+[24/7/2015 10:52:27 AM] [Gateway] "Set session and incident session"
+[24/7/2015 10:52:28 AM] [Gateway] "Start service to receive dispatched incident"
+[24/7/2015 10:52:57 AM] [Console] "Open coding service proxy"
+[24/7/2015 10:53:01 AM] [Console] "Open Coding Service proxy"
+[24/7/2015 10:53:02 AM] [Console] "Console join Coding service"
+[24/7/2015 10:53:06 AM] [Gateway] "Send broadcast test message"
+[24/7/2015 10:53:06 AM] [Gateway] "Send Ack to CAD for broadcast test message"
+[24/7/2015 10:53:09 AM] [Console] "Send Status back to gateway"
+[24/7/2015 10:53:09 AM] [Gateway] "Broadcast status back to CAD"
+[24/7/2015 10:56:29 AM] [Console] "Internet connection is down..."
+[24/7/2015 11:00:57 AM] [Console] "Internet connection is up..."
+[24/7/2015 11:01:01 AM] [Console] "Open coding service proxy"
+[24/7/2015 11:03:55 AM] [Console] "Internet connection is down..."
+[24/7/2015 11:04:08 AM] [Console] "Internet connection is up..."
+[24/7/2015 11:04:19 AM] [Console] "Open coding service proxy"
+[24/7/2015 11:05:27 AM] [Console] "Open coding service proxy"
+[24/7/2015 11:06:23 AM] [Gateway] "Open Simulate CAD service proxy"
+[24/7/2015 11:06:24 AM] [Gateway] "Open Coding Service proxy"
+[24/7/2015 11:06:25 AM] [Gateway] "Gateway join Coding Service"
+[24/7/2015 11:06:25 AM] [Gateway] "Gateway Join CAD Service"
+[24/7/2015 11:06:30 AM] [Console] "Open coding service proxy"
+[24/7/2015 11:06:34 AM] [Console] "Open Coding Service proxy"
+[24/7/2015 11:06:37 AM] [Console] "Console join Coding service"
+[24/7/2015 11:06:41 AM] [Gateway] "Send broadcast test message"
+[24/7/2015 11:06:41 AM] [Gateway] "Send Ack to CAD for broadcast test message"
+[24/7/2015 11:06:48 AM] [Console] "Send Status back to gateway"
+[24/7/2015 11:06:48 AM] [Gateway] "Broadcast status back to CAD"
+[24/7/2015 11:06:51 AM] [Gateway] "Send broadcast test message"
+[24/7/2015 11:06:51 AM] [Gateway] "Send Ack to CAD for broadcast test message"
+[24/7/2015 11:07:00 AM] [Console] "Send Status back to gateway"
+[24/7/2015 11:07:00 AM] [Gateway] "Broadcast status back to CAD"
+[24/7/2015 11:08:04 AM] [Gateway] "Send broadcast test message"
+[24/7/2015 11:08:04 AM] [Gateway] "Send Ack to CAD for broadcast test message"
+[24/7/2015 11:08:34 AM] [Console] "Send Status back to gateway"
+[24/7/2015 11:08:34 AM] [Gateway] "Broadcast status back to CAD"
+[24/7/2015 11:09:17 AM] [Gateway] "Send broadcast test message"
+[24/7/2015 11:09:17 AM] [Gateway] "Send Ack to CAD for broadcast test message"
+[24/7/2015 11:09:18 AM] [Console] "Send Status back to gateway"
+[24/7/2015 11:09:18 AM] [Gateway] "Broadcast status back to CAD"
+[24/7/2015 11:09:42 AM] [Console] "Console leave Coding service"
+[24/7/2015 11:09:43 AM] [Console] "Console join Coding service"
+[24/7/2015 11:09:44 AM] [Console] "Console leave Coding service"
+[24/7/2015 11:09:48 AM] [Console] "open new coding service proxy from setting window"
+[24/7/2015 11:09:51 AM] [Console] "Open Coding Service proxy"
+[24/7/2015 11:09:53 AM] [Console] "Console join Coding service"
+[24/7/2015 11:10:16 AM] [Console] "open new coding service proxy from setting window"
+[24/7/2015 11:10:20 AM] [Console] "Open Coding Service proxy"
+[24/7/2015 11:10:21 AM] [Console] "Console leave Coding service"
+[24/7/2015 11:10:27 AM] [Console] "Console join Coding service"
+[24/7/2015 11:10:29 AM] [Gateway] "Send target test message"
+[24/7/2015 11:10:29 AM] [Gateway] "Send Ack to CAD for target test message"
+[24/7/2015 11:10:32 AM] [Console] "Send Status back to gateway"
+[24/7/2015 11:10:32 AM] [Gateway] "Broadcast status back to CAD"
+[24/7/2015 11:10:33 AM] [Console] "Console leave Coding service"
+[24/7/2015 11:10:56 AM] [Gateway] "Gateway Leave Coding Service"
+[24/7/2015 11:10:56 AM] [Gateway] "Gateway Leave CAD Service"
+[24/7/2015 11:13:47 AM] [Gateway] "Set session and incident session"
+[24/7/2015 11:14:23 AM] [Gateway] "Set session and incident session"
+[24/7/2015 11:16:13 AM] [Gateway] "Set session and incident session"
+[24/7/2015 11:16:13 AM] [Gateway] "Open Simulate CAD service proxy"
+[24/7/2015 11:16:15 AM] [Gateway] "Open Coding Service proxy"
+[24/7/2015 11:16:15 AM] [Gateway] "Gateway join Coding Service"
+[24/7/2015 11:16:15 AM] [Gateway] "Gateway Join CAD Service"
+[24/7/2015 11:16:16 AM] [Gateway] "Start service to receive dispatched incident"
+[24/7/2015 11:16:32 AM] [Console] "Open coding service proxy"
+[24/7/2015 11:16:35 AM] [Console] "Open Coding Service proxy"
+[24/7/2015 11:16:36 AM] [Console] "Console join Coding service"
+[24/7/2015 11:27:29 AM] [Gateway] "Forward message from Real CAD to respective console"
+[24/7/2015 11:27:29 AM] [Gateway] "Sending message back to CAD"
+[24/7/2015 11:27:29 AM] [Gateway] "Create Client Session"
+[24/7/2015 11:28:28 AM] [Gateway] "Open Simulate CAD service proxy"
+[24/7/2015 11:28:28 AM] [Gateway] "Open Coding Service proxy"
+[24/7/2015 11:28:29 AM] [Gateway] "Gateway join Coding Service"
+[24/7/2015 11:28:29 AM] [Gateway] "Gateway Join CAD Service"
+[24/7/2015 11:28:30 AM] [Gateway] "Set session and incident session"
+[24/7/2015 11:28:31 AM] [Gateway] "Start service to receive dispatched incident"
+[24/7/2015 11:28:40 AM] [Console] "Open coding service proxy"
+[24/7/2015 11:28:44 AM] [Console] "Open Coding Service proxy"
+[24/7/2015 11:28:45 AM] [Console] "Console join Coding service"
+[24/7/2015 11:28:57 AM] [Gateway] "Forward message from Real CAD to respective console"
+[24/7/2015 11:28:57 AM] [Gateway] "Sending message back to CAD"
+[24/7/2015 11:28:57 AM] [Gateway] "Create Client Session"
+[24/7/2015 11:29:11 AM] [Gateway] "Update Comment Failed."
+[24/7/2015 11:29:11 AM] [Gateway] "System.ServiceModel.EndpointNotFoundException: Could not connect to net.tcp://192.168.0.97:2034/IncidentIntegrationService/. The connection attempt lasted for a time span of 00:00:01.0420596. TCP error code 10061: No connection could be made because the target machine actively refused it 192.168.0.97:2034.  ---> System.Net.Sockets.SocketException: No connection could be made because the target machine actively refused it 192.168.0.97:2034
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   at System.ServiceModel.Channels.SocketConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.SocketConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   at System.ServiceModel.Channels.BufferedConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, AccountType account)
+   at gCAD.Integration.AppLib.ClientSession.Initiate(String username, String password, AccountType account) in c:\Projects\SERIS-CAD\SC\CAD Client\CADIntegration\gCAD.Integration.AppLib\ClientSession.cs:line 75
+   at CallOut_Gateway.Form1.CreateClientSession() in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 228
+   at CallOut_Gateway.Form1.CallAPI(String IncidentNumber, String Comment) in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 239"
+[24/7/2015 11:29:16 AM] [Console] "Send Status back to gateway"
+[24/7/2015 11:29:16 AM] [Gateway] "Broadcast status back to CAD"
+[24/7/2015 11:30:54 AM] [Gateway] "Set session and incident session"
+[24/7/2015 11:31:31 AM] [Gateway] "Forward message from Real CAD to respective console"
+[24/7/2015 11:31:31 AM] [Gateway] "Sending message back to CAD"
+[24/7/2015 11:31:31 AM] [Gateway] "Create Client Session"
+[24/7/2015 11:31:33 AM] [Gateway] "Update Comment Failed."
+[24/7/2015 11:31:33 AM] [Gateway] "System.ServiceModel.EndpointNotFoundException: Could not connect to net.tcp://192.168.0.97:2034/IncidentIntegrationService/. The connection attempt lasted for a time span of 00:00:01.2520716. TCP error code 10061: No connection could be made because the target machine actively refused it 192.168.0.97:2034.  ---> System.Net.Sockets.SocketException: No connection could be made because the target machine actively refused it 192.168.0.97:2034
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   at System.ServiceModel.Channels.SocketConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.SocketConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   at System.ServiceModel.Channels.BufferedConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, AccountType account)
+   at gCAD.Integration.AppLib.ClientSession.Initiate(String username, String password, AccountType account) in c:\Projects\SERIS-CAD\SC\CAD Client\CADIntegration\gCAD.Integration.AppLib\ClientSession.cs:line 75
+   at CallOut_Gateway.Form1.CreateClientSession() in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 228
+   at CallOut_Gateway.Form1.CallAPI(String IncidentNumber, String Comment) in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 239"
+[24/7/2015 11:31:42 AM] [Console] "Send Status back to gateway"
+[24/7/2015 11:31:42 AM] [Gateway] "Broadcast status back to CAD"
+[24/7/2015 11:32:52 AM] [Gateway] "Forward message from Real CAD to respective console"
+[24/7/2015 11:32:52 AM] [Gateway] "Sending message back to CAD"
+[24/7/2015 11:32:52 AM] [Gateway] "Create Client Session"
+[24/7/2015 11:32:53 AM] [Gateway] "Update Comment Failed."
+[24/7/2015 11:32:53 AM] [Gateway] "System.ServiceModel.EndpointNotFoundException: Could not connect to net.tcp://192.168.0.97:2034/IncidentIntegrationService/. The connection attempt lasted for a time span of 00:00:01.0400595. TCP error code 10061: No connection could be made because the target machine actively refused it 192.168.0.97:2034.  ---> System.Net.Sockets.SocketException: No connection could be made because the target machine actively refused it 192.168.0.97:2034
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   at System.ServiceModel.Channels.SocketConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.SocketConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   at System.ServiceModel.Channels.BufferedConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, AccountType account)
+   at gCAD.Integration.AppLib.ClientSession.Initiate(String username, String password, AccountType account) in c:\Projects\SERIS-CAD\SC\CAD Client\CADIntegration\gCAD.Integration.AppLib\ClientSession.cs:line 75
+   at CallOut_Gateway.Form1.CreateClientSession() in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 228
+   at CallOut_Gateway.Form1.CallAPI(String IncidentNumber, String Comment) in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 239"
+[24/7/2015 11:32:56 AM] [Console] "Send Status back to gateway"
+[24/7/2015 11:32:56 AM] [Gateway] "Broadcast status back to CAD"
+[24/7/2015 11:35:03 AM] [Gateway] "Gateway Leave Coding Service"
+[24/7/2015 11:35:03 AM] [Gateway] "Gateway Leave CAD Service"
+[24/7/2015 11:35:16 AM] [Gateway] "Open Simulate CAD service proxy"
+[24/7/2015 11:35:17 AM] [Gateway] "Open Coding Service proxy"
+[24/7/2015 11:35:17 AM] [Gateway] "Gateway join Coding Service"
+[24/7/2015 11:35:18 AM] [Gateway] "Gateway Join CAD Service"
+[24/7/2015 11:35:22 AM] [Gateway] "Set session and incident session"
+[24/7/2015 11:35:23 AM] [Gateway] "Start service to receive dispatched incident"
+[24/7/2015 11:36:35 AM] [Gateway] "Forward message from Real CAD to respective console"
+[24/7/2015 11:36:35 AM] [Gateway] "Sending message back to CAD"
+[24/7/2015 11:36:35 AM] [Gateway] "Create Client Session"
+[24/7/2015 11:36:37 AM] [Gateway] "Update Comment Failed."
+[24/7/2015 11:36:37 AM] [Gateway] "System.ServiceModel.EndpointNotFoundException: Could not connect to net.tcp://192.168.0.98:2034/IncidentIntegrationService/. The connection attempt lasted for a time span of 00:00:01.0460598. TCP error code 10061: No connection could be made because the target machine actively refused it 192.168.0.98:2034.  ---> System.Net.Sockets.SocketException: No connection could be made because the target machine actively refused it 192.168.0.98:2034
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   at System.ServiceModel.Channels.SocketConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.SocketConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   at System.ServiceModel.Channels.BufferedConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, AccountType account)
+   at gCAD.Integration.AppLib.ClientSession.Initiate(String username, String password, AccountType account) in c:\Projects\SERIS-CAD\SC\CAD Client\CADIntegration\gCAD.Integration.AppLib\ClientSession.cs:line 75
+   at CallOut_Gateway.Form1.CreateClientSession() in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 228
+   at CallOut_Gateway.Form1.CallAPI(String IncidentNumber, String Comment) in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 239"
+[24/7/2015 11:36:42 AM] [Console] "Send Status back to gateway"
+[24/7/2015 11:36:42 AM] [Gateway] "Broadcast status back to CAD"
+[24/7/2015 11:37:49 AM] [Gateway] "Gateway Leave CAD Service"
+[24/7/2015 11:37:52 AM] [Gateway] "Gateway Leave Coding Service"
+[24/7/2015 11:37:57 AM] [Console] "Console leave Coding service"
+[24/7/2015 11:39:25 AM] [Gateway] "Open Simulate CAD service proxy"
+[24/7/2015 11:39:26 AM] [Gateway] "Open Coding Service proxy"
+[24/7/2015 11:39:28 AM] [Gateway] "Gateway join Coding Service"
+[24/7/2015 11:39:29 AM] [Gateway] "Gateway Join CAD Service"
+[24/7/2015 11:39:31 AM] [Gateway] "Start service to receive dispatched incident"
+[24/7/2015 11:39:43 AM] [Console] "Open coding service proxy"
+[24/7/2015 11:39:47 AM] [Console] "Open Coding Service proxy"
+[24/7/2015 11:39:48 AM] [Console] "Console join Coding service"
+[24/7/2015 11:40:15 AM] [Gateway] "Forward message from Real CAD to respective console"
+[24/7/2015 11:40:15 AM] [Gateway] "Sending message back to CAD"
+[24/7/2015 11:40:15 AM] [Gateway] "Create Client Session"
+[24/7/2015 11:40:15 AM] [Gateway] "Update Comment Failed."
+[24/7/2015 11:40:15 AM] [Gateway] "System.NullReferenceException: Object reference not set to an instance of an object.
+   at CallOut_Gateway.Form1.CreateClientSession() in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 223
+   at CallOut_Gateway.Form1.CallAPI(String IncidentNumber, String Comment) in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 239"
+[24/7/2015 11:40:19 AM] [Console] "Send Status back to gateway"
+[24/7/2015 11:40:19 AM] [Gateway] "Broadcast status back to CAD"
+[24/7/2015 11:41:18 AM] [Gateway] "Set session and incident session"
+[24/7/2015 11:41:41 AM] [Gateway] "Forward message from Real CAD to respective console"
+[24/7/2015 11:41:41 AM] [Gateway] "Sending message back to CAD"
+[24/7/2015 11:41:41 AM] [Gateway] "Create Client Session"
+[24/7/2015 11:41:49 AM] [Console] "Send Status back to gateway"
+[24/7/2015 11:42:02 AM] [Gateway] "Update Comment Failed."
+[24/7/2015 11:42:02 AM] [Gateway] "System.ServiceModel.EndpointNotFoundException: Could not connect to net.tcp://192.168.0.100:2034/IncidentIntegrationService/. The connection attempt lasted for a time span of 00:00:21.0262027. TCP error code 10060: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.0.100:2034.  ---> System.Net.Sockets.SocketException: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.0.100:2034
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   at System.ServiceModel.Channels.SocketConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.SocketConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   at System.ServiceModel.Channels.BufferedConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, AccountType account)
+   at gCAD.Integration.AppLib.ClientSession.Initiate(String username, String password, AccountType account) in c:\Projects\SERIS-CAD\SC\CAD Client\CADIntegration\gCAD.Integration.AppLib\ClientSession.cs:line 75
+   at CallOut_Gateway.Form1.CreateClientSession() in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 228
+   at CallOut_Gateway.Form1.CallAPI(String IncidentNumber, String Comment) in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 239"
+[24/7/2015 11:42:02 AM] [Gateway] "Broadcast status back to CAD"
+[24/7/2015 11:43:25 AM] [Gateway] "Forward message from Real CAD to respective console"
+[24/7/2015 11:43:25 AM] [Gateway] "Sending message back to CAD"
+[24/7/2015 11:43:25 AM] [Gateway] "Create Client Session"
+[24/7/2015 11:43:46 AM] [Gateway] "Update Comment Failed."
+[24/7/2015 11:43:46 AM] [Gateway] "System.ServiceModel.EndpointNotFoundException: Could not connect to net.tcp://192.168.0.100:2034/IncidentIntegrationService/. The connection attempt lasted for a time span of 00:00:21.0182022. TCP error code 10060: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.0.100:2034.  ---> System.Net.Sockets.SocketException: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.0.100:2034
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   at System.ServiceModel.Channels.SocketConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.SocketConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   at System.ServiceModel.Channels.BufferedConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, AccountType account)
+   at gCAD.Integration.AppLib.ClientSession.Initiate(String username, String password, AccountType account) in c:\Projects\SERIS-CAD\SC\CAD Client\CADIntegration\gCAD.Integration.AppLib\ClientSession.cs:line 75
+   at CallOut_Gateway.Form1.CreateClientSession() in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 228
+   at CallOut_Gateway.Form1.CallAPI(String IncidentNumber, String Comment) in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 239"
+[24/7/2015 11:43:46 AM] [Gateway] "Broadcast status back to CAD"
+[24/7/2015 11:43:58 AM] [Console] "Console leave Coding service"
+[24/7/2015 11:43:58 AM] [Console] "Console join Coding service"
+[24/7/2015 11:46:43 AM] [Gateway] "Open Coding Service proxy"
+[24/7/2015 11:46:45 AM] [Gateway] "Gateway join Coding Service"
+[24/7/2015 11:46:47 AM] [Gateway] "Open Simulate CAD service proxy"
+[24/7/2015 11:46:48 AM] [Gateway] "Gateway Join CAD Service"
+[24/7/2015 11:46:49 AM] [Gateway] "Start service to receive dispatched incident"
+[24/7/2015 11:46:56 AM] [Gateway] "Set session and incident session"
+[24/7/2015 11:47:25 AM] [Gateway] "Forward message from Real CAD to respective console"
+[24/7/2015 11:47:25 AM] [Gateway] "Sending message back to CAD"
+[24/7/2015 11:47:25 AM] [Gateway] "Create Client Session"
+[24/7/2015 11:47:46 AM] [Gateway] "Update Comment Failed."
+[24/7/2015 11:47:46 AM] [Gateway] "System.ServiceModel.EndpointNotFoundException: Could not connect to net.tcp://192.168.0.101:2034/IncidentIntegrationService/. The connection attempt lasted for a time span of 00:00:21.0352032. TCP error code 10060: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.0.101:2034.  ---> System.Net.Sockets.SocketException: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.0.101:2034
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   at System.ServiceModel.Channels.SocketConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.SocketConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   at System.ServiceModel.Channels.BufferedConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, AccountType account)
+   at gCAD.Integration.AppLib.ClientSession.Initiate(String username, String password, AccountType account) in c:\Projects\SERIS-CAD\SC\CAD Client\CADIntegration\gCAD.Integration.AppLib\ClientSession.cs:line 75
+   at CallOut_Gateway.Form1.CreateClientSession() in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 228
+   at CallOut_Gateway.Form1.CallAPI(String IncidentNumber, String Comment) in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 239"
+[24/7/2015 11:47:46 AM] [Gateway] "Broadcast status back to CAD"
+[24/7/2015 11:49:22 AM] [Gateway] "Forward message from Real CAD to respective console"
+[24/7/2015 11:49:22 AM] [Gateway] "Sending message back to CAD"
+[24/7/2015 11:49:22 AM] [Gateway] "Create Client Session"
+[24/7/2015 11:49:43 AM] [Gateway] "Update Comment Failed."
+[24/7/2015 11:49:43 AM] [Gateway] "System.ServiceModel.EndpointNotFoundException: Could not connect to net.tcp://192.168.0.101:2034/IncidentIntegrationService/. The connection attempt lasted for a time span of 00:00:21.0172021. TCP error code 10060: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.0.101:2034.  ---> System.Net.Sockets.SocketException: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.0.101:2034
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   at System.ServiceModel.Channels.SocketConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.SocketConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   at System.ServiceModel.Channels.BufferedConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, AccountType account)
+   at gCAD.Integration.AppLib.ClientSession.Initiate(String username, String password, AccountType account) in c:\Projects\SERIS-CAD\SC\CAD Client\CADIntegration\gCAD.Integration.AppLib\ClientSession.cs:line 75
+   at CallOut_Gateway.Form1.CreateClientSession() in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 228
+   at CallOut_Gateway.Form1.CallAPI(String IncidentNumber, String Comment) in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 239"
+[24/7/2015 11:49:43 AM] [Gateway] "Broadcast status back to CAD"
+[24/7/2015 11:50:35 AM] [Gateway] "Gateway Leave Coding Service"
+[24/7/2015 11:50:35 AM] [Gateway] "Gateway Leave CAD Service"
+[24/7/2015 11:55:18 AM] [Gateway] "Open Simulate CAD service proxy"
+[24/7/2015 11:55:20 AM] [Gateway] "Open Coding Service proxy"
+[24/7/2015 11:55:20 AM] [Gateway] "Gateway join Coding Service"
+[24/7/2015 11:55:20 AM] [Gateway] "Gateway Join CAD Service"
+[24/7/2015 11:55:22 AM] [Gateway] "Start service to receive dispatched incident"
+[24/7/2015 11:55:49 AM] [Gateway] "Set session and incident session"
+[24/7/2015 11:56:05 AM] [Gateway] "Forward message from Real CAD to respective console"
+[24/7/2015 11:56:05 AM] [Gateway] "Sending message back to CAD"
+[24/7/2015 11:56:05 AM] [Gateway] "Create Client Session"
+[24/7/2015 11:56:06 AM] [Gateway] "Update Comment Failed."
+[24/7/2015 11:56:06 AM] [Gateway] "System.ServiceModel.FaultException`1[gCAD.CADS.WcfErrorHandler.ServiceFaultExceptionCustom]: Invalid Login for admin at Workstation 192.168.2.81 (CAD_DENIED_WORKSTATION) - [03c749b6-48b0-40d1-9ed3-a7c6500ded54] (Fault Detail is equal to Invalid Login for admin at Workstation 192.168.2.81 (CAD_DENIED_WORKSTATION) - [03c749b6-48b0-40d1-9ed3-a7c6500ded54])."
+[24/7/2015 11:56:06 AM] [Gateway] "Broadcast status back to CAD"
+[24/7/2015 11:58:15 AM] [Gateway] "Gateway Leave CAD Service"
+[24/7/2015 11:58:15 AM] [Gateway] "Gateway Leave Coding Service"
+[24/7/2015 12:06:06 PM] [Gateway] "Open Coding Service proxy"
+[24/7/2015 12:06:07 PM] [Gateway] "Gateway join Coding Service"
+[24/7/2015 12:06:10 PM] [Gateway] "Open Simulate CAD service proxy"
+[24/7/2015 12:06:12 PM] [Gateway] "Gateway Join CAD Service"
+[24/7/2015 12:06:17 PM] [Gateway] "Set session and incident session"
+[24/7/2015 12:07:51 PM] [Gateway] "Open Simulate CAD service proxy"
+[24/7/2015 12:07:51 PM] [Gateway] "Open Coding Service proxy"
+[24/7/2015 12:07:52 PM] [Gateway] "Gateway join Coding Service"
+[24/7/2015 12:07:52 PM] [Gateway] "Gateway Join CAD Service"
+[24/7/2015 12:07:53 PM] [Gateway] "Start service to receive dispatched incident"
+[24/7/2015 12:07:54 PM] [Gateway] "Set session and incident session"
+[24/7/2015 12:08:15 PM] [Gateway] "Forward message from Real CAD to respective console"
+[24/7/2015 12:08:15 PM] [Gateway] "Sending message back to CAD"
+[24/7/2015 12:08:15 PM] [Gateway] "Create Client Session"
+[24/7/2015 12:08:15 PM] [Gateway] "Update Comment Failed."
+[24/7/2015 12:08:15 PM] [Gateway] "System.ServiceModel.EndpointNotFoundException: There was no endpoint listening at net.tcp://localhost:2045/IntegrationSessionService/ that could accept the message. This is often caused by an incorrect address or SOAP action. See InnerException, if present, for more details.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.ConnectionUpgradeHelper.DecodeFramingFault(ClientFramingDecoder decoder, IConnection connection, Uri via, String contentType, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.SendPreamble(IConnection connection, ArraySegment`1 preamble, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.DuplexConnectionPoolHelper.AcceptPooledConnection(IConnection connection, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, AccountType account)
+   at gCAD.Integration.AppLib.ClientSession.Initiate(String username, String password, AccountType account) in c:\Projects\SERIS-CAD\SC\CAD Client\CADIntegration\gCAD.Integration.AppLib\ClientSession.cs:line 75
+   at CallOut_Gateway.Form1.CreateClientSession() in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 228
+   at CallOut_Gateway.Form1.CallAPI(String IncidentNumber, String Comment) in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 239"
+[24/7/2015 12:08:15 PM] [Gateway] "Broadcast status back to CAD"
+[24/7/2015 12:08:41 PM] [Gateway] "Gateway Leave Coding Service"
+[24/7/2015 12:08:42 PM] [Gateway] "Gateway Leave CAD Service"
+[24/7/2015 12:11:00 PM] [Gateway] "Set session and incident session"
+[24/7/2015 12:21:28 PM] [Gateway] "Open Simulate CAD service proxy"
+[24/7/2015 12:21:29 PM] [Gateway] "Open Coding Service proxy"
+[24/7/2015 12:21:30 PM] [Gateway] "Gateway join Coding Service"
+[24/7/2015 12:21:30 PM] [Gateway] "Gateway Join CAD Service"
+[24/7/2015 12:21:31 PM] [Gateway] "Start service to receive dispatched incident"
+[24/7/2015 12:21:41 PM] [Gateway] "Set session and incident session"
+[24/7/2015 12:22:36 PM] [Gateway] "Forward message from Real CAD to respective console"
+[24/7/2015 12:22:36 PM] [Gateway] "Sending message back to CAD"
+[24/7/2015 12:22:36 PM] [Gateway] "Create Client Session"
+[24/7/2015 12:22:37 PM] [Gateway] "Update Comment Failed."
+[24/7/2015 12:22:37 PM] [Gateway] "System.ServiceModel.ActionNotSupportedException: The message with Action 'http://tempuri.org/IIntegrationSessionService/Initiate' cannot be processed at the receiver, due to a ContractFilter mismatch at the EndpointDispatcher. This may be because of either a contract mismatch (mismatched Actions between sender and receiver) or a binding/security mismatch between the sender and the receiver.  Check that sender and receiver have the same contract and the same binding (including security requirements, e.g. Message, Transport, None).
+
+Server stack trace: 
+   at System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   at System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, AccountType account)
+   at gCAD.Integration.AppLib.ClientSession.Initiate(String username, String password, AccountType account) in c:\Projects\SERIS-CAD\SC\CAD Client\CADIntegration\gCAD.Integration.AppLib\ClientSession.cs:line 75
+   at CallOut_Gateway.Form1.CreateClientSession() in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 228
+   at CallOut_Gateway.Form1.CallAPI(String IncidentNumber, String Comment) in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 239"
+[24/7/2015 12:22:37 PM] [Gateway] "Broadcast status back to CAD"
+[24/7/2015 12:24:57 PM] [Gateway] "Open Simulate CAD service proxy"
+[24/7/2015 12:24:58 PM] [Gateway] "Open Coding Service proxy"
+[24/7/2015 12:24:58 PM] [Gateway] "Gateway join Coding Service"
+[24/7/2015 12:24:59 PM] [Gateway] "Gateway Join CAD Service"
+[24/7/2015 12:25:00 PM] [Gateway] "Start service to receive dispatched incident"
+[24/7/2015 12:25:04 PM] [Gateway] "Set session and incident session"
+[24/7/2015 12:26:03 PM] [Gateway] "Forward message from Real CAD to respective console"
+[24/7/2015 12:26:03 PM] [Gateway] "Sending message back to CAD"
+[24/7/2015 12:26:03 PM] [Gateway] "Create Client Session"
+[24/7/2015 12:26:03 PM] [Gateway] "Update Comment Failed."
+[24/7/2015 12:26:03 PM] [Gateway] "System.ServiceModel.EndpointNotFoundException: There was no endpoint listening at net.tcp://localhost:2045/IntegrationSessionService/ that could accept the message. This is often caused by an incorrect address or SOAP action. See InnerException, if present, for more details.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.ConnectionUpgradeHelper.DecodeFramingFault(ClientFramingDecoder decoder, IConnection connection, Uri via, String contentType, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.SendPreamble(IConnection connection, ArraySegment`1 preamble, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.DuplexConnectionPoolHelper.AcceptPooledConnection(IConnection connection, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, AccountType account)
+   at gCAD.Integration.AppLib.ClientSession.Initiate(String username, String password, AccountType account) in c:\Projects\SERIS-CAD\SC\CAD Client\CADIntegration\gCAD.Integration.AppLib\ClientSession.cs:line 75
+   at CallOut_Gateway.Form1.CreateClientSession() in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 228
+   at CallOut_Gateway.Form1.CallAPI(String IncidentNumber, String Comment) in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 239"
+[24/7/2015 12:26:03 PM] [Gateway] "Broadcast status back to CAD"
+[24/7/2015 12:30:01 PM] [Gateway] "Set session and incident session"
+[24/7/2015 12:30:07 PM] [Gateway] "Start service to receive dispatched incident"
+[24/7/2015 12:30:08 PM] [Gateway] "Open Simulate CAD service proxy"
+[24/7/2015 12:30:08 PM] [Gateway] "Open Coding Service proxy"
+[24/7/2015 12:30:09 PM] [Gateway] "Gateway join Coding Service"
+[24/7/2015 12:30:10 PM] [Gateway] "Gateway Join CAD Service"
+[24/7/2015 12:30:26 PM] [Gateway] "Forward message from Real CAD to respective console"
+[24/7/2015 12:30:26 PM] [Gateway] "Sending message back to CAD"
+[24/7/2015 12:30:26 PM] [Gateway] "Create Client Session"
+[24/7/2015 12:30:26 PM] [Gateway] "Update Comment Failed."
+[24/7/2015 12:30:26 PM] [Gateway] "System.ServiceModel.EndpointNotFoundException: There was no endpoint listening at net.tcp://localhost:2045/IntegrationSessionService/ that could accept the message. This is often caused by an incorrect address or SOAP action. See InnerException, if present, for more details.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.ConnectionUpgradeHelper.DecodeFramingFault(ClientFramingDecoder decoder, IConnection connection, Uri via, String contentType, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.SendPreamble(IConnection connection, ArraySegment`1 preamble, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.DuplexConnectionPoolHelper.AcceptPooledConnection(IConnection connection, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, AccountType account)
+   at gCAD.Integration.AppLib.ClientSession.Initiate(String username, String password, AccountType account) in c:\Projects\SERIS-CAD\SC\CAD Client\CADIntegration\gCAD.Integration.AppLib\ClientSession.cs:line 75
+   at CallOut_Gateway.Form1.CreateClientSession() in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 228
+   at CallOut_Gateway.Form1.CallAPI(String IncidentNumber, String Comment) in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 239"
+[24/7/2015 12:30:26 PM] [Gateway] "Broadcast status back to CAD"
+[24/7/2015 12:31:48 PM] [Gateway] "Gateway Leave Coding Service"
+[24/7/2015 12:31:49 PM] [Gateway] "Gateway Leave CAD Service"
+[24/7/2015 12:32:12 PM] [Gateway] "Open Coding Service proxy"
+[24/7/2015 12:32:13 PM] [Gateway] "Open Simulate CAD service proxy"
+[24/7/2015 12:32:16 PM] [Gateway] "Open Simulate CAD service proxy"
+[24/7/2015 12:32:16 PM] [Gateway] "Gateway Join CAD Service"
+[24/7/2015 12:32:17 PM] [Gateway] "Gateway join Coding Service"
+[24/7/2015 12:32:23 PM] [Gateway] "Set session and incident session"
+[24/7/2015 12:32:29 PM] [Gateway] "Start service to receive dispatched incident"
+[24/7/2015 12:32:47 PM] [Gateway] "Forward message from Real CAD to respective console"
+[24/7/2015 12:32:47 PM] [Gateway] "Sending message back to CAD"
+[24/7/2015 12:32:47 PM] [Gateway] "Create Client Session"
+[24/7/2015 12:33:08 PM] [Gateway] "Update Comment Failed."
+[24/7/2015 12:33:08 PM] [Gateway] "System.ServiceModel.EndpointNotFoundException: Could not connect to net.tcp://192.168.0.100:2044/IncidentIntegrationService/. The connection attempt lasted for a time span of 00:00:21.0352032. TCP error code 10060: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.0.100:2044.  ---> System.Net.Sockets.SocketException: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.0.100:2044
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   at System.ServiceModel.Channels.SocketConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.SocketConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   at System.ServiceModel.Channels.BufferedConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, AccountType account)
+   at gCAD.Integration.AppLib.ClientSession.Initiate(String username, String password, AccountType account) in c:\Projects\SERIS-CAD\SC\CAD Client\CADIntegration\gCAD.Integration.AppLib\ClientSession.cs:line 75
+   at CallOut_Gateway.Form1.CreateClientSession() in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 228
+   at CallOut_Gateway.Form1.CallAPI(String IncidentNumber, String Comment) in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 239"
+[24/7/2015 12:33:08 PM] [Gateway] "Broadcast status back to CAD"
+[24/7/2015 1:48:46 PM] [Gateway] "Set session and incident session"
+[24/7/2015 1:50:01 PM] [Gateway] "Set session and incident session"
+[24/7/2015 1:56:29 PM] [Gateway] "Set session and incident session"
+[24/7/2015 2:00:47 PM] [Gateway] "Open Coding Service proxy"
+[24/7/2015 2:00:48 PM] [Gateway] "Open Simulate CAD service proxy"
+[24/7/2015 2:00:48 PM] [Gateway] "Gateway Join CAD Service"
+[24/7/2015 2:00:49 PM] [Gateway] "Gateway join Coding Service"
+[24/7/2015 2:01:06 PM] [Gateway] "Start service to receive dispatched incident"
+[24/7/2015 2:01:07 PM] [Gateway] "Set session and incident session"
+[24/7/2015 2:01:25 PM] [Gateway] "Forward message from Real CAD to respective console"
+[24/7/2015 2:01:25 PM] [Gateway] "Sending message back to CAD"
+[24/7/2015 2:01:25 PM] [Gateway] "Create Client Session"
+[24/7/2015 2:01:26 PM] [Gateway] "Update Comment Failed."
+[24/7/2015 2:01:26 PM] [Gateway] "System.ServiceModel.EndpointNotFoundException: There was no endpoint listening at net.tcp://localhost:2045/IntegrationSessionService/ that could accept the message. This is often caused by an incorrect address or SOAP action. See InnerException, if present, for more details.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.ConnectionUpgradeHelper.DecodeFramingFault(ClientFramingDecoder decoder, IConnection connection, Uri via, String contentType, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.SendPreamble(IConnection connection, ArraySegment`1 preamble, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.DuplexConnectionPoolHelper.AcceptPooledConnection(IConnection connection, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, AccountType account)
+   at gCAD.Integration.AppLib.ClientSession.Initiate(String username, String password, AccountType account) in c:\Projects\SERIS-CAD\SC\CAD Client\CADIntegration\gCAD.Integration.AppLib\ClientSession.cs:line 75
+   at CallOut_Gateway.Form1.CreateClientSession() in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 232
+   at CallOut_Gateway.Form1.CallAPI(String IncidentNumber, String Comment) in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 243"
+[24/7/2015 2:01:26 PM] [Gateway] "Broadcast status back to CAD"
+[24/7/2015 2:03:21 PM] [Gateway] "Start service to receive dispatched incident"
+[24/7/2015 2:04:25 PM] [Gateway] "Forward message from Real CAD to respective console"
+[24/7/2015 2:04:25 PM] [Gateway] "Sending message back to CAD"
+[24/7/2015 2:04:25 PM] [Gateway] "Create Client Session"
+[24/7/2015 2:04:25 PM] [Gateway] "Update Comment Failed."
+[24/7/2015 2:04:25 PM] [Gateway] "System.ServiceModel.EndpointNotFoundException: There was no endpoint listening at net.tcp://localhost:2045/IntegrationSessionService/ that could accept the message. This is often caused by an incorrect address or SOAP action. See InnerException, if present, for more details.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.ConnectionUpgradeHelper.DecodeFramingFault(ClientFramingDecoder decoder, IConnection connection, Uri via, String contentType, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.SendPreamble(IConnection connection, ArraySegment`1 preamble, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.DuplexConnectionPoolHelper.AcceptPooledConnection(IConnection connection, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, AccountType account)
+   at gCAD.Integration.AppLib.ClientSession.Initiate(String username, String password, AccountType account) in c:\Projects\SERIS-CAD\SC\CAD Client\CADIntegration\gCAD.Integration.AppLib\ClientSession.cs:line 75
+   at CallOut_Gateway.Form1.CreateClientSession() in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 232
+   at CallOut_Gateway.Form1.CallAPI(String IncidentNumber, String Comment) in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 243"
+[24/7/2015 2:04:25 PM] [Gateway] "Broadcast status back to CAD"
+[24/7/2015 2:08:10 PM] [Gateway] "Set session and incident session"
+[24/7/2015 2:22:04 PM] [Gateway] "Gateway Leave CAD Service"
+[24/7/2015 3:12:12 PM] [Gateway] "Set session and incident session"
+[24/7/2015 3:12:29 PM] [Gateway] "Set session and incident session"
+[24/7/2015 3:14:39 PM] [Gateway] "Open Coding Service proxy"
+[24/7/2015 3:14:41 PM] [Gateway] "Open Simulate CAD service proxy"
+[24/7/2015 3:14:41 PM] [Gateway] "Gateway Join CAD Service"
+[24/7/2015 3:14:42 PM] [Gateway] "Gateway join Coding Service"
+[24/7/2015 3:14:43 PM] [Gateway] "Start service to receive dispatched incident"
+[24/7/2015 3:14:45 PM] [Gateway] "Set session and incident session"
+[24/7/2015 3:15:05 PM] [Gateway] "Forward message from Real CAD to respective console"
+[24/7/2015 3:15:05 PM] [Gateway] "Sending message back to CAD"
+[24/7/2015 3:15:05 PM] [Gateway] "Create Client Session"
+[24/7/2015 3:15:05 PM] [Gateway] "Update Comment Failed."
+[24/7/2015 3:15:05 PM] [Gateway] "System.ServiceModel.EndpointNotFoundException: There was no endpoint listening at net.tcp://localhost:2045/IntegrationSessionService/ that could accept the message. This is often caused by an incorrect address or SOAP action. See InnerException, if present, for more details.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.ConnectionUpgradeHelper.DecodeFramingFault(ClientFramingDecoder decoder, IConnection connection, Uri via, String contentType, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.SendPreamble(IConnection connection, ArraySegment`1 preamble, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.DuplexConnectionPoolHelper.AcceptPooledConnection(IConnection connection, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, String hostname, String clientVersion, AccountType account)
+
+Exception rethrown at [1]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, String hostname, String clientVersion, AccountType account)
+   at gCAD.Integration.AppLib.ClientSession.Initiate(String username, String password, AccountType account) in c:\Builds\1\SERIS-CAD\CAD Trunk\src\SC\CAD Client\CADIntegration\gCAD.Integration.AppLib\ClientSession.cs:line 83
+   at CallOut_Gateway.Form1.CreateClientSession() in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 231
+   at CallOut_Gateway.Form1.CallAPI(String IncidentNumber, String Comment) in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 242"
+[24/7/2015 3:15:05 PM] [Gateway] "Broadcast status back to CAD"
+[24/7/2015 3:17:38 PM] [Gateway] "Gateway Leave Coding Service"
+[24/7/2015 3:17:40 PM] [Gateway] "Gateway Leave CAD Service"
+[24/7/2015 3:18:36 PM] [Gateway] "Open Simulate CAD service proxy"
+[24/7/2015 3:18:37 PM] [Gateway] "Gateway Join CAD Service"
+[24/7/2015 3:18:37 PM] [Gateway] "Gateway Leave CAD Service"
+[24/7/2015 3:18:40 PM] [Gateway] "Open Coding Service proxy"
+[24/7/2015 3:18:41 PM] [Gateway] "Gateway join Coding Service"
+[24/7/2015 3:18:41 PM] [Gateway] "Gateway Join CAD Service"
+[24/7/2015 3:18:42 PM] [Gateway] "Start service to receive dispatched incident"
+[24/7/2015 3:18:46 PM] [Gateway] "Set session and incident session"
+[24/7/2015 3:19:13 PM] [Gateway] "Forward message from Real CAD to respective console"
+[24/7/2015 3:19:13 PM] [Gateway] "Sending message back to CAD"
+[24/7/2015 3:19:13 PM] [Gateway] "Create Client Session"
+[24/7/2015 3:19:14 PM] [Gateway] "Update Comment Failed."
+[24/7/2015 3:19:14 PM] [Gateway] "System.ServiceModel.EndpointNotFoundException: Could not connect to net.tcp://192.168.0.99:2044/IncidentIntegrationService/. The connection attempt lasted for a time span of 00:00:01.1330648. TCP error code 10061: No connection could be made because the target machine actively refused it 192.168.0.99:2044.  ---> System.Net.Sockets.SocketException: No connection could be made because the target machine actively refused it 192.168.0.99:2044
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   at System.ServiceModel.Channels.SocketConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.SocketConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   at System.ServiceModel.Channels.BufferedConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, String hostname, String clientVersion, AccountType account)
+
+Exception rethrown at [1]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, String hostname, String clientVersion, AccountType account)
+   at gCAD.Integration.AppLib.ClientSession.Initiate(String username, String password, AccountType account) in c:\Builds\1\SERIS-CAD\CAD Trunk\src\SC\CAD Client\CADIntegration\gCAD.Integration.AppLib\ClientSession.cs:line 83
+   at CallOut_Gateway.Form1.CreateClientSession() in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 231
+   at CallOut_Gateway.Form1.CallAPI(String IncidentNumber, String Comment) in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 242"
+[24/7/2015 3:19:14 PM] [Gateway] "Broadcast status back to CAD"
+[24/7/2015 3:19:41 PM] [Gateway] "Gateway Leave Coding Service"
+[24/7/2015 3:19:42 PM] [Gateway] "Gateway Leave CAD Service"
+[24/7/2015 3:53:00 PM] [Gateway] "Open Coding Service proxy"
+[24/7/2015 3:53:02 PM] [Gateway] "Gateway join Coding Service"
+[24/7/2015 3:53:03 PM] [Gateway] "Open Simulate CAD service proxy"
+[24/7/2015 3:53:03 PM] [Gateway] "Gateway Join CAD Service"
+[24/7/2015 3:53:14 PM] [Gateway] "Set session and incident session"
+[24/7/2015 3:53:15 PM] [Gateway] "Start service to receive dispatched incident"
+[24/7/2015 3:53:58 PM] [Gateway] "Forward message from Real CAD to respective console"
+[24/7/2015 3:53:58 PM] [Gateway] "Sending message back to CAD"
+[24/7/2015 3:53:58 PM] [Gateway] "Create Client Session"
+[24/7/2015 3:53:58 PM] [Gateway] "Update Comment Failed."
+[24/7/2015 3:53:58 PM] [Gateway] "System.ServiceModel.EndpointNotFoundException: There was no endpoint listening at net.tcp://localhost:2045/IntegrationSessionService/ that could accept the message. This is often caused by an incorrect address or SOAP action. See InnerException, if present, for more details.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.ConnectionUpgradeHelper.DecodeFramingFault(ClientFramingDecoder decoder, IConnection connection, Uri via, String contentType, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.SendPreamble(IConnection connection, ArraySegment`1 preamble, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.DuplexConnectionPoolHelper.AcceptPooledConnection(IConnection connection, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, String hostname, String clientVersion, AccountType account)
+
+Exception rethrown at [1]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, String hostname, String clientVersion, AccountType account)
+   at gCAD.Integration.AppLib.ClientSession.Initiate(String username, String password, AccountType account) in c:\Builds\1\SERIS-CAD\CAD Trunk\src\SC\CAD Client\CADIntegration\gCAD.Integration.AppLib\ClientSession.cs:line 83
+   at CallOut_Gateway.Form1.CreateClientSession() in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 231
+   at CallOut_Gateway.Form1.CallAPI(String IncidentNumber, String Comment) in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 242"
+[24/7/2015 3:53:58 PM] [Gateway] "Broadcast status back to CAD"
+[24/7/2015 3:56:20 PM] [Gateway] "Gateway Leave CAD Service"
+[24/7/2015 3:56:21 PM] [Gateway] "Gateway Leave Coding Service"
+[24/7/2015 3:56:32 PM] [Gateway] "Open Simulate CAD service proxy"
+[24/7/2015 3:56:32 PM] [Gateway] "Open Coding Service proxy"
+[24/7/2015 3:56:33 PM] [Gateway] "Gateway join Coding Service"
+[24/7/2015 3:56:33 PM] [Gateway] "Gateway Join CAD Service"
+[24/7/2015 3:56:34 PM] [Gateway] "Start service to receive dispatched incident"
+[24/7/2015 3:56:38 PM] [Gateway] "Set session and incident session"
+[24/7/2015 3:56:51 PM] [Gateway] "Forward message from Real CAD to respective console"
+[24/7/2015 3:56:51 PM] [Gateway] "Sending message back to CAD"
+[24/7/2015 3:56:51 PM] [Gateway] "Create Client Session"
+[24/7/2015 3:56:53 PM] [Gateway] "Update Comment Failed."
+[24/7/2015 3:56:53 PM] [Gateway] "System.ServiceModel.EndpointNotFoundException: Could not connect to net.tcp://192.168.0.88:2044/IncidentIntegrationService/. The connection attempt lasted for a time span of 00:00:01.0920625. TCP error code 10061: No connection could be made because the target machine actively refused it 192.168.0.88:2044.  ---> System.Net.Sockets.SocketException: No connection could be made because the target machine actively refused it 192.168.0.88:2044
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   at System.ServiceModel.Channels.SocketConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.SocketConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   at System.ServiceModel.Channels.BufferedConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, String hostname, String clientVersion, AccountType account)
+
+Exception rethrown at [1]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, String hostname, String clientVersion, AccountType account)
+   at gCAD.Integration.AppLib.ClientSession.Initiate(String username, String password, AccountType account) in c:\Builds\1\SERIS-CAD\CAD Trunk\src\SC\CAD Client\CADIntegration\gCAD.Integration.AppLib\ClientSession.cs:line 83
+   at CallOut_Gateway.Form1.CreateClientSession() in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 231
+   at CallOut_Gateway.Form1.CallAPI(String IncidentNumber, String Comment) in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 242"
+[24/7/2015 3:56:53 PM] [Gateway] "Broadcast status back to CAD"
+[24/7/2015 4:05:00 PM] [Gateway] "Gateway Leave CAD Service"
+[24/7/2015 4:05:02 PM] [Gateway] "Gateway Leave Coding Service"
+[24/7/2015 4:07:47 PM] [Gateway] "Open Coding Service proxy"
+[24/7/2015 4:07:48 PM] [Gateway] "Gateway join Coding Service"
+[24/7/2015 4:07:48 PM] [Gateway] "Open Simulate CAD service proxy"
+[24/7/2015 4:07:49 PM] [Gateway] "Gateway Join CAD Service"
+[24/7/2015 4:07:50 PM] [Gateway] "Start service to receive dispatched incident"
+[24/7/2015 4:08:03 PM] [Gateway] "Set session and incident session"
+[24/7/2015 4:08:18 PM] [Gateway] "Forward message from Real CAD to respective console"
+[24/7/2015 4:08:18 PM] [Gateway] "Sending message back to CAD"
+[24/7/2015 4:08:18 PM] [Gateway] "Create Client Session"
+[24/7/2015 4:08:18 PM] [Gateway] "Update Comment Failed."
+[24/7/2015 4:08:18 PM] [Gateway] "System.ServiceModel.EndpointNotFoundException: There was no endpoint listening at net.tcp://localhost:2045/IntegrationSessionService/ that could accept the message. This is often caused by an incorrect address or SOAP action. See InnerException, if present, for more details.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.ConnectionUpgradeHelper.DecodeFramingFault(ClientFramingDecoder decoder, IConnection connection, Uri via, String contentType, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.SendPreamble(IConnection connection, ArraySegment`1 preamble, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.DuplexConnectionPoolHelper.AcceptPooledConnection(IConnection connection, TimeoutHelper& timeoutHelper)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, String hostname, String clientVersion, AccountType account)
+
+Exception rethrown at [1]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, String hostname, String clientVersion, AccountType account)
+   at gCAD.Integration.AppLib.ClientSession.Initiate(String username, String password, AccountType account) in c:\Builds\1\SERIS-CAD\CAD Trunk\src\SC\CAD Client\CADIntegration\gCAD.Integration.AppLib\ClientSession.cs:line 83
+   at CallOut_Gateway.Form1.CreateClientSession() in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 231
+   at CallOut_Gateway.Form1.CallAPI(String IncidentNumber, String Comment) in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 242"
+[24/7/2015 4:08:18 PM] [Gateway] "Broadcast status back to CAD"
+[24/7/2015 4:12:24 PM] [Gateway] "Open Simulate CAD service proxy"
+[24/7/2015 4:12:25 PM] [Gateway] "Open Coding Service proxy"
+[24/7/2015 4:12:26 PM] [Gateway] "Gateway Join CAD Service"
+[24/7/2015 4:12:27 PM] [Gateway] "Gateway join Coding Service"
+[24/7/2015 4:12:32 PM] [Gateway] "Set session and incident session"
+[24/7/2015 4:12:53 PM] [Gateway] "Start service to receive dispatched incident"
+[24/7/2015 4:13:24 PM] [Gateway] "Forward message from Real CAD to respective console"
+[24/7/2015 4:13:24 PM] [Gateway] "Sending message back to CAD"
+[24/7/2015 4:13:24 PM] [Gateway] "Create Client Session"
+[24/7/2015 4:13:46 PM] [Gateway] "Update Comment Failed."
+[24/7/2015 4:13:46 PM] [Gateway] "System.ServiceModel.EndpointNotFoundException: Could not connect to net.tcp://192.168.0.100:2044/IncidentIntegrationService/. The connection attempt lasted for a time span of 00:00:21.0272027. TCP error code 10060: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.0.100:2044.  ---> System.Net.Sockets.SocketException: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.0.100:2044
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   at System.ServiceModel.Channels.SocketConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.SocketConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   at System.ServiceModel.Channels.BufferedConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, String hostname, String clientVersion, AccountType account)
+
+Exception rethrown at [1]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, String hostname, String clientVersion, AccountType account)
+   at gCAD.Integration.AppLib.ClientSession.Initiate(String username, String password, AccountType account) in c:\Builds\1\SERIS-CAD\CAD Trunk\src\SC\CAD Client\CADIntegration\gCAD.Integration.AppLib\ClientSession.cs:line 83
+   at CallOut_Gateway.Form1.CreateClientSession() in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 231
+   at CallOut_Gateway.Form1.CallAPI(String IncidentNumber, String Comment) in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 242"
+[24/7/2015 4:13:46 PM] [Gateway] "Broadcast status back to CAD"
+[24/7/2015 4:14:59 PM] [Gateway] "Set session and incident session"
+[24/7/2015 4:15:14 PM] [Gateway] "Forward message from Real CAD to respective console"
+[24/7/2015 4:15:14 PM] [Gateway] "Sending message back to CAD"
+[24/7/2015 4:15:14 PM] [Gateway] "Create Client Session"
+[24/7/2015 4:15:15 PM] [Gateway] "Update Comment Failed."
+[24/7/2015 4:15:15 PM] [Gateway] "System.ServiceModel.EndpointNotFoundException: Could not connect to net.tcp://192.168.0.199:2044/IncidentIntegrationService/. The connection attempt lasted for a time span of 00:00:01.0380594. TCP error code 10061: No connection could be made because the target machine actively refused it 192.168.0.199:2044.  ---> System.Net.Sockets.SocketException: No connection could be made because the target machine actively refused it 192.168.0.199:2044
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   at System.ServiceModel.Channels.SocketConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.SocketConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   at System.ServiceModel.Channels.BufferedConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.EnsureOpened(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, String hostname, String clientVersion, AccountType account)
+
+Exception rethrown at [1]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, String hostname, String clientVersion, AccountType account)
+   at gCAD.Integration.AppLib.ClientSession.Initiate(String username, String password, AccountType account) in c:\Builds\1\SERIS-CAD\CAD Trunk\src\SC\CAD Client\CADIntegration\gCAD.Integration.AppLib\ClientSession.cs:line 83
+   at CallOut_Gateway.Form1.CreateClientSession() in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 231
+   at CallOut_Gateway.Form1.CallAPI(String IncidentNumber, String Comment) in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 242"
+[24/7/2015 4:15:15 PM] [Gateway] "Broadcast status back to CAD"
+[24/7/2015 4:15:54 PM] [Gateway] "Gateway Leave CAD Service"
+[24/7/2015 4:15:54 PM] [Gateway] "Gateway Leave Coding Service"
+[24/7/2015 4:16:18 PM] [Gateway] "Open Coding Service proxy"
+[24/7/2015 4:16:19 PM] [Gateway] "Open Simulate CAD service proxy"
+[24/7/2015 4:16:19 PM] [Gateway] "Gateway Join CAD Service"
+[24/7/2015 4:16:20 PM] [Gateway] "Gateway join Coding Service"
+[24/7/2015 4:16:24 PM] [Gateway] "Set session and incident session"
+[24/7/2015 4:16:25 PM] [Gateway] "Start service to receive dispatched incident"
+[24/7/2015 4:16:34 PM] [Gateway] "Forward message from Real CAD to respective console"
+[24/7/2015 4:16:34 PM] [Gateway] "Sending message back to CAD"
+[24/7/2015 4:16:34 PM] [Gateway] "Create Client Session"
+[24/7/2015 4:16:36 PM] [Gateway] "Update Comment Failed."
+[24/7/2015 4:16:36 PM] [Gateway] "System.ServiceModel.EndpointNotFoundException: Could not connect to net.tcp://192.168.0.50:2044/IncidentIntegrationService/. The connection attempt lasted for a time span of 00:00:01.6550947. TCP error code 10061: No connection could be made because the target machine actively refused it 192.168.0.50:2044.  ---> System.Net.Sockets.SocketException: No connection could be made because the target machine actively refused it 192.168.0.50:2044
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   at System.ServiceModel.Channels.SocketConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.SocketConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   at System.ServiceModel.Channels.BufferedConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, String hostname, String clientVersion, AccountType account)
+
+Exception rethrown at [1]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, String hostname, String clientVersion, AccountType account)
+   at gCAD.Integration.AppLib.ClientSession.Initiate(String username, String password, AccountType account) in c:\Builds\1\SERIS-CAD\CAD Trunk\src\SC\CAD Client\CADIntegration\gCAD.Integration.AppLib\ClientSession.cs:line 83
+   at CallOut_Gateway.Form1.CreateClientSession() in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 231
+   at CallOut_Gateway.Form1.CallAPI(String IncidentNumber, String Comment) in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 242"
+[24/7/2015 4:16:36 PM] [Gateway] "Broadcast status back to CAD"
+[24/7/2015 4:16:59 PM] [Gateway] "Gateway Leave Coding Service"
+[24/7/2015 4:16:59 PM] [Gateway] "Gateway Leave CAD Service"
+[24/7/2015 4:19:13 PM] [Gateway] "Set session and incident session"
+[24/7/2015 4:19:23 PM] [Gateway] "Forward message from Real CAD to respective console"
+[24/7/2015 4:19:23 PM] [Gateway] "Sending message back to CAD"
+[24/7/2015 4:19:23 PM] [Gateway] "Create Client Session"
+[24/7/2015 4:19:24 PM] [Gateway] "Update Comment Failed."
+[24/7/2015 4:19:24 PM] [Gateway] "System.ServiceModel.EndpointNotFoundException: Could not connect to net.tcp://192.168.0.99:2044/IncidentIntegrationService/. The connection attempt lasted for a time span of 00:00:01.0270587. TCP error code 10061: No connection could be made because the target machine actively refused it 192.168.0.99:2044.  ---> System.Net.Sockets.SocketException: No connection could be made because the target machine actively refused it 192.168.0.99:2044
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   at System.ServiceModel.Channels.SocketConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.SocketConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   at System.ServiceModel.Channels.BufferedConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, String hostname, String clientVersion, AccountType account)
+
+Exception rethrown at [1]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, String hostname, String clientVersion, AccountType account)
+   at gCAD.Integration.AppLib.ClientSession.Initiate(String username, String password, AccountType account) in c:\Builds\1\SERIS-CAD\CAD Trunk\src\SC\CAD Client\CADIntegration\gCAD.Integration.AppLib\ClientSession.cs:line 83
+   at CallOut_Gateway.Form1.CreateClientSession() in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 231
+   at CallOut_Gateway.Form1.CallAPI(String IncidentNumber, String Comment) in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 242"
+[24/7/2015 4:20:02 PM] [Gateway] "Gateway Join CAD Service"
+[24/7/2015 4:20:03 PM] [Gateway] "Gateway Leave CAD Service"
+[24/7/2015 4:23:09 PM] [Gateway] "Open Coding Service proxy"
+[24/7/2015 4:23:10 PM] [Gateway] "Open Simulate CAD service proxy"
+[24/7/2015 4:23:10 PM] [Gateway] "Gateway Join CAD Service"
+[24/7/2015 4:23:11 PM] [Gateway] "Gateway join Coding Service"
+[24/7/2015 4:23:18 PM] [Gateway] "Set session and incident session"
+[24/7/2015 4:23:19 PM] [Gateway] "Start service to receive dispatched incident"
+[24/7/2015 4:23:31 PM] [Gateway] "Forward message from Real CAD to respective console"
+[24/7/2015 4:23:31 PM] [Gateway] "Sending message back to CAD"
+[24/7/2015 4:23:31 PM] [Gateway] "Create Client Session"
+[24/7/2015 4:23:32 PM] [Gateway] "Update Comment Failed."
+[24/7/2015 4:23:32 PM] [Gateway] "System.ServiceModel.EndpointNotFoundException: Could not connect to net.tcp://192.168.0.78:2044/IncidentIntegrationService/. The connection attempt lasted for a time span of 00:00:01.0210584. TCP error code 10061: No connection could be made because the target machine actively refused it 192.168.0.78:2044.  ---> System.Net.Sockets.SocketException: No connection could be made because the target machine actively refused it 192.168.0.78:2044
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   at System.ServiceModel.Channels.SocketConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.SocketConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   at System.ServiceModel.Channels.BufferedConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, String hostname, String clientVersion, AccountType account)
+
+Exception rethrown at [1]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, String hostname, String clientVersion, AccountType account)
+   at gCAD.Integration.AppLib.ClientSession.Initiate(String username, String password, AccountType account) in c:\Builds\1\SERIS-CAD\CAD Trunk\src\SC\CAD Client\CADIntegration\gCAD.Integration.AppLib\ClientSession.cs:line 83
+   at CallOut_Gateway.Form1.CreateClientSession() in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 231
+   at CallOut_Gateway.Form1.CallAPI(String IncidentNumber, String Comment) in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 242"
+[24/7/2015 4:23:32 PM] [Gateway] "Broadcast status back to CAD"
+[24/7/2015 4:24:02 PM] [Gateway] "Set session and incident session"
+[24/7/2015 4:24:02 PM] [Gateway] "Start service to receive dispatched incident"
+[24/7/2015 4:24:24 PM] [Console] "Open coding service proxy"
+[24/7/2015 4:24:33 PM] [Console] "Open coding service proxy"
+[24/7/2015 4:24:37 PM] [Console] "Open Coding Service proxy"
+[24/7/2015 4:24:38 PM] [Console] "Console join Coding service"
+[24/7/2015 4:24:47 PM] [Gateway] "Forward message from Real CAD to respective console"
+[24/7/2015 4:24:47 PM] [Gateway] "Sending message back to CAD"
+[24/7/2015 4:24:47 PM] [Gateway] "Create Client Session"
+[24/7/2015 4:24:47 PM] [Gateway] "Update Comment Failed."
+[24/7/2015 4:24:47 PM] [Gateway] "System.ServiceModel.ActionNotSupportedException: The message with Action 'http://tempuri.org/IIntegrationSessionService/Initiate' cannot be processed at the receiver, due to a ContractFilter mismatch at the EndpointDispatcher. This may be because of either a contract mismatch (mismatched Actions between sender and receiver) or a binding/security mismatch between the sender and the receiver.  Check that sender and receiver have the same contract and the same binding (including security requirements, e.g. Message, Transport, None).
+
+Server stack trace: 
+   at System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   at System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, String hostname, String clientVersion, AccountType account)
+
+Exception rethrown at [1]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, String hostname, String clientVersion, AccountType account)
+   at gCAD.Integration.AppLib.ClientSession.Initiate(String username, String password, AccountType account) in c:\Builds\1\SERIS-CAD\CAD Trunk\src\SC\CAD Client\CADIntegration\gCAD.Integration.AppLib\ClientSession.cs:line 83
+   at CallOut_Gateway.Form1.CreateClientSession() in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 231
+   at CallOut_Gateway.Form1.CallAPI(String IncidentNumber, String Comment) in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 242"
+[24/7/2015 4:24:52 PM] [Console] "Send Status back to gateway"
+[24/7/2015 4:24:52 PM] [Gateway] "Broadcast status back to CAD"
+[24/7/2015 4:27:26 PM] [Console] "Console leave Coding service"
+[24/7/2015 4:27:27 PM] [Console] "open new coding service proxy from setting window"
+[24/7/2015 4:27:33 PM] [Console] "Open Coding Service proxy"
+[24/7/2015 4:27:35 PM] [Console] "Console join Coding service"
+[24/7/2015 4:30:20 PM] [Gateway] "Forward message from Real CAD to respective console"
+[24/7/2015 4:30:20 PM] [Gateway] "Sending message back to CAD"
+[24/7/2015 4:30:20 PM] [Gateway] "Create Client Session"
+[24/7/2015 4:30:20 PM] [Gateway] "Update Comment Failed."
+[24/7/2015 4:30:20 PM] [Gateway] "System.ServiceModel.ActionNotSupportedException: The message with Action 'http://tempuri.org/IIntegrationSessionService/Initiate' cannot be processed at the receiver, due to a ContractFilter mismatch at the EndpointDispatcher. This may be because of either a contract mismatch (mismatched Actions between sender and receiver) or a binding/security mismatch between the sender and the receiver.  Check that sender and receiver have the same contract and the same binding (including security requirements, e.g. Message, Transport, None).
+
+Server stack trace: 
+   at System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   at System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, String hostname, String clientVersion, AccountType account)
+
+Exception rethrown at [1]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, String hostname, String clientVersion, AccountType account)
+   at gCAD.Integration.AppLib.ClientSession.Initiate(String username, String password, AccountType account) in c:\Builds\1\SERIS-CAD\CAD Trunk\src\SC\CAD Client\CADIntegration\gCAD.Integration.AppLib\ClientSession.cs:line 83
+   at CallOut_Gateway.Form1.CreateClientSession() in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 231
+   at CallOut_Gateway.Form1.CallAPI(String IncidentNumber, String Comment) in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 242"
+[24/7/2015 4:30:50 PM] [Gateway] "Broadcast status back to CAD"
+[24/7/2015 4:35:44 PM] [Console] "Console leave Coding service"
+[24/7/2015 4:35:45 PM] [Console] "open new coding service proxy from setting window"
+[24/7/2015 4:35:55 PM] [Console] "Open Coding Service proxy"
+[24/7/2015 4:35:56 PM] [Console] "Console join Coding service"
+[24/7/2015 4:36:09 PM] [Gateway] "Forward message from Real CAD to respective console"
+[24/7/2015 4:36:09 PM] [Gateway] "Sending message back to CAD"
+[24/7/2015 4:36:09 PM] [Gateway] "Create Client Session"
+[24/7/2015 4:36:09 PM] [Gateway] "Update Comment Failed."
+[24/7/2015 4:36:09 PM] [Gateway] "System.ServiceModel.ActionNotSupportedException: The message with Action 'http://tempuri.org/IIntegrationSessionService/Initiate' cannot be processed at the receiver, due to a ContractFilter mismatch at the EndpointDispatcher. This may be because of either a contract mismatch (mismatched Actions between sender and receiver) or a binding/security mismatch between the sender and the receiver.  Check that sender and receiver have the same contract and the same binding (including security requirements, e.g. Message, Transport, None).
+
+Server stack trace: 
+   at System.ServiceModel.Channels.ServiceChannel.ThrowIfFaultUnderstood(Message reply, MessageFault fault, String action, MessageVersion version, FaultConverter faultConverter)
+   at System.ServiceModel.Channels.ServiceChannel.HandleReply(ProxyOperationRuntime operation, ProxyRpc& rpc)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, String hostname, String clientVersion, AccountType account)
+
+Exception rethrown at [1]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, String hostname, String clientVersion, AccountType account)
+   at gCAD.Integration.AppLib.ClientSession.Initiate(String username, String password, AccountType account) in c:\Builds\1\SERIS-CAD\CAD Trunk\src\SC\CAD Client\CADIntegration\gCAD.Integration.AppLib\ClientSession.cs:line 83
+   at CallOut_Gateway.Form1.CreateClientSession() in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 231
+   at CallOut_Gateway.Form1.CallAPI(String IncidentNumber, String Comment) in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 242"
+[24/7/2015 4:36:39 PM] [Console] "Send Status back to gateway"
+[24/7/2015 4:36:39 PM] [Gateway] "Broadcast status back to CAD"
+[24/7/2015 4:37:28 PM] [Console] "Console leave Coding service"
+[24/7/2015 4:37:34 PM] [Gateway] "Gateway Leave CAD Service"
+[24/7/2015 4:37:34 PM] [Gateway] "Gateway Leave Coding Service"
+[24/7/2015 4:51:56 PM] [Gateway] "Open Coding Service proxy"
+[24/7/2015 4:51:57 PM] [Gateway] "Gateway join Coding Service"
+[24/7/2015 4:51:59 PM] [Gateway] "Open Simulate CAD service proxy"
+[24/7/2015 4:51:59 PM] [Gateway] "Gateway Join CAD Service"
+[24/7/2015 4:52:04 PM] [Gateway] "Start service to receive dispatched incident"
+[24/7/2015 4:52:05 PM] [Gateway] "Set session and incident session"
+[24/7/2015 4:52:18 PM] [Gateway] "Forward message from Real CAD to respective console"
+[24/7/2015 4:52:18 PM] [Gateway] "Sending message back to CAD"
+[24/7/2015 4:52:18 PM] [Gateway] "Create Client Session"
+[24/7/2015 4:52:39 PM] [Gateway] "Update Comment Failed."
+[24/7/2015 4:52:39 PM] [Gateway] "System.ServiceModel.EndpointNotFoundException: Could not connect to net.tcp://192.168.0.100:2044/IncidentIntegrationService/. The connection attempt lasted for a time span of 00:00:21.0012012. TCP error code 10060: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.0.100:2044.  ---> System.Net.Sockets.SocketException: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.0.100:2044
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   at System.ServiceModel.Channels.SocketConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.SocketConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   at System.ServiceModel.Channels.BufferedConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, String hostname, String clientVersion, AccountType account)
+
+Exception rethrown at [1]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, String hostname, String clientVersion, AccountType account)
+   at gCAD.Integration.AppLib.ClientSession.Initiate(String username, String password, AccountType account) in c:\Builds\1\SERIS-CAD\CAD Trunk\src\SC\CAD Client\CADIntegration\gCAD.Integration.AppLib\ClientSession.cs:line 83
+   at CallOut_Gateway.Form1.CreateClientSession() in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 231
+   at CallOut_Gateway.Form1.CallAPI(String IncidentNumber, String Comment) in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 242"
+[24/7/2015 4:52:39 PM] [Gateway] "Broadcast status back to CAD"
+[24/7/2015 4:53:38 PM] [Gateway] "Set session and incident session"
+[24/7/2015 4:53:57 PM] [Gateway] "Forward message from Real CAD to respective console"
+[24/7/2015 4:53:57 PM] [Gateway] "Sending message back to CAD"
+[24/7/2015 4:53:57 PM] [Gateway] "Create Client Session"
+[24/7/2015 4:53:58 PM] [Gateway] "Update Comment Failed."
+[24/7/2015 4:53:58 PM] [Gateway] "System.ServiceModel.EndpointNotFoundException: Could not connect to net.tcp://192.168.0.120:2044/IncidentIntegrationService/. The connection attempt lasted for a time span of 00:00:01.0010572. TCP error code 10061: No connection could be made because the target machine actively refused it 192.168.0.120:2044.  ---> System.Net.Sockets.SocketException: No connection could be made because the target machine actively refused it 192.168.0.120:2044
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   at System.ServiceModel.Channels.SocketConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.SocketConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   at System.ServiceModel.Channels.BufferedConnectionInitiator.Connect(Uri uri, TimeSpan timeout)
+   at System.ServiceModel.Channels.ConnectionPoolHelper.EstablishConnection(TimeSpan timeout)
+   at System.ServiceModel.Channels.ClientFramingDuplexSessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, String hostname, String clientVersion, AccountType account)
+
+Exception rethrown at [1]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at gCAD.Shared.IntegrationContract.IIntegrationSessionService.Initiate(String username, String password, String hostname, String clientVersion, AccountType account)
+   at gCAD.Integration.AppLib.ClientSession.Initiate(String username, String password, AccountType account) in c:\Builds\1\SERIS-CAD\CAD Trunk\src\SC\CAD Client\CADIntegration\gCAD.Integration.AppLib\ClientSession.cs:line 83
+   at CallOut_Gateway.Form1.CreateClientSession() in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 231
+   at CallOut_Gateway.Form1.CallAPI(String IncidentNumber, String Comment) in c:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\Form1.cs:line 242"
+[24/7/2015 4:53:58 PM] [Gateway] "Broadcast status back to CAD"
+[24/7/2015 4:57:29 PM] [Gateway] "Gateway Leave CAD Service"

@@ -1,0 +1,15 @@
+C:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_ConsoleWPF\CallOut_ConsoleWPF\bin\Release\CallOut_ConsoleWPF.exe.config
+C:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_ConsoleWPF\CallOut_ConsoleWPF\bin\Release\CallOut_ConsoleWPF.exe
+C:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_ConsoleWPF\CallOut_ConsoleWPF\bin\Release\CallOut_ConsoleWPF.pdb
+C:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_ConsoleWPF\CallOut_ConsoleWPF\bin\Release\NAudio.dll
+C:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Release\MainWindow.baml
+C:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Release\SettingsWindow.baml
+C:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Release\MainWindow.g.cs
+C:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Release\SettingsWindow.g.cs
+C:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Release\App.g.cs
+C:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Release\CallOut_ConsoleWPF_MarkupCompile.cache
+C:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Release\CallOut_ConsoleWPF.g.resources
+C:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Release\CallOut_ConsoleWPF.Properties.Resources.resources
+C:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Release\CallOut_ConsoleWPF.csproj.GenerateResource.Cache
+C:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Release\CallOut_ConsoleWPF.exe
+C:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_ConsoleWPF\CallOut_ConsoleWPF\obj\Release\CallOut_ConsoleWPF.pdb

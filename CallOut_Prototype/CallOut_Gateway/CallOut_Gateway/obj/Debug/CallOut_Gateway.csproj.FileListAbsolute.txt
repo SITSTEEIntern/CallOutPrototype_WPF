@@ -1,0 +1,153 @@
+c:\users\intern\documents\visual studio 2013\Projects\CallOut_Gateway\CallOut_Gateway\bin\Debug\CallOut_Gateway.exe.config
+C:\Users\intern\Documents\GitHub\CallOutPrototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\CallOut_Gateway.exe.config
+C:\Users\intern\Documents\GitHub\CallOutPrototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\CallOut_Gateway.exe
+C:\Users\intern\Documents\GitHub\CallOutPrototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\CallOut_Gateway.pdb
+C:\Users\intern\Documents\GitHub\CallOutPrototype\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.csprojResolveAssemblyReference.cache
+C:\Users\intern\Documents\GitHub\CallOutPrototype\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.Form1.resources
+C:\Users\intern\Documents\GitHub\CallOutPrototype\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.Properties.Resources.resources
+C:\Users\intern\Documents\GitHub\CallOutPrototype\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.csproj.GenerateResource.Cache
+C:\Users\intern\Documents\GitHub\CallOutPrototype\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.exe
+C:\Users\intern\Documents\GitHub\CallOutPrototype\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.pdb
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.Form1.resources
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.Properties.Resources.resources
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.csproj.GenerateResource.Cache
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\CallOut_Gateway.exe.config
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\CallOut_Gateway.exe
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\CallOut_Gateway.pdb
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.Service.dll
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.Integration.AppLib.dll
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.Shared.IntegrationContract.dll
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\NLog.dll
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.Entity.dll
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.Utility.dll
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.DAO.dll
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.WcfErrorHandler.dll
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\NHibernate.dll
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\Iesi.Collections.dll
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.Service.pdb
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.Integration.AppLib.pdb
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.Integration.AppLib.xml
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.Shared.IntegrationContract.pdb
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.Shared.IntegrationContract.xml
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.Entity.pdb
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.Utility.pdb
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.DAO.pdb
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.WcfErrorHandler.pdb
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\Iesi.Collections.xml
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.exe
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.pdb
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.csprojResolveAssemblyReference.cache
+C:\Users\Elson\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\CallOut_Gateway.exe.config
+C:\Users\Elson\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\CallOut_Gateway.exe
+C:\Users\Elson\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\CallOut_Gateway.pdb
+C:\Users\Elson\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.Service.dll
+C:\Users\Elson\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.Integration.AppLib.dll
+C:\Users\Elson\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.Shared.IntegrationContract.dll
+C:\Users\Elson\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\NLog.dll
+C:\Users\Elson\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.Entity.dll
+C:\Users\Elson\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.Utility.dll
+C:\Users\Elson\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.DAO.dll
+C:\Users\Elson\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.WcfErrorHandler.dll
+C:\Users\Elson\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\NHibernate.dll
+C:\Users\Elson\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\Iesi.Collections.dll
+C:\Users\Elson\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.Service.pdb
+C:\Users\Elson\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.Integration.AppLib.pdb
+C:\Users\Elson\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.Integration.AppLib.xml
+C:\Users\Elson\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.Shared.IntegrationContract.pdb
+C:\Users\Elson\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.Shared.IntegrationContract.xml
+C:\Users\Elson\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.Entity.pdb
+C:\Users\Elson\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.Utility.pdb
+C:\Users\Elson\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.DAO.pdb
+C:\Users\Elson\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.WcfErrorHandler.pdb
+C:\Users\Elson\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\Iesi.Collections.xml
+C:\Users\Elson\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.csprojResolveAssemblyReference.cache
+C:\Users\Elson\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.Form1.resources
+C:\Users\Elson\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.Properties.Resources.resources
+C:\Users\Elson\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.csproj.GenerateResource.Cache
+C:\Users\Elson\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.exe
+C:\Users\Elson\Desktop\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.pdb
+C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\CallOut_Gateway.exe.config
+C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\CallOut_Gateway.exe
+C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\CallOut_Gateway.pdb
+C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.Service.dll
+C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.Integration.AppLib.dll
+C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.Shared.IntegrationContract.dll
+C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\NLog.dll
+C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.Entity.dll
+C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.Utility.dll
+C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.DAO.dll
+C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.WcfErrorHandler.dll
+C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\NHibernate.dll
+C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\Iesi.Collections.dll
+C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.Service.pdb
+C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.Integration.AppLib.pdb
+C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.Integration.AppLib.xml
+C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.Shared.IntegrationContract.pdb
+C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.Shared.IntegrationContract.xml
+C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.Entity.pdb
+C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.Utility.pdb
+C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.DAO.pdb
+C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.WcfErrorHandler.pdb
+C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\bin\Debug\Iesi.Collections.xml
+C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.Form1.resources
+C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.Properties.Resources.resources
+C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.csproj.GenerateResource.Cache
+C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.exe
+C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.pdb
+C:\Users\intern\Documents\GitHub\CallOutPrototype_WPF\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.csprojResolveAssemblyReference.cache
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\CallOut_Gateway.exe.config
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\CallOut_Gateway.exe
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\CallOut_Gateway.pdb
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.Service.dll
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.Integration.AppLib.dll
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.Shared.IntegrationContract.dll
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\NLog.dll
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.Entity.dll
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.Utility.dll
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.DAO.dll
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.WcfErrorHandler.dll
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\NHibernate.dll
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\Iesi.Collections.dll
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.Service.pdb
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.Integration.AppLib.pdb
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.Integration.AppLib.xml
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.Shared.IntegrationContract.pdb
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.Shared.IntegrationContract.xml
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.Entity.pdb
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.Utility.pdb
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.DAO.pdb
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.WcfErrorHandler.pdb
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\Iesi.Collections.xml
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.csprojResolveAssemblyReference.cache
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.Form1.resources
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.Properties.Resources.resources
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.csproj.GenerateResource.Cache
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.exe
+C:\Users\intern\Desktop\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.pdb
+C:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\CallOut_Gateway.exe.config
+C:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\CallOut_Gateway.exe
+C:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\CallOut_Gateway.pdb
+C:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.Service.dll
+C:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.Integration.AppLib.dll
+C:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.Shared.IntegrationContract.dll
+C:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\NLog.dll
+C:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.Entity.dll
+C:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.Utility.dll
+C:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.DAO.dll
+C:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.WcfErrorHandler.dll
+C:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\NHibernate.dll
+C:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\Iesi.Collections.dll
+C:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.Service.pdb
+C:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.Integration.AppLib.pdb
+C:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.Shared.IntegrationContract.pdb
+C:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.Entity.pdb
+C:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.Utility.pdb
+C:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.DAO.pdb
+C:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\gCAD.CADS.WcfErrorHandler.pdb
+C:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\bin\Debug\Iesi.Collections.xml
+C:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.Form1.resources
+C:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.Properties.Resources.resources
+C:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.csproj.GenerateResource.Cache
+C:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.exe
+C:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.pdb
+C:\Users\admin\Desktop\CallOutPrototype_WPF (230715)\CallOutPrototype_WPF\CallOut_Prototype\CallOut_Gateway\CallOut_Gateway\obj\Debug\CallOut_Gateway.csprojResolveAssemblyReference.cache

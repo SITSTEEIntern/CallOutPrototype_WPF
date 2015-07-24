@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CallOut_CAD", "CallOut_CAD\CallOut_CAD\CallOut_CAD.csproj", "{27CA3629-C334-477A-8093-FEA09D963A6F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CallOut_CADServiceLib", "CallOut_CADServiceLib\CallOut_CADServiceLib\CallOut_CADServiceLib.csproj", "{638BA6B6-173F-4ADA-9D55-5B554C032EA6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CallOut_CADServiceHost", "CallOut_CADServiceLib\CallOut_CADServiceHost\CallOut_CADServiceHost.csproj", "{AAB945E0-0327-4461-B2FD-DF11C9A43F6C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CallOut_CodingServiceLib", "CallOut_CodingServiceLib\CallOut_CodingServiceLib\CallOut_CodingServiceLib.csproj", "{D8E04806-EB38-4792-8DD8-7B61C207BDD1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CallOut_CodingServiceHost", "CallOut_CodingServiceLib\CallOut_CodingServiceHost\CallOut_CodingServiceHost.csproj", "{47F6D836-4A52-455A-84B5-5581D3AF3958}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CallOut_ConsoleWPF", "CallOut_ConsoleWPF\CallOut_ConsoleWPF\CallOut_ConsoleWPF.csproj", "{4CFF9FD2-F965-4B3D-BF0D-74FC445133AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CallOut_Gateway", "CallOut_Gateway\CallOut_Gateway\CallOut_Gateway.csproj", "{6244ED06-77FF-4CF1-992E-E40B0E9C5CD9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{27CA3629-C334-477A-8093-FEA09D963A6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27CA3629-C334-477A-8093-FEA09D963A6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27CA3629-C334-477A-8093-FEA09D963A6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27CA3629-C334-477A-8093-FEA09D963A6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{638BA6B6-173F-4ADA-9D55-5B554C032EA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{638BA6B6-173F-4ADA-9D55-5B554C032EA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{638BA6B6-173F-4ADA-9D55-5B554C032EA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{638BA6B6-173F-4ADA-9D55-5B554C032EA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAB945E0-0327-4461-B2FD-DF11C9A43F6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAB945E0-0327-4461-B2FD-DF11C9A43F6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAB945E0-0327-4461-B2FD-DF11C9A43F6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAB945E0-0327-4461-B2FD-DF11C9A43F6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8E04806-EB38-4792-8DD8-7B61C207BDD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8E04806-EB38-4792-8DD8-7B61C207BDD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8E04806-EB38-4792-8DD8-7B61C207BDD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8E04806-EB38-4792-8DD8-7B61C207BDD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47F6D836-4A52-455A-84B5-5581D3AF3958}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47F6D836-4A52-455A-84B5-5581D3AF3958}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47F6D836-4A52-455A-84B5-5581D3AF3958}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47F6D836-4A52-455A-84B5-5581D3AF3958}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CFF9FD2-F965-4B3D-BF0D-74FC445133AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CFF9FD2-F965-4B3D-BF0D-74FC445133AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CFF9FD2-F965-4B3D-BF0D-74FC445133AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CFF9FD2-F965-4B3D-BF0D-74FC445133AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6244ED06-77FF-4CF1-992E-E40B0E9C5CD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6244ED06-77FF-4CF1-992E-E40B0E9C5CD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6244ED06-77FF-4CF1-992E-E40B0E9C5CD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6244ED06-77FF-4CF1-992E-E40B0E9C5CD9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
